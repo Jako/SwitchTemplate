@@ -1,0 +1,1 @@
+<div id="switchtemplate-panel-settings-div"></div>

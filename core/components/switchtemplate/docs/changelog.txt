@@ -1,0 +1,5 @@
+History
+================================================================================
+
+- 1.0.0-pl
+	- Initial public release for MODX Revolution
