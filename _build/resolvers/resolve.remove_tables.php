@@ -19,7 +19,8 @@ if ($object->xpdo) {
             $modx->addPackage('switchtemplate', $modelPath);
 
             $manager = $modx->getManager();
-            $manager->createObjectContainer('SwitchtemplateSettings');
+
+            $manager->removeObjectContainer('SwitchtemplateSettings');
 
             break;
     }

@@ -13,9 +13,9 @@ $plugins = array();
 
 /* create the plugin object */
 $plugins[0] = $modx->newObject('modPlugin');
-$plugins[0]->set('id', 1);
-$plugins[0]->set('name', 'SwitchTemplate');
-$plugins[0]->set('description', 'Switch the template of a resource on the fly with a request parameter.');
+$plugins[0]->set('id',1);
+$plugins[0]->set('name','SwitchTemplate');
+$plugins[0]->set('description','Switch resource templates on the fly.');
 $plugins[0]->set('plugincode', getSnippetContent($sources['plugins'] . 'switchtemplate.plugin.php'));
 $plugins[0]->set('category', 0);
 
@@ -32,12 +32,12 @@ foreach ($e as $ev) {
         'event' => $ev,
         'priority' => 0,
         'propertyset' => 0
-    ), '', true, true);
+    ),'',true,true);
 }
 
 if (is_array($events) && !empty($events)) {
     $plugins[0]->addMany($events);
-    $modx->log(xPDO::LOG_LEVEL_INFO, 'Packaged in ' . count($events) . ' plugin events for SwitchTemplate.');
+    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' plugin events for SwitchTemplate.');
 } else {
     $modx->log(xPDO::LOG_LEVEL_ERROR, 'Could not find plugin events for SwitchTemplate!');
 }

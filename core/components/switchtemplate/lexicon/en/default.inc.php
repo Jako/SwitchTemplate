@@ -10,7 +10,7 @@
  * Default English Lexicon Entries for the SwitchTemplate package.
  */
 $_lang['switchtemplate'] = 'SwitchTemplate';
-$_lang['switchtemplate_desc'] = 'Switch resource templates on the fly.';
+$_lang['switchtemplate_desc'] = 'Switch resource templates on the fly';
 
 $_lang['setting_switchtemplate.mode_key'] = 'Request key';
 $_lang['setting_switchtemplate.mode_key_desc'] = 'Request key used to switch the custom templates.';
@@ -36,9 +36,8 @@ $_lang['switchtemplate.type_short'] = 'Type';
 $_lang['switchtemplate.templatename'] = 'Chunk/Template Name';
 $_lang['switchtemplate.cache'] = 'Cache the Output';
 $_lang['switchtemplate.cache_short'] = 'Cache';
-$_lang['switchtemplate.include'] = 'Enabled Resources (Default \'All\')';
-$_lang['switchtemplate.exclude'] = 'Disabled Resources (Default \'None\')';
-$_lang['switchtemplate.resource_empty'] = 'Select Ressources';
+$_lang['switchtemplate.include'] = 'Enabled Resources (Empty: \'All Enabled\')';
+$_lang['switchtemplate.exclude'] = 'Disabled Resources (Empty: \'None Disabled\')';
 $_lang['switchtemplate.type_empty'] = 'Select Template Type';
 $_lang['switchtemplate.type_chunk'] = 'Chunk';
 $_lang['switchtemplate.type_template'] = 'Template';

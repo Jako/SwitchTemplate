@@ -1,5 +1,5 @@
-History
-================================================================================
+Changelog for SwitchTemplate.
 
-- 1.0.0-pl
-	- Initial public release for MODX Revolution
+SwitchTemplate 1.0.0
+======================
+- Initial public release for MODX Revolution

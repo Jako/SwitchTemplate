@@ -21,7 +21,7 @@ set_time_limit(0);
 define('PKG_NAME', 'SwitchTemplate');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
 define('PKG_VERSION', '1.0.0');
-define('PKG_RELEASE', 'pl');
+define('PKG_RELEASE', 'pl2');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)) . '/';
@@ -50,10 +50,9 @@ $hasCore = is_dir($sources['source_core']); /* Transfer the files in the core di
 
 $hasContexts = file_exists($sources['data'] . 'transport.contexts.php');
 $hasResources = file_exists($sources['data'] . 'transport.resources.php');
-$hasValidators = is_dir($sources['build'] . 'validators'); /* Run a validators before installing anything */
-$hasFiles = file_exists($sources['data'] . 'transport.files.php');
+$hasValidators = file_exists($sources['data'] . 'transport.validators.php'); /* Run a validators before installing anything */
 $hasResolvers = file_exists($sources['data'] . 'transport.resolvers.php');
-$hasSetupOptions = is_dir($sources['data'] . 'install.options'); /* HTML/PHP script to interact with user */
+$hasSetupOptions = file_exists($sources['data'] . 'transport.options.php'); /* HTML/PHP script to interact with user */
 $hasMenu = file_exists($sources['data'] . 'transport.menus.php'); /* Add items to the MODx Top Menu */
 $hasSettings = file_exists($sources['data'] . 'transport.settings.php'); /* Add new MODx System Settings */
 $hasContextSettings = file_exists($sources['data'] . 'transport.contextsettings.php');
@@ -76,98 +75,6 @@ $builder->createPackage(PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE);
 
 $assetsPath = ($hasAssets) ? '{assets_path}components/' . PKG_NAME_LOWER . '/' : '';
 $builder->registerNamespace(PKG_NAME_LOWER, false, true, '{core_path}components/' . PKG_NAME_LOWER . '/', $assetsPath);
-
-/* load contexts */
-if ($hasContexts) {
-    $contexts = include $sources['data'] . 'transport.contexts.php';
-    if (!is_array($contexts)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'No Contexts defined.');
-    } else {
-        $attributes = array(
-            xPDOTransport::UNIQUE_KEY => 'key',
-            xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => false,
-        );
-        foreach ($contexts as $context) {
-            $vehicle = $builder->createVehicle($context, $attributes);
-            $builder->putVehicle($vehicle);
-        }
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($contexts) . ' Contexts.');
-        unset($contexts, $context, $attributes);
-    }
-    if (!$download) flush();
-}
-
-/* load resources */
-if ($hasResources) {
-    $resources = include $sources['data'] . 'transport.resources.php';
-    if (!is_array($resources)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'No Resources defined.');
-    } else {
-        $attributes = array(
-            xPDOTransport::PRESERVE_KEYS => false,
-            xPDOTransport::UPDATE_OBJECT => true,
-            xPDOTransport::UNIQUE_KEY => 'pagetitle',
-            xPDOTransport::RELATED_OBJECTS => true,
-            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
-                'ContentType' => array(
-                    xPDOTransport::PRESERVE_KEYS => false,
-                    xPDOTransport::UPDATE_OBJECT => true,
-                    xPDOTransport::UNIQUE_KEY => 'name',
-                ),
-            ),
-        );
-        foreach ($resources as $resource) {
-            $vehicle = $builder->createVehicle($resource, $attributes);
-            $builder->putVehicle($vehicle);
-        }
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($resources) . ' Resources.');
-        unset($resources, $resource, $attributes);
-    }
-    if (!$download) flush();
-}
-
-/* load system settings */
-if ($hasSettings) {
-    $settings = include $sources['data'] . 'transport.settings.php';
-    if (!is_array($settings)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'No System Settings defined.');
-    } else {
-        $attributes = array(
-            xPDOTransport::UNIQUE_KEY => 'key',
-            xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => false,
-        );
-        foreach ($settings as $setting) {
-            $vehicle = $builder->createVehicle($setting, $attributes);
-            $builder->putVehicle($vehicle);
-        }
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' System Settings.');
-        unset($settings, $setting, $attributes);
-    }
-    if (!$download) flush();
-}
-
-/* load context settings */
-if ($hasContextSettings) {
-    $settings = include $sources['data'] . 'transport.contextsettings.php';
-    if (!is_array($settings)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'No Context Settings defined.');
-    } else {
-        $attributes = array(
-            xPDOTransport::UNIQUE_KEY => 'key',
-            xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => false,
-        );
-        foreach ($settings as $setting) {
-            $vehicle = $builder->createVehicle($setting, $attributes);
-            $builder->putVehicle($vehicle);
-        }
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' Context Settings.');
-        unset($settings, $setting, $attributes);
-    }
-    if (!$download) flush();
-}
 
 /* See what we have based on the files */
 $hasSnippets = file_exists($sources['data'] . '/transport.snippets.php');
@@ -274,7 +181,7 @@ if ($hasPropertySets) {
     $propertySets = include $sources['data'] . '/transport.propertysets.php';
     if (is_array($propertySets)) {
         if ($category->addMany($propertySets, 'PropertySets')) {
-            $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($plugins) . ' property sets.');
+            $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($propertySets) . ' property sets.');
         } else {
             $modx->log(modX::LOG_LEVEL_FATAL, 'Packing in property sets failed');
         }
@@ -284,7 +191,206 @@ if ($hasPropertySets) {
     if (!$download) flush();
 }
 
-/* add menu */
+/* create category vehicle */
+
+$attr = array(
+    xPDOTransport::UNIQUE_KEY => 'category',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true
+);
+
+if ($hasValidators) {
+    $attr[xPDOTransport::ABORT_INSTALL_ON_VEHICLE_FAIL] = true;
+}
+
+if ($hasSnippets) {
+    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Snippets'] = array(
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => 'name'
+    );
+}
+
+if ($hasChunks) {
+    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Chunks'] = array(
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => 'name'
+    );
+}
+
+if ($hasPlugins) {
+    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Plugins'] = array(
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => 'name',
+        xPDOTransport::RELATED_OBJECTS => true,
+        xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
+            'PluginEvents' => array(
+                xPDOTransport::PRESERVE_KEYS => true,
+                xPDOTransport::UPDATE_OBJECT => false,
+                xPDOTransport::UNIQUE_KEY => array('pluginid', 'event')
+            )
+        )
+    );
+}
+
+if ($hasTemplates) {
+    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Templates'] = array(
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => 'templatename'
+    );
+}
+
+if ($hasTemplateVariables) {
+    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['TemplateVars'] = array(
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => 'name'
+    );
+}
+
+if ($hasPropertySets) {
+    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['PropertySets'] = array(
+        xPDOTransport::PRESERVE_KEYS => false,
+        xPDOTransport::UPDATE_OBJECT => true,
+        xPDOTransport::UNIQUE_KEY => 'name'
+    );
+}
+
+$vehicle = $builder->createVehicle($category, $attr);
+unset($category, $attr);
+
+if ($hasValidators) {
+    $modx->log(modX::LOG_LEVEL_INFO, 'Adding validators ...');
+    $validators = include $sources['data'] . 'transport.validators.php';
+    if (!is_array($validators)) {
+        $modx->log(modX::LOG_LEVEL_ERROR, 'No validators defined.');
+    } else {
+        foreach ($validators as $key => $validator) {
+            if (file_exists($validator['source'])) {
+                $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . $key . ' validator.');
+                $vehicle->validate('php', $validator);
+            } else {
+                $modx->log(modX::LOG_LEVEL_ERROR, 'Could not find validator ' . $key . ' file.');
+            }
+        }
+    }
+    if (!$download) flush();
+}
+
+if ($hasResolvers) {
+    $modx->log(modX::LOG_LEVEL_INFO, 'Adding resolvers ...');
+    $resolvers = include $sources['data'] . 'transport.resolvers.php';
+    if (!is_array($resolvers)) {
+        $modx->log(modX::LOG_LEVEL_ERROR, 'No resolvers defined.');
+    } else {
+        foreach ($resolvers as $resolver) {
+            $vehicle->resolve($resolver['type'], $resolver['resolver']);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($resolvers) . ' php/file resolvers.');
+    }
+    if (!$download) flush();
+}
+
+$builder->putVehicle($vehicle);
+unset($vehicle, $resolvers, $resolver);
+
+/* load contexts */
+if ($hasContexts) {
+    $contexts = include $sources['data'] . 'transport.contexts.php';
+    if (!is_array($contexts)) {
+        $modx->log(modX::LOG_LEVEL_ERROR, 'No Contexts defined.');
+    } else {
+        $attributes = array(
+            xPDOTransport::UNIQUE_KEY => 'key',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+        );
+        foreach ($contexts as $context) {
+            $vehicle = $builder->createVehicle($context, $attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($contexts) . ' Contexts.');
+        unset($contexts, $context, $attributes);
+    }
+    if (!$download) flush();
+}
+
+/* load resources */
+if ($hasResources) {
+    $resources = include $sources['data'] . 'transport.resources.php';
+    if (!is_array($resources)) {
+        $modx->log(modX::LOG_LEVEL_ERROR, 'No Resources defined.');
+    } else {
+        $attributes = array(
+            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::UPDATE_OBJECT => true,
+            xPDOTransport::UNIQUE_KEY => 'pagetitle',
+            xPDOTransport::RELATED_OBJECTS => true,
+            xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array(
+                'ContentType' => array(
+                    xPDOTransport::PRESERVE_KEYS => false,
+                    xPDOTransport::UPDATE_OBJECT => true,
+                    xPDOTransport::UNIQUE_KEY => 'name',
+                ),
+            ),
+        );
+        foreach ($resources as $resource) {
+            $vehicle = $builder->createVehicle($resource, $attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($resources) . ' Resources.');
+        unset($resources, $resource, $attributes);
+    }
+    if (!$download) flush();
+}
+
+/* load system settings */
+if ($hasSettings) {
+    $settings = include $sources['data'] . 'transport.settings.php';
+    if (!is_array($settings)) {
+        $modx->log(modX::LOG_LEVEL_ERROR, 'No System Settings defined.');
+    } else {
+        $attributes = array(
+            xPDOTransport::UNIQUE_KEY => 'key',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+        );
+        foreach ($settings as $setting) {
+            $vehicle = $builder->createVehicle($setting, $attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' System Settings.');
+        unset($settings, $setting, $attributes);
+    }
+    if (!$download) flush();
+}
+
+/* load context settings */
+if ($hasContextSettings) {
+    $settings = include $sources['data'] . 'transport.contextsettings.php';
+    if (!is_array($settings)) {
+        $modx->log(modX::LOG_LEVEL_ERROR, 'No Context Settings defined.');
+    } else {
+        $attributes = array(
+            xPDOTransport::UNIQUE_KEY => 'key',
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+        );
+        foreach ($settings as $setting) {
+            $vehicle = $builder->createVehicle($setting, $attributes);
+            $builder->putVehicle($vehicle);
+        }
+        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' Context Settings.');
+        unset($settings, $setting, $attributes);
+    }
+    if (!$download) flush();
+}
+
+/* load menu */
 if ($hasMenu) {
     $menus = include $sources['data'] . 'transport.menus.php';
     if (is_array($menus)) {
@@ -320,119 +426,6 @@ if ($hasMenu) {
     unset($menus, $menu, $attributes);
     if (!$download) flush();
 }
-
-/* create category vehicle */
-
-$attr = array(
-    xPDOTransport::UNIQUE_KEY => 'category',
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::RELATED_OBJECTS => true,
-);
-
-if ($hasValidators) {
-    $attr[xPDOTransport::ABORT_INSTALL_ON_VEHICLE_FAIL] = true;
-}
-
-if ($hasSnippets) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Snippets'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => 'name',
-    );
-}
-
-if ($hasChunks) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Chunks'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => 'name',
-    );
-}
-
-if ($hasPlugins) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Plugins'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => 'name',
-    );
-}
-
-if ($hasTemplates) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['Templates'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => 'templatename',
-    );
-}
-
-if ($hasTemplateVariables) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['TemplateVars'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => 'name',
-    );
-}
-
-if ($hasPropertySets) {
-    $attr[xPDOTransport::RELATED_OBJECT_ATTRIBUTES]['PropertySets'] = array(
-        xPDOTransport::PRESERVE_KEYS => false,
-        xPDOTransport::UPDATE_OBJECT => true,
-        xPDOTransport::UNIQUE_KEY => 'name',
-    );
-}
-
-$vehicle = $builder->createVehicle($category, $attr);
-unset($category, $attr);
-
-if ($hasValidators) {
-    $modx->log(modX::LOG_LEVEL_INFO, 'Adding validators ...');
-    $validators = include $sources['data'] . 'transport.files.php';
-    if (!is_array($validators)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'No validators defined.');
-    } else {
-        foreach ($validators as $key => $validator) {
-            if (file_exists($validator['source'])) {
-                $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . $key . ' validator.');
-                $vehicle->validate('php', $validator);
-            } else {
-                $modx->log(modX::LOG_LEVEL_ERROR, 'Could not find validator ' . $key . ' file.');
-            }
-        }
-    }
-    if (!$download) flush();
-}
-
-if ($hasFiles) {
-    $modx->log(modX::LOG_LEVEL_INFO, 'Adding file resolvers ...');
-    $files = include $sources['data'] . 'transport.files.php';
-    if (!is_array($files)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'No resolvers defined.');
-    } else {
-        foreach ($files as $file) {
-            $vehicle->resolve('file', $file);
-        }
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($files) . ' file resolvers.');
-    }
-    if (!$download) flush();
-}
-
-if ($hasResolvers) {
-    $modx->log(modX::LOG_LEVEL_INFO, 'Adding PHP resolvers ...');
-    $resolvers = include $sources['data'] . 'transport.resolvers.php';
-    if (!is_array($resolvers)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'No resolvers defined.');
-    } else {
-        foreach ($resolvers as $resolver) {
-            $vehicle->resolve('php', $resolver);
-        }
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($files) . ' PHP resolvers.');
-    }
-    if (!$download) flush();
-}
-
-$builder->putVehicle($vehicle);
-unset($vehicle, $resolvers, $resolver);
 
 /* now pack in the license file, readme and changelog */
 $builder->setPackageAttributes(array(
