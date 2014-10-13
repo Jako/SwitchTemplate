@@ -1,4 +1,4 @@
-Changelog for SwitchTemplate.
+Changelog for SwitchTemplate
 
 SwitchTemplate 1.0.0
 ======================

@@ -14,6 +14,9 @@ $modx->getService('switchtemplate', 'SwitchTemplate', $switchtemplateCorePath . 
 
 switch ($modx->event->name) {
     case 'OnLoadWebPageCache':
+        if ($modx->switchtemplate->fromCache) {
+            return;
+        }
     case 'OnLoadWebDocument':
 
         $modeKey = $modx->switchtemplate->config['mode_key'];
