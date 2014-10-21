@@ -125,8 +125,8 @@ class SwitchTemplate
                 if ($cachedResource) {
                     // partial overwrite current resource data with cached data
                     $output = $cachedResource['content'];
-                    if (isset($cachedResource['elementCache'])) $this->modx->elementCache= $cachedResource['elementCache'];
-                    $resource->setProcessed(true);
+                    if (isset($cachedResource['elementCache'])) $this->modx->elementCache = $cachedResource['elementCache'];
+                    //$resource->setProcessed(true);
                     $fromCache = true;
                 }
             }
@@ -172,10 +172,10 @@ class SwitchTemplate
             if ($resource->get('cacheable') && $templates->get('cache') && $this->modx->getCacheManager() && !empty($output)) {
                 // store not empty output in cache
                 $cachedResource = array(
-                    'output' => $output,
+                    'content' => $output,
                     'elementCache' => $this->modx->elementCache
                 );
-                $this->modx->cacheManager->set($cachePageKey, $output, $this->config['cache_resource_expires'], $cacheOptions);
+                $this->modx->cacheManager->set($cachePageKey, $cachedResource, $this->config['cache_resource_expires'], $cacheOptions);
             }
         }
         // parse uncacheable elements

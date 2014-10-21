@@ -1,5 +1,9 @@
 Changelog for SwitchTemplate
 
+SwitchTemplate 1.0.1
+======================
+- (Processed) placeholders are now cached
+
 SwitchTemplate 1.0.0
 ======================
 - Initial public release for MODX Revolution
