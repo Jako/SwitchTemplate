@@ -1,4 +1,8 @@
-Changelog for SwitchTemplate.
+Changelog for SwitchTemplate
+
+SwitchTemplate 1.0.1
+======================
+- (Processed) placeholders are now cached
 
 SwitchTemplate 1.0.0
 ======================
