@@ -28,7 +28,8 @@ SwitchTemplate.combo.Resources = function (config) {
         ],
         url: SwitchTemplate.config.connectorUrl,
         baseParams: {
-            action: 'mgr/resources/getlist'
+            action: 'mgr/resources/getlist',
+            limit: 0
         }
     });
 
