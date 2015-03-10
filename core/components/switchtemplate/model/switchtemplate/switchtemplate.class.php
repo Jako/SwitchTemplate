@@ -31,7 +31,7 @@ class SwitchTemplate
     /**
      * SwitchTemplate constructor
      *
-     * @param modX $this ->modx A reference to the modX instance.
+     * @param modX $modx A reference to the modX instance.
      * @param array $config An array of configuration options. Optional.
      */
     function __construct(modX $modx, array $config = array())

@@ -44,7 +44,7 @@ $_lang['switchtemplate.type_template'] = 'Template';
 $_lang['switchtemplate.chunk_not_found'] = 'Chunk \'[[+name]]\' is not found.';
 $_lang['switchtemplate.template_not_found'] = 'Template \'[[+name]]\' is not found.';
 
-$_lang['switchtemplate.redirect_err_invalid'] = 'Invalid data.';
-$_lang['switchtemplate.redirect_err_nf'] = 'API User not found.';
-$_lang['switchtemplate.redirect_err_ns'] = 'API User not specified.';
-$_lang['switchtemplate.redirect_err_save'] = 'An error occurred while trying to save the API user.';
+$_lang['switchtemplate.setting_err_invalid'] = 'Invalid data.';
+$_lang['switchtemplate.setting_err_nf'] = 'Setting not found.';
+$_lang['switchtemplate.setting_err_ns'] = 'Setting not specified.';
+$_lang['switchtemplate.setting_err_save'] = 'An error occurred while trying to save the setting.';
