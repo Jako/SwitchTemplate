@@ -1,5 +1,9 @@
 Changelog for SwitchTemplate
 
+SwitchTemplate 1.1.0
+======================
+- Chunk name for chunk template type could be set by placeholder
+
 SwitchTemplate 1.0.1
 ======================
 - (Processed) placeholders are now cached

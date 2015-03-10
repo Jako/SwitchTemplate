@@ -1,0 +1,63 @@
+{
+  "name": "SwitchTemplate",
+  "lowCaseName": "switchtemplate",
+  "description": "Switch resource templates on the fly",
+  "author": "Thomas Jakobi",
+  "version": "1.1.0",
+  "package": {
+    "menus": [
+      {
+        "text": "switchtemplate.menu_home",
+        "description": "switchtemplate.menu_home_desc",
+        "action": "settings",
+        "parent": "components",
+        "namespace": "switchtemplate"
+      }
+    ],
+    "elements": {
+      "plugins": [
+        {
+          "name": "SwitchTemplate",
+          "file": "switchtemplate.plugin.php",
+          "events": [
+            "OnLoadWebPageCache",
+            "OnLoadWebDocument"
+          ]
+        }
+      ]
+    },
+    "systemSettings": [
+      {
+        "key": "mode_key",
+        "area": "site",
+        "value": "mode"
+      },
+      {
+        "key": "cache_resource_key",
+        "area": "site",
+        "value": "resource"
+      },
+      {
+        "key": "cache_resource_handler",
+        "area": "site",
+        "value": "xPDOFileCache"
+      },
+      {
+        "key": "cache_resource_expires",
+        "area": "site",
+        "value": "0"
+      }
+    ]
+  },
+  "database": {
+    "tables": [
+      "SwitchtemplateSettings"
+    ]
+  },
+  "build": {
+    "readme": "docs/readme.txt",
+    "license": "docs/license.txt",
+    "changelog": "docs/changelog.txt",
+    "resolver": {}
+  }
+}

@@ -27,14 +27,15 @@ SwitchTemplate.combo.Resources = function (config) {
             {name: 'pagetitle', type: 'string'}
         ],
         url: SwitchTemplate.config.connectorUrl,
+        pageSize: 10,
         baseParams: {
-            action: 'mgr/resources/getlist',
-            limit: 0
+            action: 'mgr/resources/getlist'
         }
     });
 
     config = config || {};
     Ext.applyIf(config, {
+        pageSize: 10,
         xtype: 'superboxselect',
         store: resources,
         mode: 'remote',
@@ -44,6 +45,11 @@ SwitchTemplate.combo.Resources = function (config) {
         displayField: 'pagetitle',
         displayFieldTpl: '{pagetitle} ({id})',
         valueField: 'id',
+        lazyRender: true,
+        editable: true,
+        typeAhead: true,
+        minChars: 1,
+        forceSelection: true,
         classField: 'cls',
         styleField: 'style',
         extraItemCls: 'x-tag',

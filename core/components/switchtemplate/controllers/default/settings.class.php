@@ -17,10 +17,10 @@ class SwitchtemplateSettingsManagerController extends modExtraManagerController
     public function initialize()
     {
         $this->switchtemplate = new SwitchTemplate($this->modx);
-        $this->addJavascript($this->switchtemplate->config['jsUrl'] . 'mgr/switchtemplate.js');
+        $this->addJavascript($this->switchtemplate->getOption('jsUrl') . 'mgr/switchtemplate.js');
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            SwitchTemplate.config = ' . $this->modx->toJSON($this->switchtemplate->config) . ';
+            SwitchTemplate.config = ' . $this->modx->toJSON($this->switchtemplate->options) . ';
         });
         </script>');
         return parent::initialize();
@@ -42,14 +42,14 @@ class SwitchtemplateSettingsManagerController extends modExtraManagerController
 
     public function loadCustomCssJs()
     {
-        $this->addJavascript($this->switchtemplate->config['jsUrl'] . 'mgr/widgets/switchtemplate.grid.js');
-        $this->addJavascript($this->switchtemplate->config['jsUrl'] . 'mgr/widgets/settings.panel.js');
-        $this->addLastJavascript($this->switchtemplate->config['jsUrl'] . 'mgr/sections/settings.js');
+        $this->addJavascript($this->switchtemplate->getOption('jsUrl') . 'mgr/widgets/switchtemplate.grid.js');
+        $this->addJavascript($this->switchtemplate->getOption('jsUrl') . 'mgr/widgets/settings.panel.js');
+        $this->addLastJavascript($this->switchtemplate->getOption('jsUrl') . 'mgr/sections/settings.js');
     }
 
     public function getTemplateFile()
     {
-        return $this->switchtemplate->config['templatesPath'] . 'default/settings.tpl';
+        return $this->switchtemplate->getOption('templatesPath') . 'default/settings.tpl';
     }
 
 }

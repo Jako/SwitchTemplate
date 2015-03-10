@@ -1,20 +1,18 @@
 <?php
 /**
- * SwitchTemplate
+ * Resolve creating db tables
  *
- * Copyright 2014 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * THIS RESOLVER IS AUTOMATICALY GENERATED, NO CHANGES WILL APPLY
  *
  * @package switchtemplate
  * @subpackage build
- *
- * Create/Update Table Resolver for the SwitchTemplate package.
  */
+
 if ($object->xpdo) {
+    $modx =& $object->xpdo;
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
-            /** @var modX $modx */
-            $modx =& $object->xpdo;
-
+        case xPDOTransport::ACTION_UPGRADE:
             $modelPath = $modx->getOption('switchtemplate.core_path', null, $modx->getOption('core_path') . 'components/switchtemplate/') . 'model/';
             $modx->addPackage('switchtemplate', $modelPath);
 
@@ -25,4 +23,5 @@ if ($object->xpdo) {
             break;
     }
 }
+
 return true;

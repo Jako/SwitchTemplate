@@ -45,6 +45,35 @@ switchtemplate.cache_esource_expires
 0 means indefinitely or until the cache items are purposely cleared.
 Default: 0
 
+Settings
+--------------------------------------------------------------------------------
+SwitchTemplate could be configured by settings created in a custom manager page.
+Each setting could use the following properties:
+
+Setting Name:
+A name to identify this configuration.
+
+Setting Key:
+The request key value that selects this setting.
+
+Chunk/Template Name:
+The name of a chunk or a template that is parsed and displayed if this setting
+is used. The name of the chunk is variable by using MODX placeholders. The
+placeholders are filled with the values of the current resource (no template
+variables). If this chunk is not found, a chunkname with stripped placeholders is used.
+
+Template Type:
+The template type that is parsed and displayed (`Chunk` or `Template`).
+
+Cache the Output:
+Cache the output of the switched template.
+
+Enabled Resources (Default 'All'):
+A list of MODX resources that could have a switched template.
+
+Disabled Resources (Default 'None'):
+A list of MODX resources that could not have a switched template.
+
 Example
 --------------------------------------------------------------------------------
 If you create the following setting

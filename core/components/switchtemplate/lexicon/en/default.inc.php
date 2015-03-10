@@ -12,14 +12,17 @@
 $_lang['switchtemplate'] = 'SwitchTemplate';
 $_lang['switchtemplate_desc'] = 'Switch resource templates on the fly';
 
-$_lang['setting_switchtemplate.mode_key'] = 'Request key';
+$_lang['switchtemplate.menu_home'] = 'SwitchTemplate';
+$_lang['switchtemplate.menu_home_desc'] = 'Switch resource templates on the fly';
+
+$_lang['setting_switchtemplate.mode_key'] = 'Request Key';
 $_lang['setting_switchtemplate.mode_key_desc'] = 'Request key used to switch the custom templates.';
-$_lang['setting_switchtemplate.cache_resource_key'] = 'Key identifying a cache handler';
-$_lang['setting_switchtemplate.cache_resource_key_desc'] = 'The key identifying a cache handler for SwitchTemplate to use.';
-$_lang['setting_switchtemplate.cache_resource_handler'] = 'Class of cache handler';
-$_lang['setting_switchtemplate.cache_resource_handler_desc'] = 'The class of cache handler for SwitchTemplate to use.';
-$_lang['setting_switchtemplate.cache_resource_expires'] = 'Cache expiration time in seconds';
-$_lang['setting_switchtemplate.cache_resource_expires_desc'] = 'The cache expiration time in seconds for custom template output. 0 means indefinitely or until the cache items are purposely cleared.';
+$_lang['setting_switchtemplate.cache_resource_key'] = 'Cache Handler Key';
+$_lang['setting_switchtemplate.cache_resource_key_desc'] = 'The cache handler key used by SwitchTemplate.';
+$_lang['setting_switchtemplate.cache_resource_handler'] = 'Cache Handler Class';
+$_lang['setting_switchtemplate.cache_resource_handler_desc'] = 'The cache handler class used by SwitchTemplate.';
+$_lang['setting_switchtemplate.cache_resource_expires'] = 'Cache Expiration Time';
+$_lang['setting_switchtemplate.cache_resource_expires_desc'] = 'The cache expiration time in seconds for custom template. 0 means indefinitely or until the cache items are purposely cleared.';
 
 $_lang['switchtemplate.setting_ceate'] = 'Create';
 $_lang['switchtemplate.setting_update'] = 'Update';

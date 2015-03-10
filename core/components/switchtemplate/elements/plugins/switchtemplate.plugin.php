@@ -10,7 +10,7 @@
  * SwitchTemplate plugin.
  */
 $switchtemplateCorePath = realpath($modx->getOption('switchtemplate.core_path', null, $modx->getOption('core_path') . 'components/switchtemplate/')) . '/';
-$modx->getService('switchtemplate', 'SwitchTemplate', $switchtemplateCorePath . 'model/switchtemplate/');
+$switchtemplate = $modx->getService('switchtemplate', 'SwitchTemplate', $switchtemplateCorePath . 'model/switchtemplate/');
 
 switch ($modx->event->name) {
     case 'OnLoadWebPageCache':
@@ -20,13 +20,13 @@ switch ($modx->event->name) {
         }
     case 'OnLoadWebDocument':
 
-        $modeKey = $modx->switchtemplate->config['mode_key'];
+        $modeKey = $switchtemplate->getOption('mode_key');
         $mode = isset($_REQUEST[$modeKey]) ? $_REQUEST[$modeKey] : null;
 
         // if SwitchTemplate setting with the given key is found
         if ($mode && $templates = $modx->getObject('SwitchtemplateSettings', array('key' => $mode))) {
             // change the template on the fly
-            $output = $modx->switchtemplate->switchTemplate($mode, $templates);
+            $output = $switchtemplate->switchTemplate($mode, $templates);
 
             // if the output is not null
             if ($output !== null) {
