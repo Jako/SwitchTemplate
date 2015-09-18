@@ -74,15 +74,14 @@ class SwitchTemplate
 
         // Load parameters
         $this->options = array_merge($this->options, array(
-            'mode_key' => $this->getOption('mode_key', $options, 'mode', true),
-            'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource'), true),
-            'cache_resource_handler' => $this->getOption('cache_resource_handler', $options, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache'), true),
-            'cache_resource_expires' => (integer)$this->getOption('cache_resource_expires', $options, $this->modx->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0), true),
-            'max_iterations' => (integer)$this->modx->getOption('parser_max_iterations', null, 10)
+            'mode_key' => $this->getOption('mode_key', $options, 'mode'),
+            'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource')),
+            'cache_resource_handler' => $this->getOption('cache_resource_handler', $options, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+            'cache_resource_expires' => intval($this->getOption('cache_resource_expires', $options, $this->modx->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0))),
+            'max_iterations' => intval($this->modx->getOption('parser_max_iterations', null, 10))
         ));
 
         $this->modx->addPackage('switchtemplate', $this->getOption('modelPath'));
-        $this->modx->lexicon->load('switchtemplate:default');
     }
 
     /**
@@ -90,20 +89,20 @@ class SwitchTemplate
      *
      * @param string $key The option key to search for.
      * @param array $options An array of options that override local options.
-     * @param mixed $default The default value returned, if the option is not found locally or as a namespaced system setting.
-     * @param bool $skipEmpty If true: use default value if option value is empty.
+     * @param mixed $default The default value returned if the option is not found locally or as a
+     * namespaced system setting; by default this value is null.
      * @return mixed The option value or the default value specified.
      */
-    public function getOption($key, $options = array(), $default = null, $skipEmpty = false)
+    public function getOption($key, $options = array(), $default = null)
     {
         $option = $default;
         if (!empty($key) && is_string($key)) {
-            if ($options !== null && array_key_exists($key, $options) && !($skipEmpty && empty($options[$key]))) {
+            if ($options != null && array_key_exists($key, $options)) {
                 $option = $options[$key];
-            } elseif (array_key_exists($key, $this->options) && !($skipEmpty && empty($options[$key]))) {
+            } elseif (array_key_exists($key, $this->options)) {
                 $option = $this->options[$key];
             } elseif (array_key_exists("{$this->namespace}.{$key}", $this->modx->config)) {
-                $option = $this->modx->getOption("{$this->namespace}.{$key}", null, $default, $skipEmpty);
+                $option = $this->modx->getOption("{$this->namespace}.{$key}");
             }
         }
         return $option;
@@ -124,7 +123,9 @@ class SwitchTemplate
 
         // get the current resource
         if (!$this->modx->resource) {
+            // prevent infinite loop in OnLoadWebPageCache
             $this->fromCache = true;
+
             $this->modx->resource = $this->modx->request->getResource($this->modx->resourceMethod, $this->modx->resourceIdentifier);
         }
         $resource = &$this->modx->resource;
@@ -160,13 +161,13 @@ class SwitchTemplate
                     if (isset($cachedResource['sourceCache'])) {
                         $this->modx->sourceCache = $cachedResource['sourceCache'];
                     }
-                    if($cachedResource['_jscripts']) {
+                    if ($cachedResource['_jscripts']) {
                         $this->modx->jscripts = $cachedResource['resource']['_sjscripts'];
                     }
-                    if($cachedResource['_sjscripts']) {
+                    if ($cachedResource['_sjscripts']) {
                         $this->modx->sjscripts = $cachedResource['resource']['_sjscripts'];
                     }
-                    if($cachedResource['_loadedjscripts']) {
+                    if ($cachedResource['_loadedjscripts']) {
                         $this->modx->loadedjscripts = $cachedResource['resource']['_loadedjscripts'];
                     }
                     $fromCache = true;
@@ -179,23 +180,8 @@ class SwitchTemplate
             switch (strtolower($setting->get('type'))) {
                 // get the template chunk
                 case 'chunk':
-                    $chunkname = $setting->get('template');
-
                     // set variable chunkname
-                    if ((strpos($chunkname, '[[') !== false)) {
-                        $chunk = $this->modx->newObject('modChunk', array('name' => '{tmp}-' . uniqid()));
-                        $chunk->setCacheable(false);
-                        $tmpname = $chunk->process($resource->toArray(), $chunkname);
-                        if ($this->modx->getObject('modChunk', array('name' => $tmpname))) {
-                            $chunkname = $tmpname;
-                        } else {
-                            // Strip not processed placeholder
-                            $re = '%\[\[(?:(?!\[\[).)+?\]\]%ms';
-                            while (preg_match($re, $chunkname)) {
-                                $chunkname = preg_replace($re, '', $chunkname);
-                            }
-                        }
-                    }
+                    $chunkname = $this->setVariableName($setting->get('template'), 'chunk');
 
                     if ($chunk = $this->modx->getObject('modChunk', array('name' => $chunkname))) {
                         // prepare current resource as placeholder for templated output
@@ -212,17 +198,26 @@ class SwitchTemplate
                         $chunk->setCacheable(false);
                         $output = $chunk->process($ph);
                     } else {
+                        // fallback to normal resource
                         $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('switchtemplate.chunk_not_found', array('name' => $setting->get('template'))), '', 'SwitchTemplate');
+                        $resource = $this->modx->request->getResource('id', $resourceId);
+                        return null;
                     }
                     break;
                 // get the template
                 case 'template':
                 default:
-                    if ($template = $this->modx->getObject('modTemplate', array('templatename' => $setting->get('template')))) {
+                    // set variable templatename
+                    $templatename = $this->setVariableName($setting->get('template'), 'template');
+
+                    if ($template = $this->modx->getObject('modTemplate', array('templatename' => $templatename))) {
                         // get the template content
                         $output = $template->get('content');
                     } else {
+                        // fallback to normal resource
                         $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('switchtemplate.template_not_found', array('name' => $setting->get('template'))), '', 'SwitchTemplate');
+                        $resource = $this->modx->request->getResource('id', $resourceId);
+                        return null;
                     }
                     break;
             }
@@ -240,13 +235,13 @@ class SwitchTemplate
                     $cachedResource['sourceCache'] = $this->modx->sourceCache;
                 }
                 if (!empty($resource->_sjscripts)) {
-                    $cachedResource['resource']['_sjscripts']= $resource->_sjscripts;
+                    $cachedResource['resource']['_sjscripts'] = $resource->_sjscripts;
                 }
                 if (!empty($resource->_jscripts)) {
-                    $cachedResource['resource']['_jscripts']= $resource->_jscripts;
+                    $cachedResource['resource']['_jscripts'] = $resource->_jscripts;
                 }
                 if (!empty($resource->_loadedjscripts)) {
-                    $cachedResource['resource']['_loadedjscripts']= $resource->_loadedjscripts;
+                    $cachedResource['resource']['_loadedjscripts'] = $resource->_loadedjscripts;
                 }
                 $this->modx->cacheManager->set($cachePageKey, $cachedResource, $this->getOption('cache_resource_expires'), $cacheOptions);
             }
@@ -255,5 +250,52 @@ class SwitchTemplate
         $this->modx->getParser()->processElementTags('', $output, true, true, '[[', ']]', array(), $this->getOption('max_iterations'));
 
         return $output;
+    }
+
+    /**
+     * Set variable template name
+     *
+     * @param string $name
+     * @param string $type
+     * @return mixed
+     */
+    function setVariableName($name, $type = 'chunk')
+    {
+        $resource = &$this->modx->resource;
+        $chunk = $this->modx->newObject('modChunk', array('name' => '{tmp}-' . uniqid()));
+        $chunk->setCacheable(false);
+        $tmpname = $chunk->process($resource->toArray(), $name);
+        switch ($type) {
+            case 'template':
+                if ($this->modx->getObject('modTemplate', array('templatename' => $tmpname))) {
+                    $name = $tmpname;
+                }
+                break;
+            case 'chunk':
+            default:
+                if ($this->modx->getObject('modChunk', array('name' => $tmpname))) {
+                    $name = $tmpname;
+                }
+                break;
+        }
+        // Strip not processed placeholder
+        $name = $this->stripPlaceholder($name);
+
+        return $name;
+    }
+
+    /**
+     * Strip MODX placeholder
+     *
+     * @param string $string
+     * @return string
+     */
+    function stripPlaceholder($string)
+    {
+        $re = '%\[\[(?:(?!\[\[).)+?\]\]%ms';
+        while (preg_match($re, $string)) {
+            $string = preg_replace($re, '', $string);
+        }
+        return $string;
     }
 }

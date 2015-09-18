@@ -1,5 +1,10 @@
 Changelog for SwitchTemplate
 
+SwitchTemplate 1.1.1
+======================
+- Switch back to default template if the chunk/template is not found
+- Template name could be set by set by placeholder too
+
 SwitchTemplate 1.1.0
 ======================
 - Chunk name for chunk template type could be set by placeholder

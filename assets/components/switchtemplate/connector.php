@@ -9,9 +9,9 @@ require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/config.core.php';
 require_once MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 require_once MODX_CONNECTORS_PATH . 'index.php';
 
-$corePath = realpath($modx->getOption('switchtemplate.core_path', null, $modx->getOption('core_path') . 'components/switchtemplate/')) . '/';
+$corePath = $modx->getOption('switchtemplate.core_path', null, $modx->getOption('core_path') . 'components/switchtemplate/');
 
-$modx->getService(
+$switchtemplate = $modx->getService(
     'switchtemplate',
     'SwitchTemplate',
     $corePath . 'model/switchtemplate/',
@@ -22,6 +22,6 @@ $modx->getService(
 
 /* handle request */
 $modx->request->handleRequest(array(
-    'processors_path' => $modx->switchtemplate->getOption('processorsPath'),
+    'processors_path' => $switchtemplate->getOption('processorsPath'),
     'location' => '',
 ));

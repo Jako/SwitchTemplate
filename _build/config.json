@@ -3,7 +3,7 @@
   "lowCaseName": "switchtemplate",
   "description": "Switch resource templates on the fly",
   "author": "Thomas Jakobi",
-  "version": "1.1.0",
+  "version": "1.1.1-b1",
   "package": {
     "menus": [
       {
@@ -47,11 +47,6 @@
         "area": "site",
         "value": "0"
       }
-    ]
-  },
-  "database": {
-    "tables": [
-      "SwitchtemplateSettings"
     ]
   },
   "build": {
