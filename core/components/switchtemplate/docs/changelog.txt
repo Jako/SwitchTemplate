@@ -1,18 +1,15 @@
 Changelog for SwitchTemplate
+============================
 
-SwitchTemplate 1.1.1
-======================
-- Switch back to default template if the chunk/template is not found
-- Template name could be set by set by placeholder too
+- 1.1.1
+    - Switch back to default template if the chunk/template is not found
+    - Template name could be set by set by placeholder too
 
-SwitchTemplate 1.1.0
-======================
-- Chunk name for chunk template type could be set by placeholder
+- 1.1.0
+    - Chunk name for chunk template type could be set by placeholder
 
-SwitchTemplate 1.0.1
-======================
-- (Processed) placeholders are now cached
+- 1.0.1
+    - (Processed) placeholders are now cached
 
-SwitchTemplate 1.0.0
-======================
-- Initial public release for MODX Revolution
+- 1.0.0
+    - Initial public release for MODX Revolution
