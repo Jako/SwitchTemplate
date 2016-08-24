@@ -223,6 +223,10 @@ class SwitchTemplate
             }
             // parse cacheable elements
             $this->modx->getParser()->processElementTags('', $output, false, false, '[[', ']]', array(), $this->getOption('max_iterations'));
+            
+            // because reference to outout gets lost
+            $this->modx->eventoutput = & $output;
+            $this->modx->invokeEvent('OnSwitchTemplateParsed',array('output' => & $output, 'mode' => $mode, 'setting' => $setting));              
 
             if ($resource->get('cacheable') && $setting->get('cache') && $this->modx->getCacheManager() && !empty($output)) {
                 // store not empty output in cache
@@ -248,6 +252,10 @@ class SwitchTemplate
         }
         // parse uncacheable elements
         $this->modx->getParser()->processElementTags('', $output, true, true, '[[', ']]', array(), $this->getOption('max_iterations'));
+        
+        // because reference to outout gets lost
+        $this->modx->eventoutput = & $output;
+        $this->modx->invokeEvent('OnSwitchTemplateParsed',array('output' => & $output, 'mode' => $mode, 'setting' => $setting, 'uncached' => true));         
 
         return $output;
     }
