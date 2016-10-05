@@ -139,15 +139,15 @@ class SwitchTemplate
         }
 
         $fromCache = false;
+        // prepare cache settings
+        $cachePageKey = $resource->getCacheKey() . '.' . $mode . '.' . md5(implode('', $this->modx->request->getParameters()));
+        $cacheOptions = array(
+            xPDO::OPT_CACHE_KEY => $this->getOption('cache_resource_key'),
+            xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_resource_handler'),
+            xPDO::OPT_CACHE_EXPIRES => $this->getOption('cache_resource_expires'),
+        );
         // if resource is cacheable and cache is enabled for this setting
         if ($resource->get('cacheable') && $setting->get('cache')) {
-            // prepare cache settings
-            $cachePageKey = $resource->getCacheKey() . '.' . $mode . '.' . md5(implode('', $this->modx->request->getParameters()));
-            $cacheOptions = array(
-                xPDO::OPT_CACHE_KEY => $this->getOption('cache_resource_key'),
-                xPDO::OPT_CACHE_HANDLER => $this->getOption('cache_resource_handler'),
-                xPDO::OPT_CACHE_EXPIRES => $this->getOption('cache_resource_expires'),
-            );
             // retreive the output from cache
             if ($this->modx->getCacheManager()) {
                 $cachedResource = $this->modx->cacheManager->get($cachePageKey, $cacheOptions);
@@ -188,6 +188,7 @@ class SwitchTemplate
                         $ph = $resource->toArray();
 
                         // prepare current resource template variable values as placeholder for templated output
+                        /** @var modTemplateVar[] $tvs */
                         $tvs = $resource->getMany('TemplateVars');
                         foreach ($tvs as $tv) {
                             $tvName = $tv->get('name');
@@ -223,10 +224,14 @@ class SwitchTemplate
             }
             // parse cacheable elements
             $this->modx->getParser()->processElementTags('', $output, false, false, '[[', ']]', array(), $this->getOption('max_iterations'));
-            
+
             // because reference to outout gets lost
-            $this->modx->eventoutput = & $output;
-            $this->modx->invokeEvent('OnSwitchTemplateParsed',array('output' => & $output, 'mode' => $mode, 'setting' => $setting));              
+            $this->modx->eventoutput = &$output;
+            $this->modx->invokeEvent('OnSwitchTemplateParsed', array(
+                'output' => &$output,
+                'mode' => $mode,
+                'setting' => $setting
+            ));
 
             if ($resource->get('cacheable') && $setting->get('cache') && $this->modx->getCacheManager() && !empty($output)) {
                 // store not empty output in cache
@@ -252,10 +257,15 @@ class SwitchTemplate
         }
         // parse uncacheable elements
         $this->modx->getParser()->processElementTags('', $output, true, true, '[[', ']]', array(), $this->getOption('max_iterations'));
-        
+
         // because reference to outout gets lost
-        $this->modx->eventoutput = & $output;
-        $this->modx->invokeEvent('OnSwitchTemplateParsed',array('output' => & $output, 'mode' => $mode, 'setting' => $setting, 'uncached' => true));         
+        $this->modx->eventoutput = &$output;
+        $this->modx->invokeEvent('OnSwitchTemplateParsed', array(
+            'output' => & $output,
+            'mode' => $mode,
+            'setting' => $setting,
+            'uncached' => true)
+        );
 
         return $output;
     }
