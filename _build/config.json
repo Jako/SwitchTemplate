@@ -52,7 +52,6 @@
   "build": {
     "readme": "docs/readme.txt",
     "license": "docs/license.txt",
-    "changelog": "docs/changelog.txt",
-    "resolver": {}
+    "changelog": "docs/changelog.txt"
   }
 }
