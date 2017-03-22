@@ -19,12 +19,6 @@ class SwitchTemplateSettingsGetListProcessor extends modObjectGetListProcessor
 
     public function prepareQueryBeforeCount(xPDOQuery $c)
     {
-        $id = $this->getProperty('id');
-        if (!empty($id)) {
-            $c->where(array(
-                'id' => $id
-            ));
-        }
         $query = $this->getProperty('query');
         if (!empty($query)) {
             $c->where(array(
@@ -33,6 +27,17 @@ class SwitchTemplateSettingsGetListProcessor extends modObjectGetListProcessor
                 'OR:template:LIKE' => '%' . $query . '%',
                 'OR:include:LIKE' => '%' . $query . '%',
                 'OR:exclude:LIKE' => '%' . $query . '%'
+            ));
+        }
+        return $c;
+    }
+
+    public function prepareQueryAfterCount(xPDOQuery $c)
+    {
+        $id = $this->getProperty('id');
+        if (!empty($id)) {
+            $c->where(array(
+                'id:IN' => array_map('intval', explode('|', $id))
             ));
         }
         return $c;
