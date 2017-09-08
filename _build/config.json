@@ -3,15 +3,14 @@
   "lowCaseName": "switchtemplate",
   "description": "Switch resource templates on the fly",
   "author": "Thomas Jakobi",
-  "version": "1.1.1-b1",
+  "version": "1.2.0-pl",
   "package": {
     "menus": [
       {
         "text": "switchtemplate.menu_home",
         "description": "switchtemplate.menu_home_desc",
-        "action": "settings",
-        "parent": "components",
-        "namespace": "switchtemplate"
+        "action": "home",
+        "parent": "components"
       }
     ],
     "elements": {
@@ -21,16 +20,28 @@
           "file": "switchtemplate.plugin.php",
           "events": [
             "OnLoadWebPageCache",
-            "OnLoadWebDocument"
+            "OnLoadWebDocument",
+            "OnPageNotFound"
           ]
         }
       ]
     },
     "systemSettings": [
       {
+        "key": "debug",
+        "type": "combo-boolean",
+        "area": "system",
+        "value": "0"
+      },
+      {
         "key": "mode_key",
         "area": "site",
         "value": "mode"
+      },
+      {
+        "key": "mode_tv",
+        "area": "site",
+        "value": ""
       },
       {
         "key": "cache_resource_key",
@@ -49,9 +60,19 @@
       }
     ]
   },
+  "database": {
+    "tables": [
+      "SwitchtemplateSettings"
+    ]
+  },
   "build": {
     "readme": "docs/readme.txt",
     "license": "docs/license.txt",
-    "changelog": "docs/changelog.txt"
+    "changelog": "docs/changelog.txt",
+    "resolver": {
+      "after": [
+        "resolve.synctables.php"
+      ]
+    }
   }
 }

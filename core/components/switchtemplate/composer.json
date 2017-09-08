@@ -1,0 +1,12 @@
+{
+    "name": "jako/switchtemplate",
+    "authors": [
+        {
+            "name": "Thomas Jakobi",
+            "email": "thomas.jakobi@partout.info"
+        }
+    ],
+    "require": {
+        "lullabot/amp": "^1.1"
+    }
+}

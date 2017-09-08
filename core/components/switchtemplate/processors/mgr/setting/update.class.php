@@ -1,13 +1,10 @@
 <?php
+
 /**
- * SwitchTemplate
- *
- * Copyright 2014 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Update processor for SwitchTemplate CMP
  *
  * @package switchtemplate
  * @subpackage processor
- *
- * Update processor for SwitchTemplate CMP
  */
 class SwitchTemplateSettingUpdateProcessor extends modObjectUpdateProcessor
 {

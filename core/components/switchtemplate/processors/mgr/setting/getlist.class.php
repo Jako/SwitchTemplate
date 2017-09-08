@@ -1,13 +1,10 @@
 <?php
+
 /**
- * SwitchTemplate
- *
- * Copyright 2014 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Get list processor for SwitchTemplate CMP
  *
  * @package switchtemplate
  * @subpackage processor
- *
- * Get list processor for SwitchTemplate CMP
  */
 class SwitchTemplateSettingsGetListProcessor extends modObjectGetListProcessor
 {
@@ -46,7 +43,7 @@ class SwitchTemplateSettingsGetListProcessor extends modObjectGetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $ta = $object->toArray('', false, true);
-        $ta['type'] = $this->modx->lexicon($ta['type']);
+        $ta['templatename'] = ($ta['template'] != '') ? $ta['template'] : '<span class="green">{original_template_name} '.$ta['name'].'</span>';
         return $ta;
     }
 

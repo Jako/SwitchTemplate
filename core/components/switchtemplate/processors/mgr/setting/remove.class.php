@@ -1,13 +1,10 @@
 <?php
+
 /**
- * SwitchTemplate
- *
- * Copyright 2014 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Remove processor for SwitchTemplate CMP
  *
  * @package switchtemplate
  * @subpackage processor
- *
- * Remove processor for SwitchTemplate CMP
  */
 class SwitchTemplateSettingsRemoveProcessor extends modObjectRemoveProcessor
 {

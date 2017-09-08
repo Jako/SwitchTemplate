@@ -1,13 +1,10 @@
 <?php
+
 /**
- * SwitchTemplate
- *
- * Copyright 2014 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Create processor for SwitchTemplate CMP
  *
  * @package switchtemplate
  * @subpackage processor
- *
- * Create processor for SwitchTemplate CMP
  */
 class SwitchTemplateSettingCreateProcessor extends modObjectCreateProcessor
 {

@@ -1,10 +1,17 @@
 Changelog for SwitchTemplate
 ============================
 
+- 1.2.0
+    - Switch the template on base of the extension
+    - $modx->RegClient methods are executed in switched templates with HTML output
+    - Filter the page source before output i.e. for AMP output
+    - Absolute links & images and image width & height attributes in AMP output
+    - Switched template/chunk name on base of the original template name
+    - Set the allowed SwitchTemplate modes in a template variable
+
 - 1.1.1
     - Switch back to default template if the chunk/template is not found
     - Template name could be set by set by placeholder too
-
 - 1.1.0
     - Chunk name for chunk template type could be set by placeholder
 

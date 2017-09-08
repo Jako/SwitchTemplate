@@ -1,13 +1,10 @@
 <?php
+
 /**
- * SwitchTemplate
- *
- * Copyright 2014 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Get list processor for SwitchTemplate CMP.
  *
  * @package switchtemplate
  * @subpackage processor
- *
- * Get list processor for SwitchTemplate CMP.
  */
 class SwitchTemplateResourcesGetListProcessor extends modObjectGetListProcessor
 {

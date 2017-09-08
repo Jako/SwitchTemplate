@@ -1,0 +1,18 @@
+{
+  "name": "SwitchTemplate",
+  "description": "Switch resource templates on the fly",
+  "devDependencies": {
+    "autoprefixer": "^6.5.4",
+    "grunt": "^1.0.1",
+    "grunt-banner": "^0.6.0",
+    "grunt-bowercopy": "^1.2.4",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "grunt-sass": "^2.0.0",
+    "grunt-ssh": "^0.12.9",
+    "grunt-string-replace": "^1.3.1",
+    "pixrem": "^3.0.2"
+  }
+}

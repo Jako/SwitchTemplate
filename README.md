@@ -45,15 +45,17 @@ Property | Description
 ---------|------
 Setting Name | A name to identify this configuration.
 Setting Key | The request key value that selects this setting.
-Chunk/Template Name | The name of a chunk or a template that is parsed and displayed if this setting is used. The name of the chunk is variable by using MODX placeholders. The placeholders are filled with the values of the current resource (no template variables). If this chunk is not found, a chunkname with stripped placeholders is used.
-Template Type | The template type that is parsed and displayed (`Chunk` or `Template`)
+Chunk/Template Name | The name of a chunk or a template that is parsed and displayed if this setting is used. The name of the chunk is variable by using MODX placeholders. The placeholders are filled with the values of the current resource (no template variables). If this chunk is not found, a chunkname with stripped placeholders is used. If this field is empty, the name of the original template is used with the setting key as suffix (separated by an underscore).
+Template Type | The template type that is parsed and displayed (`Chunk` or `Template`).
 Cache the Output | Cache the output of the switched template.
+Output Type | The output for filtering the template output (`HTML` or `AMP`)[^1]. 
 Enabled Resources (Default 'All') | A list of MODX resources that could have a switched template.
 Disabled Resources (Default 'None') | A list of MODX resources that could not have a switched template.
 
 Example
 --------------------------------------------------------------------------------
-If you create the following setting in the custom manager page you could call every page in your installation with the url parameter mode=test (i.e. `your.own.domain/?mode=test`) and the page is shown with the template chunk `switchTest`.
+If you create the following setting in the custom manager page you could call every page in your installation with the 
+url parameter mode=test (i.e. `your.own.domain/?mode=test`) and the page is shown with the template chunk `switchTest`.
 
 Property | Value
 ---------|------
