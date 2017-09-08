@@ -65,7 +65,7 @@ Output Type | AMP
 Enabled Resources (Default 'All') | -
 Disabled Resources (Default 'None') | -
 
-[^1]: The `AMP` output type will filter the resource output to valid [AMP](https://www.ampproject.org) markup using the [AMP PHP Library](https://github.com/Lullabot/amp-library). img tags with Locally referenced images receive image width and height attributes to avoid []openssl issues](https://github.com/Lullabot/amp-library#caveats-and-known-issues) with PHP 5.6+.
+[^1]: The `AMP` output type will filter the resource output to valid [AMP](https://www.ampproject.org) markup using the [AMP PHP Library](https://github.com/Lullabot/amp-library). img tags with Locally referenced images receive image width and height attributes to avoid [openssl issues](https://github.com/Lullabot/amp-library#caveats-and-known-issues) with PHP 5.6+.
 
 <!-- Piwik -->
 <script type="text/javascript">
