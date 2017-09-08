@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+	<title>Usage - SwitchTemplate</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">SwitchTemplate</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../installation/">Installation</a>
+                </li>
+            
+            
+            
+                <li class="active">
+                    <a href="./">Usage</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../installation/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a rel="prev" >
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/Jako/SwitchTemplate">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#usage">Usage</a></li>
+        
+            <li><a href="#system-settings">System Settings</a></li>
+        
+            <li><a href="#custom-manager-page">Custom Manager Page</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="usage">Usage</h1>
+<p>SwitchTemplate template switching plugin for MODx Revolution. It changes the
+template of a MODX resource on the fly with a request parameter. Different
+settings with different setting keys could be set in a custom manager page.</p>
+<p>With each setting a different template could be used to output the resource. As
+well the template type could be set to chunk or template. If the template type
+is chunk the resource variables and template variables are prepared as
+placeholder before the chunk is parsed. The caching of the output of
+SwitchTemplate could be enabled for each separate setting. The output is cached
+separate for each resource and each setting. Each setting could be enabled or
+disabled for selected resources. The output could be filtered to valid AMP
+markup.</p>
+<p>SwitchTemplate could be used for different purposes: As Ajax connector, as
+language switcher, AMP output ...</p>
+<h2 id="system-settings">System Settings</h2>
+<p>SwitchTemplate uses the following system settings:</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cache Expiration Time</td>
+<td>The cache expiration time in seconds for custom template output. 0 means indefinitely or until the cache items are purposely cleared.</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Cache Handler Class</td>
+<td>The class of cache handler for SwitchTemplate to use.</td>
+<td>xPDOFileCache</td>
+</tr>
+<tr>
+<td>Cache Handler Key</td>
+<td>The key identifying a cache handler for SwitchTemplate to use.</td>
+<td>resource</td>
+</tr>
+<tr>
+<td>Request Key</td>
+<td>Request key used to switch the custom template chunks.</td>
+<td>mode</td>
+</tr>
+<tr>
+<td>Switch Modes TV</td>
+<td>Name of a template variable that contains a comma separated list of allowed switch modes.</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h2 id="custom-manager-page">Custom Manager Page</h2>
+<p>SwitchTemplate could be configured by settings created in a custom manager page.
+Each setting could use the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>A name to identify this configuration.</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>The request key value that selects this setting.</td>
+</tr>
+<tr>
+<td>Extension</td>
+<td>A file extension (including the dot), that selects this setting.</td>
+</tr>
+<tr>
+<td>Chunk/Template Name</td>
+<td>The name of a chunk or a template that is parsed and displayed if this setting is used. The name of the chunk is variable by using MODX placeholders. The placeholders are filled with the values of the current resource (no template variables). If this chunk is not found, a chunkname with stripped placeholders is used. If this field is empty, the name of the original template is used with the setting key as suffix (separated with a space). In this case the field value in the grid is green.</td>
+</tr>
+<tr>
+<td>Template Type</td>
+<td>The template type that is parsed and displayed (<code>Chunk</code> or <code>Template</code>).</td>
+</tr>
+<tr>
+<td>Cache the Output</td>
+<td>Cache the output of the switched template.</td>
+</tr>
+<tr>
+<td>Output Type</td>
+<td>The output for filtering the template output (<code>HTML</code> or <code>AMP</code>)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</td>
+</tr>
+<tr>
+<td>Enabled Resources (Default 'All')</td>
+<td>A list of MODX resources that could have a switched template.</td>
+</tr>
+<tr>
+<td>Disabled Resources (Default 'None')</td>
+<td>A list of MODX resources that could not have a switched template.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<p>If you create the following setting in the custom manager page, you could call
+every page in your installation with the url parameter mode=test (i.e.
+<code>https://your.own.domain/?mode=amp</code>) or with the file extension .amp.html (i.e.
+<code>https://your.own.domain/index.amp.html</code>) and the page is shown with the template
+chunk <code>switchTest</code> and is filtered to valid AMP markup.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Test</td>
+</tr>
+<tr>
+<td>Key</td>
+<td>amp</td>
+</tr>
+<tr>
+<td>Extension</td>
+<td>.amp.html</td>
+</tr>
+<tr>
+<td>Chunk/Template Name</td>
+<td>switchTest</td>
+</tr>
+<tr>
+<td>Template Type</td>
+<td>Chunk</td>
+</tr>
+<tr>
+<td>Cache the Output</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Output Type</td>
+<td>AMP</td>
+</tr>
+<tr>
+<td>Enabled Resources (Default 'All')</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Disabled Resources (Default 'None')</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<!-- Piwik -->
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.partout.info/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 22]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+
+<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=22" style="border:0;" alt="" /></p></noscript>
+
+<!-- End Piwik Code -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The <code>AMP</code> output type will filter the resource output to valid <a href="https://www.ampproject.org">AMP</a> markup using the <a href="https://github.com/Lullabot/amp-library">AMP PHP Library</a>. img tags with Locally referenced images receive image width and height attributes to avoid []openssl issues](https://github.com/Lullabot/amp-library#caveats-and-known-issues) with PHP 5.6+.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
