@@ -13,6 +13,7 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
     'key' => '',
     'template' => '',
     'type' => '',
+    'extension' => '',
     'output' => '',
     'cache' => 1,
     'include' => NULL,
@@ -45,6 +46,14 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
       'default' => '',
     ),
     'type' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '10',
+      'phptype' => 'string',
+      'null' => false,
+      'default' => '',
+    ),
+    'extension' => 
     array (
       'dbtype' => 'varchar',
       'precision' => '10',

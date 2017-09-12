@@ -26,7 +26,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.2.0-pl';
+    public $version = '1.2.0-pl2';
 
     /**
      * The class options

@@ -7,7 +7,7 @@ Changelog for SwitchTemplate
     - Filter the page source before output i.e. for AMP output
     - Absolute links & images and image width & height attributes in AMP output
     - Switched template/chunk name on base of the original template name
-    - Set the allowed SwitchTemplate modes in a template variable
+    - Set the allowed SwitchTemplate modes in a template variable on resource base
 
 - 1.1.1
     - Switch back to default template if the chunk/template is not found

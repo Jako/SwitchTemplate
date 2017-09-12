@@ -21,7 +21,7 @@ language switcher, AMP output ...
 SwitchTemplate uses the following system settings:
 
 Setting | Description | Default
-----|-------------|--------
+--------|-------------|--------
 Cache Expiration Time | The cache expiration time in seconds for custom template output. 0 means indefinitely or until the cache items are purposely cleared. | 0
 Cache Handler Class | The class of cache handler for SwitchTemplate to use. | xPDOFileCache
 Cache Handler Key | The key identifying a cache handler for SwitchTemplate to use. | resource
