@@ -14,7 +14,11 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
 
     public function initialize()
     {
-        $this->switchtemplate = new SwitchTemplate($this->modx);
+        $path = $this->modx->getOption('switchtemplate.core_path', null, $this->modx->getOption('core_path') . 'components/switchtemplate/');
+        $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $path . '/model/switchtemplate/', array(
+            'core_path' => $path
+        ));
+
         parent::initialize();
     }
 
@@ -26,8 +30,6 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
         $cssUrl = $this->switchtemplate->getOption('cssUrl') . 'mgr/';
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
-        $this->modx->controller->addLexiconTopic('switchtemplate:default');
-
         if ($this->switchtemplate->getOption('debug') && ($this->switchtemplate->getOption('assetsUrl') != MODX_ASSETS_URL . 'components/switchtemplate/')) {
             $this->addCss($cssSourceUrl . 'switchtemplate.css');
             $this->addJavascript($jsSourceUrl . 'switchtemplate.js');
@@ -37,7 +39,7 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
             $this->addLastJavascript($jsSourceUrl . 'sections/home.js');
         } else {
             $this->addCss($cssUrl . 'switchtemplate.min.css?v=v' . $this->switchtemplate->version);
-            $this->addJavascript($jsUrl . 'switchtemplate.min.js?v=v' . $this->switchtemplate->version);
+            $this->addLastJavascript($jsUrl . 'switchtemplate.min.js?v=v' . $this->switchtemplate->version);
         }
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
