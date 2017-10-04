@@ -115,11 +115,15 @@ module.exports = function (grunt) {
         },
         watch: {
             js: {
-                files: ['source/**/*.js'],
+                files: [
+                    'source/**/*.js'
+                ],
                 tasks: ['uglify', 'usebanner:js', 'sftp:js']
             },
-            css: {
-                files: ['source/**/*.scss'],
+            scss: {
+                files: [
+                    'source/**/*.scss'
+                ],
                 tasks: ['sass', 'postcss', 'cssmin', 'usebanner:css', 'sftp:css']
             },
             config: {
@@ -161,6 +165,18 @@ module.exports = function (grunt) {
                     replacements: [{
                         pattern: /© \d{4}(-\d{4})? by/g,
                         replacement: '© ' + (new Date().getFullYear() > 2014 ? '2014-' : '') + new Date().getFullYear() + ' by'
+                    }]
+                }
+            },
+            docs: {
+                files: [{
+                    src: 'mkdocs.yml',
+                    dest: 'mkdocs.yml'
+                }],
+                options: {
+                    replacements: [{
+                        pattern: /&copy; \d{4}(-\d{4})?/g,
+                        replacement: '&copy; ' + (new Date().getFullYear() > 2014 ? '2014-' : '') + new Date().getFullYear()
                     }]
                 }
             }

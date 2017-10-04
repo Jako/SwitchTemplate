@@ -5,7 +5,6 @@
     "autoprefixer": "^6.5.4",
     "grunt": "^1.0.1",
     "grunt-banner": "^0.6.0",
-    "grunt-bowercopy": "^1.2.4",
     "grunt-contrib-cssmin": "^1.0.2",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",

@@ -1,6 +1,6 @@
 <?php
 /**
- * Home controller class for SwitchTemplate CMP.
+ * Home controller class for SwitchTemplate
  *
  * @package switchtemplate
  * @subpackage controller
