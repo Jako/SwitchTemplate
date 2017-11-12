@@ -120,14 +120,16 @@ module.exports = function (grunt) {
                 ],
                 tasks: ['uglify', 'usebanner:js', 'sftp:js']
             },
-            scss: {
+            css: {
                 files: [
                     'source/**/*.scss'
                 ],
                 tasks: ['sass', 'postcss', 'cssmin', 'usebanner:css', 'sftp:css']
             },
             config: {
-                files: ['_build/config.json'],
+                files: [
+                    '_build/config.json'
+                ],
                 tasks: ['default']
             }
         },

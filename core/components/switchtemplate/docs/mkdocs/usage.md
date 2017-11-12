@@ -18,7 +18,7 @@ language switcher, AMP output ...
 
 ## System Settings
 
-SwitchTemplate uses the following system settings:
+SwitchTemplate uses the following system settings in the namespace `switchtemplate`:
 
 Setting | Description | Default
 --------|-------------|--------
