@@ -22,12 +22,12 @@ class SwitchTemplateOnLoadWebDocument extends SwitchTemplatePlugin
             // if the output is not null
             if ($output !== null) {
                 // break MODX execution and return the output
-                echo $output;
-                exit;
+                exit($output);
             } elseif ($setting->get('extension')) {
                 // redirect to the default resource without a changed extension
                 $args = $_GET;
                 unset($args[$this->modx->getOption('request_param_alias', null, 'q')]);
+                unset($args[$this->switchtemplate->getOption('mode_key')]);
                 $this->modx->sendRedirect($this->modx->makeUrl($this->modx->resourceIdentifier, '', $args, 'full'));
             }
         }

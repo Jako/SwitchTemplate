@@ -9,7 +9,7 @@ class SwitchTemplateOnPageNotFound extends SwitchTemplatePlugin
     public function run()
     {
         if ($this->modx->context->get('key') !== 'mgr') {
-            $requestUri = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
+            $requestUri = $_REQUEST[$this->modx->getOption('request_param_alias', null, 'q')];
             $requestName = substr($requestUri, 0, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', array(), 2)));
             $requestExtension = substr($requestUri, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', array(), 2)));
 
@@ -38,6 +38,8 @@ class SwitchTemplateOnPageNotFound extends SwitchTemplatePlugin
                         'extension' => $requestExtension
                     ));
                     $_REQUEST[$modeKey] = $setting->get('key');
+
+                    $this->switchtemplate->debugInfo = array('# Extension based template switch triggered with the extension "' . $requestExtension . '"');
 
                     $this->modx->sendForward($id);
                 }

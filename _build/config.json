@@ -3,7 +3,7 @@
   "lowCaseName": "switchtemplate",
   "description": "Switch resource templates on the fly",
   "author": "Thomas Jakobi",
-  "version": "1.2.0-pl2",
+  "version": "1.2.1",
   "package": {
     "menus": [
       {
@@ -55,6 +55,12 @@
       },
       {
         "key": "cache_resource_expires",
+        "area": "site",
+        "value": "0"
+      },
+      {
+        "key": "allow_debug_info",
+        "type": "combo-boolean",
         "area": "site",
         "value": "0"
       }

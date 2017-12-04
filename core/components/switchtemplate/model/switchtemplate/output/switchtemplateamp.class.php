@@ -58,7 +58,6 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
         $resource->_output = $amp->convertToAmpHtml();
     }
 
-
     /**
      * @param string $source
      */

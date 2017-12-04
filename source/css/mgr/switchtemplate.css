@@ -1,5 +1,9 @@
+.action-buttons {
+  text-align: center;
+}
+
 .action-buttons li {
-  float: left;
+  display: inline-block;
   line-height: .7;
   margin-right: 5px;
   font-size: 1.1em;

@@ -26,13 +26,19 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.2.0-pl2';
+    public $version = '1.2.1';
 
     /**
      * The class options
      * @var array $options
      */
     public $options = array();
+
+    /**
+     * The class options
+     * @var array $options
+     */
+    public $debugInfo = array();
 
     /**
      * SwitchTemplate constructor
@@ -81,7 +87,8 @@ class SwitchTemplate
             'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource')),
             'cache_resource_handler' => $this->getOption('cache_resource_handler', $options, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
             'cache_resource_expires' => intval($this->getOption('cache_resource_expires', $options, $this->modx->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0))),
-            'max_iterations' => intval($this->modx->getOption('parser_max_iterations', null, 10))
+            'max_iterations' => intval($this->modx->getOption('parser_max_iterations', null, 10)),
+            'show_debug' => isset($_REQUEST['switchtemplate-debug']) && $_REQUEST['switchtemplate-debug'] == '1' && $this->getOption('allow_debug_info', null, false)
         ));
 
         $this->modx->lexicon->load($this->namespace . ':default');
@@ -137,10 +144,18 @@ class SwitchTemplate
         $resourceId = $resource->get('id');
         $resource->_output = '';
 
+        if ($this->getOption('show_debug')) {
+            $this->debugInfo[] = '# Resource ID: ' . $resourceId;
+            $this->debugInfo[] = '# Used SwitchTemplate Setting: ' . print_r($setting->toArray(), true);
+        }
+
         // stop, if resource id is not in include list or in exclude list
         if ((count($include) && (!in_array($resourceId, $include))) ||
             (count($exclude) && (in_array($resourceId, $exclude)))
         ) {
+            if ($this->getOption('show_debug')) {
+                exit('<pre>' . implode("\n\n", $this->debugInfo));
+            }
             return null;
         }
         // stop, if mode name is not in mode_tv list value
@@ -148,11 +163,21 @@ class SwitchTemplate
         $tvValue = ($tVName) ? $resource->getTVValue($tVName) : '';
         $modes = explode(',', $tvValue);
         if ($tVName && ($tvValue == '' || !in_array($setting->get('key'), $modes))) {
+            if ($this->getOption('show_debug')) {
+                exit('<pre>' . implode("\n\n", $this->debugInfo));
+            }
             return null;
         }
         // stop if the template can't be switched/parsed
         if (is_null($this->parseTemplate($setting))) {
+            if ($this->getOption('show_debug')) {
+                exit('<pre>' . implode("\n\n", $this->debugInfo));
+            }
             return null;
+        }
+
+        if ($this->getOption('show_debug')) {
+            exit('<pre>' . implode("\n\n", $this->debugInfo));
         }
 
         return $resource->_output;
@@ -204,7 +229,6 @@ class SwitchTemplate
         }
         return $string;
     }
-
 
     /**
      * Set timing placeholder
@@ -273,9 +297,16 @@ class SwitchTemplate
             $template = $this->modx->getObject('modTemplate', array('id' => $resource->get('template')));
             if ($template) {
                 $templateName = $template->get('templatename') . ' ' . $setting->get('name');
+                if ($this->getOption('show_debug')) {
+                    $this->debugInfo[] = '# Automatic selected template: ' . $templateName;
+                }
             } else {
                 // fallback to normal resource
-                $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('switchtemplate.err_template_invalid'), '', 'SwitchTemplate');
+                $message = $this->modx->lexicon('switchtemplate.err_template_invalid');
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                if ($this->getOption('show_debug')) {
+                    $this->debugInfo[] = $message;
+                }
                 $resource = $this->modx->request->getResource('id', $resource->get('id'));
                 return null;
             }
@@ -306,7 +337,11 @@ class SwitchTemplate
                         $resource->_output = $chunk->process($ph);
                     } else {
                         // fallback to normal resource
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('switchtemplate.err_chunk_nf', array('name' => $templateName)), '', 'SwitchTemplate');
+                        $message = $this->modx->lexicon('switchtemplate.err_chunk_nf', array('name' => $templateName));
+                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                        if ($this->getOption('show_debug')) {
+                            $this->debugInfo[] = '# ' . $message;
+                        }
                         $resource = $this->modx->request->getResource('id', $resource->get('id'));
                         return null;
                     }
@@ -322,7 +357,11 @@ class SwitchTemplate
                         $resource->_output = $template->get('content');
                     } else {
                         // fallback to normal resource
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, $this->modx->lexicon('switchtemplate.err_template_nf', array('name' => $templateName)), '', 'SwitchTemplate');
+                        $message = $this->modx->lexicon('switchtemplate.err_template_nf', array('name' => $templateName));
+                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                        if ($this->getOption('show_debug')) {
+                            $this->debugInfo[] = $message;
+                        }
                         $resource = $this->modx->request->getResource('id', $resource->get('id'));
                         return null;
                     }

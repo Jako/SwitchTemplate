@@ -1,6 +1,9 @@
 Changelog for SwitchTemplate
 ============================
 
+- 1.2.1
+    - Make the extension based template switch work with xRouting, LangRouter and other routing extras.
+    - Enable debug information in the frontend with a system setting an an URL parameter.
 - 1.2.0
     - Switch the template on base of the extension
     - $modx->RegClient methods are executed in switched templates with HTML output
