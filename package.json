@@ -2,16 +2,16 @@
   "name": "SwitchTemplate",
   "description": "Switch resource templates on the fly",
   "devDependencies": {
-    "autoprefixer": "^6.5.4",
+    "autoprefixer": "^7.2.5",
     "grunt": "^1.0.1",
     "grunt-banner": "^0.6.0",
-    "grunt-contrib-cssmin": "^1.0.2",
-    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-cssmin": "^2.2.1",
+    "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-postcss": "^0.8.0",
+    "grunt-postcss": "^0.9.0",
     "grunt-sass": "^2.0.0",
-    "grunt-ssh": "^0.12.9",
+    [[!+fi."grunt-ssh": "git+https://github.com/israelroldan/grunt-ssh.git",
     "grunt-string-replace": "^1.3.1",
-    "pixrem": "^3.0.2"
+    "pixrem": "^4.0.1"
   }
 }

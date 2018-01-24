@@ -16,7 +16,7 @@ SwitchTemplate.grid.Setting = function (config) {
         id: 'switchtemplate-grid-setting',
         url: SwitchTemplate.config.connectorUrl,
         baseParams: {
-            action: 'mgr/setting/getList',
+            action: 'mgr/setting/getlist',
             pageSize: 10
         },
         autosave: true,
