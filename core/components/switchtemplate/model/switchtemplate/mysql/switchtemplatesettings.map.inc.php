@@ -7,14 +7,18 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
   'version' => '1.1',
   'table' => 'switchtemplate_settings',
   'extends' => 'xPDOSimpleObject',
+  'tableMeta' => 
+  array (
+    'engine' => 'InnoDB',
+  ),
   'fields' => 
   array (
     'name' => '',
     'key' => '',
     'template' => '',
-    'type' => '',
+    'type' => 'chunk',
     'extension' => '',
-    'output' => '',
+    'output' => 'html',
     'cache' => 1,
     'include' => NULL,
     'exclude' => NULL,
@@ -51,7 +55,7 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
       'precision' => '10',
       'phptype' => 'string',
       'null' => false,
-      'default' => '',
+      'default' => 'chunk',
     ),
     'extension' => 
     array (
@@ -67,7 +71,7 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
       'precision' => '10',
       'phptype' => 'string',
       'null' => false,
-      'default' => '',
+      'default' => 'html',
     ),
     'cache' => 
     array (

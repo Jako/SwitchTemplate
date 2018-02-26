@@ -1,6 +1,8 @@
 Changelog for SwitchTemplate
 ============================
 
+- 1.2.2
+    - Bugfix for an empty output type.
 - 1.2.1
     - Make the extension based template switch work with xRouting, LangRouter and other routing extras.
     - Enable debug information in the frontend with a system setting an an URL parameter.

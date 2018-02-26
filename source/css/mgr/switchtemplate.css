@@ -19,6 +19,7 @@
   cursor: pointer;
   height: 40px;
   opacity: 0.25;
+  -webkit-transition: opacity 0.5s;
   transition: opacity 0.5s;
 }
 

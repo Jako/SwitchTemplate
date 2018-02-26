@@ -3,7 +3,7 @@
 /**
  * SwitchTemplate
  *
- * Copyright 2014-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2014-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package switchtemplate
  * @subpackage classfile
@@ -26,7 +26,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.2.1';
+    public $version = '1.2.2';
 
     /**
      * The class options
@@ -390,13 +390,16 @@ class SwitchTemplate
         // parse uncacheable elements
         $this->modx->getParser()->processElementTags('', $resource->_output, true, true, '[[', ']]', array(), $this->getOption('max_iterations'));
 
-        $className = 'SwitchTemplate' . ucfirst($setting->get('output'));
+        $outputType = ($setting->get('output')) ? $setting->get('output') : 'html';
+        $className = 'SwitchTemplate' . ucfirst($outputType);
         $this->modx->loadClass('SwitchTemplateOutput', $this->getOption('modelPath') . 'switchtemplate/output/', true, true);
         $this->modx->loadClass($className, $this->getOption('modelPath') . 'switchtemplate/output/', true, true);
         if (class_exists($className)) {
             /** @var SwitchTemplateOutput $handler */
             $handler = new $className($this->modx, $this->options);
             $handler->run($resource, $setting);
+        } else {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Output type not set.', '', 'SwitchtTemplate');
         }
 
         return $resource;

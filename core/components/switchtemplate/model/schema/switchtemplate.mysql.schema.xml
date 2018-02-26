@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model package="switchtemplate" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="switchtemplate" phpdoc-subpackage="model" version="1.1">
+<model package="switchtemplate" baseClass="xPDOObject" platform="mysql" defaultEngine="InnoDB" phpdoc-package="switchtemplate" phpdoc-subpackage="model" version="1.1">
     <object class="SwitchtemplateSettings" table="switchtemplate_settings" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
         <field key="key" dbtype="varchar" precision="50" phptype="string" null="false" default=""/>
         <field key="template" dbtype="varchar" precision="100" phptype="string" null="false" default=""/>
-        <field key="type" dbtype="varchar" precision="10" phptype="string" null="false" default=""/>
+        <field key="type" dbtype="varchar" precision="10" phptype="string" null="false" default="chunk"/>
         <field key="extension" dbtype="varchar" precision="10" phptype="string" null="false" default=""/>
-        <field key="output" dbtype="varchar" precision="10" phptype="string" null="false" default=""/>
+        <field key="output" dbtype="varchar" precision="10" phptype="string" null="false" default="html"/>
         <field key="cache" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="1"/>
         <field key="include" dbtype="text" phptype="string" null="true"/>
         <field key="exclude" dbtype="text" phptype="string" null="true"/>
 
         <index alias="key" name="key" primary="false" unique="true" type="BTREE">
-            <column key="key" length="" collation="A" null="false" />
+            <column key="key" length="" collation="A" null="false"/>
         </index>
     </object>
 </model>

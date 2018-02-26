@@ -34,7 +34,7 @@ SwitchTemplate.panel.Home = function (config) {
                 afterrender: function (component) {
                     component.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + SwitchTemplate.config.assetsUrl + 'img/treehill-studio.png" srcset="' + SwitchTemplate.config.assetsUrl + 'img/treehill-studio@2x.png 2x" alt"Treehill Studio"><br>' +
-                            '© 2014-2017 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '© 2014-2018 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('switchtemplate') + ' ' + SwitchTemplate.config.version,
                             msg: msg,
