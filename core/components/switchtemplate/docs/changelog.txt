@@ -1,6 +1,8 @@
 Changelog for SwitchTemplate
 ============================
 
+- 1.2.3
+    - Show Debug Mode in CMP
 - 1.2.2
     - Bugfix for an empty output type.
 - 1.2.1

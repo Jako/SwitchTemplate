@@ -26,7 +26,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.2.2';
+    public $version = '1.2.3';
 
     /**
      * The class options
@@ -82,6 +82,7 @@ class SwitchTemplate
 
         // Load parameters
         $this->options = array_merge($this->options, array(
+            'debug' => (bool) $this->getOption('debug', $options, false),
             'mode_key' => $this->getOption('mode_key', $options, 'mode'),
             'mode_tv' => $this->getOption('mode_tv', $options, ''),
             'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource')),

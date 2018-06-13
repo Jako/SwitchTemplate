@@ -1,31 +1,32 @@
 SwitchTemplate.panel.Home = function (config) {
     config = config || {};
     Ext.applyIf(config, {
-        cls: 'container',
+        cls: 'container home-panel'+ ((SwitchTemplate.config.debug) ? ' debug' : ''),
         defaults: {
             collapsible: false,
             autoHeight: true
         },
         items: [{
-            html: '<h2>' + _('switchtemplate.management') + '</h2>',
+            html: '<h2>' + _('switchtemplate') + '</h2>' + ((SwitchTemplate.config.debug) ? '<div class="ribbon top-right"><span>' + _('switchtemplate.debug_mode') + '</span></div>' : ''),
             border: false,
             cls: 'modx-page-header'
         }, {
-            layout: 'form',
-            cls: 'x-form-label-left',
             defaults: {
                 autoHeight: true
             },
             border: true,
-            style: 'margin-bottom: 20px',
             items: [{
-                html: '<p>' + _('switchtemplate.management_desc') + '</p>',
-                border: false,
-                bodyCssClass: 'panel-desc'
-            }, {
-                xtype: 'switchtemplate-grid-setting',
-                cls: 'main-wrapper',
-                preventRender: true
+                xtype: 'modx-tabs',
+                deferredRender: false,
+                forceLayout: true,
+                defaults: {
+                    layout: 'form',
+                    autoHeight: true,
+                    hideMode: 'offsets'
+                },
+                items: [{
+                    xtype: 'switchtemplate-panel-settings'
+                }]
             }]
         }, {
             cls: "treehillstudio_about",
@@ -51,3 +52,35 @@ SwitchTemplate.panel.Home = function (config) {
 };
 Ext.extend(SwitchTemplate.panel.Home, MODx.Panel);
 Ext.reg('switchtemplate-panel-home', SwitchTemplate.panel.Home);
+
+SwitchTemplate.panel.Settings = function (config) {
+    config = config || {};
+    Ext.applyIf(config, {
+        id: 'switchtemplate-panel-settings',
+        title: _('switchtemplate.settings'),
+        items: [{
+            html: '<p>' + _('switchtemplate.settings_desc') + '</p>',
+            border: false,
+            bodyCssClass: 'panel-desc'
+        }, {
+            cls: 'main-wrapper',
+            items: [{
+                layout: 'form',
+                id: 'switchtemplate-panel-setting-grid',
+                defaults: {
+                    border: false,
+                    autoHeight: true
+                },
+                border: true,
+                items: [{
+                    xtype: 'switchtemplate-grid-setting',
+                    preventRender: true
+                }]
+            }]
+        }]
+    });
+    SwitchTemplate.panel.Settings.superclass.constructor.call(this, config);
+}
+;
+Ext.extend(SwitchTemplate.panel.Settings, MODx.Panel);
+Ext.reg('switchtemplate-panel-settings', SwitchTemplate.panel.Settings);
