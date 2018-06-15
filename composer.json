@@ -1,0 +1,17 @@
+{
+  "name": "treehillstudio/switchtemplate",
+  "type": "project",
+  "require": {
+    "lullabot/amp": "^1.1"
+  },
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Thomas Jakobi",
+      "email": "thomas.jakobi@partout.info"
+    }
+  ],
+  "config": {
+    "vendor-dir": "core/components/paythat/vendor"
+  }
+}
