@@ -1,5 +1,5 @@
 {
-  "name": "SwitchTemplate",
+  "name": "switchtemplate",
   "description": "Switch resource templates on the fly",
   "devDependencies": {
     "autoprefixer": "^9.1.3",

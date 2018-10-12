@@ -12,6 +12,6 @@
     }
   ],
   "config": {
-    "vendor-dir": "core/components/paythat/vendor"
+    "vendor-dir": "core/components/switchtemplate/vendor"
   }
 }
