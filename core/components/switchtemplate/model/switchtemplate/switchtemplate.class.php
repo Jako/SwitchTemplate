@@ -304,7 +304,9 @@ class SwitchTemplate
             } else {
                 // fallback to normal resource
                 $message = $this->modx->lexicon('switchtemplate.err_template_invalid');
-                $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                if ($this->getOption('debug')) {
+                    $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                }
                 if ($this->getOption('show_debug')) {
                     $this->debugInfo[] = $message;
                 }
@@ -339,7 +341,9 @@ class SwitchTemplate
                     } else {
                         // fallback to normal resource
                         $message = $this->modx->lexicon('switchtemplate.err_chunk_nf', array('name' => $templateName));
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                        if ($this->getOption('debug')) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                        }
                         if ($this->getOption('show_debug')) {
                             $this->debugInfo[] = '# ' . $message;
                         }
@@ -359,7 +363,9 @@ class SwitchTemplate
                     } else {
                         // fallback to normal resource
                         $message = $this->modx->lexicon('switchtemplate.err_template_nf', array('name' => $templateName));
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                        if ($this->getOption('debug')) {
+                            $this->modx->log(xPDO::LOG_LEVEL_ERROR, $message, '', 'SwitchTemplate');
+                        }
                         if ($this->getOption('show_debug')) {
                             $this->debugInfo[] = $message;
                         }
@@ -400,7 +406,9 @@ class SwitchTemplate
             $handler = new $className($this->modx, $this->options);
             $handler->run($resource, $setting);
         } else {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Output type not set.', '', 'SwitchtTemplate');
+            if ($this->getOption('debug')) {
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Output type not set.', '', 'SwitchtTemplate');
+            }
         }
 
         return $resource;

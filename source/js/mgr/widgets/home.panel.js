@@ -24,6 +24,7 @@ SwitchTemplate.panel.Home = function (config) {
                     autoHeight: true,
                     hideMode: 'offsets'
                 },
+                autoScroll: true,
                 items: [{
                     xtype: 'switchtemplate-panel-settings'
                 }]

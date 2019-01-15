@@ -1,10 +1,12 @@
-SwitchTemplate
-==============
+# SwitchTemplate
 
 Switch resource templates on the fly.
 
-Features
---------
+- Author: Thomas Jakobi <thomas.jakobi@partout.info>
+- License: GNU GPLv2
+
+## Features
+
 SwitchTemplate changes the template of a MODX resource on the fly with a request
 parameter. Different settings with different setting keys could be set in a
 custom manager page.
@@ -21,19 +23,19 @@ markup.
 SwitchTemplate could be used for different purposes: As Ajax connector, as
 language switcher, AMP output ...
 
-Installation
-------------
+## Installation
+
 MODX Package Management
 
-Usage
------
-Install via package manager and create template switching settings in a custom
-manager page.
+## Usage
 
-Documentation
--------------
-For more information please read the documentation on http://jako.github.io/SwitchTemplate/
+Install via package manager, create template switching settings in a custom manager page.
 
-GitHub Repository
------------------
+## Documentation
+
+For more information please read the documentation on
+https://jako.github.io/SwitchTemplate/
+
+## GitHub Repository
+
 https://github.com/Jako/SwitchTemplate
