@@ -16,27 +16,16 @@ SwitchTemplate.panel.Home = function (config) {
             },
             border: true,
             items: [{
-                xtype: 'modx-tabs',
-                deferredRender: false,
-                forceLayout: true,
-                defaults: {
-                    layout: 'form',
-                    autoHeight: true,
-                    hideMode: 'offsets'
-                },
-                autoScroll: true,
-                items: [{
-                    xtype: 'switchtemplate-panel-settings'
-                }]
+                xtype: 'switchtemplate-panel-overview'
             }]
         }, {
             cls: "treehillstudio_about",
-            html: '<img width="133" height="40" src="' + SwitchTemplate.config.assetsUrl + 'img/treehill-studio-small.png"' + ' srcset="' + SwitchTemplate.config.assetsUrl + 'img/treehill-studio-small@2x.png 2x" alt="Treehill Studio">',
+            html: '<img width="133" height="40" src="' + SwitchTemplate.config.assetsUrl + 'img/treehill-studio-small.png"' + ' srcset="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio-small@2x.png 2x" alt="Treehill Studio">',
             listeners: {
                 afterrender: function (component) {
                     component.getEl().select('img').on('click', function () {
-                        var msg = '<span style="display: inline-block; text-align: center"><img src="' + SwitchTemplate.config.assetsUrl + 'img/treehill-studio.png" srcset="' + SwitchTemplate.config.assetsUrl + 'img/treehill-studio@2x.png 2x" alt"Treehill Studio"><br>' +
-                            '© 2014-2018 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                        var msg = '<span style="display: inline-block; text-align: center"><img src="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt"Treehill Studio"><br>' +
+                            '© 2014-2019 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('switchtemplate') + ' ' + SwitchTemplate.config.version,
                             msg: msg,
@@ -54,34 +43,114 @@ SwitchTemplate.panel.Home = function (config) {
 Ext.extend(SwitchTemplate.panel.Home, MODx.Panel);
 Ext.reg('switchtemplate-panel-home', SwitchTemplate.panel.Home);
 
-SwitchTemplate.panel.Settings = function (config) {
+SwitchTemplate.panel.HomeTab = function (config) {
     config = config || {};
     Ext.applyIf(config, {
-        id: 'switchtemplate-panel-settings',
-        title: _('switchtemplate.settings'),
+        id: 'switchtemplate-panel-' + config.tabtype,
+        title: _('switchtemplate.' + config.tabtype),
         items: [{
-            html: '<p>' + _('switchtemplate.settings_desc') + '</p>',
+            html: '<p>' + _('switchtemplate.' + config.tabtype + '_desc') + '</p>',
             border: false,
-            bodyCssClass: 'panel-desc'
+            cls: 'panel-desc'
         }, {
-            cls: 'main-wrapper',
+            layout: 'form',
+            cls: 'x-form-label-left main-wrapper',
+            defaults: {
+                autoHeight: true
+            },
+            border: true,
             items: [{
-                layout: 'form',
-                id: 'switchtemplate-panel-setting-grid',
-                defaults: {
-                    border: false,
-                    autoHeight: true
-                },
-                border: true,
-                items: [{
-                    xtype: 'switchtemplate-grid-setting',
-                    preventRender: true
-                }]
+                id: 'switchtemplate-panel-' + config.tabtype + '-grid',
+                xtype: 'switchtemplate-grid-' + config.tabtype,
+                preventRender: true
             }]
         }]
     });
-    SwitchTemplate.panel.Settings.superclass.constructor.call(this, config);
-}
-;
-Ext.extend(SwitchTemplate.panel.Settings, MODx.Panel);
-Ext.reg('switchtemplate-panel-settings', SwitchTemplate.panel.Settings);
+    SwitchTemplate.panel.HomeTab.superclass.constructor.call(this, config);
+};
+Ext.extend(SwitchTemplate.panel.HomeTab, MODx.Panel);
+Ext.reg('switchtemplate-panel-hometab', SwitchTemplate.panel.HomeTab);
+
+SwitchTemplate.panel.Overview = function (config) {
+    config = config || {};
+    this.ident = 'switchtemplate-panel-overview' + Ext.id();
+    this.panelOverviewTabs = [{
+        xtype: 'switchtemplate-panel-hometab',
+        tabtype: 'setting'
+    }];
+    if (SwitchTemplate.config.is_admin) {
+        this.panelOverviewTabs.push({
+            xtype: 'switchtemplate-panel-settings',
+            tabtype: 'settings'
+        })
+    }
+    Ext.applyIf(config, {
+        id: this.ident,
+        items: [{
+            xtype: 'modx-tabs',
+            stateful: true,
+            stateId: 'switchtemplate-panel-overview',
+            stateEvents: ['tabchange'],
+            getState: function () {
+                return {
+                    activeTab: this.items.indexOf(this.getActiveTab())
+                };
+            },
+            autoScroll: true,
+            deferredRender: false,
+            forceLayout: true,
+            defaults: {
+                layout: 'form',
+                autoHeight: true,
+                hideMode: 'offsets'
+            },
+            items: this.panelOverviewTabs,
+            listeners: {
+                tabchange: function (o, t) {
+                    if (t.tabtype === 'settings') {
+                        Ext.getCmp('switchtemplate-grid-system-settings').getStore().reload();
+                    } else if (t.xtype === 'switchtemplate-panel-hometab') {
+                        if (Ext.getCmp('switchtemplate-panel-' + t.tabtype + '-grid')) {
+                            Ext.getCmp('switchtemplate-panel-' + t.tabtype + '-grid').getStore().reload();
+                        }
+                    }
+                }
+            }
+        }]
+    });
+    SwitchTemplate.panel.Overview.superclass.constructor.call(this, config);
+};
+Ext.extend(SwitchTemplate.panel.Overview, MODx.Panel);
+Ext.reg('switchtemplate-panel-overview', SwitchTemplate.panel.Overview);
+
+// SwitchTemplate.panel.Settings = function (config) {
+//     config = config || {};
+//     Ext.applyIf(config, {
+//         id: 'switchtemplate-panel-settings',
+//         title: _('switchtemplate.settings'),
+//         items: [{
+//             html: '<p>' + _('switchtemplate.settings_desc') + '</p>',
+//             border: false,
+//             bodyCssClass: 'panel-desc'
+//         }, {
+//             cls: 'main-wrapper',
+//             items: [{
+//                 layout: 'form',
+//                 id: 'switchtemplate-panel-setting-grid',
+//                 defaults: {
+//                     border: false,
+//                     autoHeight: true
+//                 },
+//                 border: true,
+//                 items: [{
+//                     xtype: 'switchtemplate-grid-setting',
+//                     preventRender: true
+//                 }]
+//             }]
+//         }]
+//     });
+//     SwitchTemplate.panel.Settings.superclass.constructor.call(this, config);
+// }
+// ;
+// Ext.extend(SwitchTemplate.panel.Settings, MODx.Panel);
+// Ext.reg('switchtemplate-panel-settings', SwitchTemplate.panel.Settings);

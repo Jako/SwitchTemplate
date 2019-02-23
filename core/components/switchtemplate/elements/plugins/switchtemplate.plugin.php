@@ -17,8 +17,8 @@ $switchtemplate = $modx->getService('switchtemplate', 'SwitchTemplate', $corePat
     'core_path' => $corePath
 ));
 
-$modx->loadClass('SwitchTemplatePlugin', $switchtemplate->getOption('eventsPath'), true, true);
-$modx->loadClass($className, $switchtemplate->getOption('eventsPath'), true, true);
+$modx->loadClass('SwitchTemplatePlugin', $switchtemplate->getOption('modelPath') . 'switchtemplate/events/', true, true);
+$modx->loadClass($className, $switchtemplate->getOption('modelPath') . 'switchtemplate/events/', true, true);
 if (class_exists($className)) {
     /** @var SwitchTemplatePlugin $handler */
     $handler = new $className($modx, $scriptProperties);

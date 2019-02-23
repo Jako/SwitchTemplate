@@ -31,7 +31,7 @@ SwitchTemplate.grid.Setting = function (config) {
             sortable: true,
             hidden: true
         }, {
-            header: _('switchtemplate.name'),
+            header: _('switchtemplate.setting_name'),
             dataIndex: 'name',
             sortable: true,
             editable: false,
@@ -39,7 +39,7 @@ SwitchTemplate.grid.Setting = function (config) {
                 xtype: 'textfield'
             }
         }, {
-            header: _('switchtemplate.key'),
+            header: _('switchtemplate.setting_key'),
             dataIndex: 'key',
             sortable: true,
             editable: false,
@@ -48,7 +48,7 @@ SwitchTemplate.grid.Setting = function (config) {
             },
             width: 50
         }, {
-            header: _('switchtemplate.templatename'),
+            header: _('switchtemplate.setting_templatename'),
             dataIndex: 'templatename',
             sortable: true,
             editable: false,
@@ -57,13 +57,13 @@ SwitchTemplate.grid.Setting = function (config) {
             },
             width: 120
         }, {
-            header: _('switchtemplate.extension'),
+            header: _('switchtemplate.setting_extension'),
             dataIndex: 'extension',
             sortable: true,
             editable: false,
             width: 50
         }, {
-            header: _('switchtemplate.type_short'),
+            header: _('switchtemplate.setting_type_short'),
             dataIndex: 'type',
             sortable: true,
             editable: false,
@@ -72,7 +72,7 @@ SwitchTemplate.grid.Setting = function (config) {
             },
             width: 40
         }, {
-            header: _('switchtemplate.output_short'),
+            header: _('switchtemplate.setting_output_short'),
             dataIndex: 'output',
             sortable: true,
             editable: false,
@@ -81,7 +81,7 @@ SwitchTemplate.grid.Setting = function (config) {
             },
             width: 40
         }, {
-            header: _('switchtemplate.cache_short'),
+            header: _('switchtemplate.setting_cache_short'),
             dataIndex: 'cache',
             sortable: true,
             editable: false,
@@ -102,7 +102,7 @@ SwitchTemplate.grid.Setting = function (config) {
         }, '->', {
             xtype: 'textfield',
             id: 'switchtemplate-search-filter',
-            emptyText: _('switchtemplate.search') + '…',
+            emptyText: _('search') + '…',
             listeners: {
                 change: {fn: this.search, scope: this}, 'render': {
                     fn: function (cmp) {
@@ -254,7 +254,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
-                    fieldLabel: _('switchtemplate.name'),
+                    fieldLabel: _('switchtemplate.setting_name'),
                     name: 'name',
                     id: this.ident + '-name',
                     anchor: '100%',
@@ -265,7 +265,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
-                    fieldLabel: _('switchtemplate.key'),
+                    fieldLabel: _('switchtemplate.setting_key'),
                     name: 'key',
                     id: this.ident + '-key',
                     anchor: '100%',
@@ -276,7 +276,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
-                    fieldLabel: _('switchtemplate.extension'),
+                    fieldLabel: _('switchtemplate.setting_extension'),
                     name: 'extension',
                     id: this.ident + '-extension',
                     anchor: '100%'
@@ -289,7 +289,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
-                    fieldLabel: _('switchtemplate.templatename'),
+                    fieldLabel: _('switchtemplate.setting_templatename'),
                     name: 'template',
                     id: this.ident + '-template',
                     anchor: '100%'
@@ -299,7 +299,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-type',
-                    fieldLabel: _('switchtemplate.type'),
+                    fieldLabel: _('switchtemplate.setting_type'),
                     value: 'chunk',
                     name: 'type',
                     hiddenName: 'type',
@@ -312,7 +312,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'modx-combo-boolean',
-                    fieldLabel: _('switchtemplate.cache'),
+                    fieldLabel: _('switchtemplate.setting_cache'),
                     value: '1',
                     name: 'cache',
                     hiddenName: 'cache',
@@ -324,7 +324,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-output',
-                    fieldLabel: _('switchtemplate.output'),
+                    fieldLabel: _('switchtemplate.setting_output'),
                     value: 'html',
                     name: 'output',
                     hiddenName: 'output',
@@ -339,8 +339,8 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-resources',
-                    fieldLabel: _('switchtemplate.include'),
-                    description: MODx.expandHelp ? '' : _('switchtemplate.include_desc'),
+                    fieldLabel: _('switchtemplate.setting_include'),
+                    description: MODx.expandHelp ? '' : _('switchtemplate.setting_include_desc'),
                     name: 'include',
                     hiddenName: 'include',
                     id: this.ident + '-include',
@@ -348,7 +348,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 }, {
                     xtype: MODx.expandHelp ? 'label' : 'hidden',
                     forId: this.ident + '-template',
-                    html: _('switchtemplate.include_desc'),
+                    html: _('switchtemplate.setting_include_desc'),
                     cls: 'desc-under'
                 }, {
                     xtype: 'textfield',
@@ -361,8 +361,8 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-resources',
-                    fieldLabel: _('switchtemplate.exclude'),
-                    description: MODx.expandHelp ? '' : _('switchtemplate.exclude_desc'),
+                    fieldLabel: _('switchtemplate.setting_exclude'),
+                    description: MODx.expandHelp ? '' : _('switchtemplate.setting_exclude_desc'),
                     name: 'exclude',
                     hiddenName: 'exclude',
                     id: this.ident + '-exclude',
@@ -370,7 +370,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 }, {
                     xtype: MODx.expandHelp ? 'label' : 'hidden',
                     forId: this.ident + '-template',
-                    html: _('switchtemplate.exclude_desc'),
+                    html: _('switchtemplate.setting_exclude_desc'),
                     cls: 'desc-under'
                 }, {
                     xtype: 'textfield',

@@ -1,12 +1,14 @@
 <?php
 /**
- * Home controller class for SwitchTemplate
+ * Home Manager Controller class for SwitchTemplate
  *
  * @package switchtemplate
  * @subpackage controller
  */
-require_once dirname(dirname(__FILE__)) . '/model/switchtemplate/switchtemplate.class.php';
 
+/**
+ * Class SwitchtemplateHomeManagerController
+ */
 class SwitchtemplateHomeManagerController extends modExtraManagerController
 {
     /** @var SwitchTemplate $switchtemplate */
@@ -31,14 +33,17 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
         if ($this->switchtemplate->getOption('debug') && ($this->switchtemplate->getOption('assetsUrl') != MODX_ASSETS_URL . 'components/switchtemplate/')) {
-            $this->addCss($cssSourceUrl . 'switchtemplate.css');
-            $this->addJavascript($jsSourceUrl . 'switchtemplate.js');
-            $this->addJavascript($jsSourceUrl . 'helper/switchtemplate.combo.js');
-            $this->addJavascript($jsSourceUrl . 'widgets/switchtemplate.grid.js');
-            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js');
-            $this->addLastJavascript($jsSourceUrl . 'sections/home.js');
+            $this->addCss($cssSourceUrl . 'switchtemplate.css?v=v' . $this->switchtemplate->version);
+            $this->addJavascript($jsSourceUrl . 'switchtemplate.js?v=v' . $this->switchtemplate->version);
+            $this->addJavascript($jsSourceUrl . 'helper/combo.js?v=v' . $this->switchtemplate->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->switchtemplate->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/switchtemplate.grid.js?v=v' . $this->switchtemplate->version);
+            $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js?v=v' . $this->switchtemplate->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/settings.panel.js?v=v' . $this->switchtemplate->version);
+            $this->addLastJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->switchtemplate->version);
         } else {
             $this->addCss($cssUrl . 'switchtemplate.min.css?v=v' . $this->switchtemplate->version);
+            $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js');
             $this->addLastJavascript($jsUrl . 'switchtemplate.min.js?v=v' . $this->switchtemplate->version);
         }
         $this->addHtml('<script type="text/javascript">
@@ -51,7 +56,7 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
 
     public function getLanguageTopics()
     {
-        return array('switchtemplate:default');
+        return array('core:setting', 'switchtemplate:default');
     }
 
     public function process(array $scriptProperties = array())

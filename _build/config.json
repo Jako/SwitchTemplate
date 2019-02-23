@@ -7,8 +7,8 @@
   "package": {
     "menus": [
       {
-        "text": "switchtemplate.menu_home",
-        "description": "switchtemplate.menu_home_desc",
+        "text": "switchtemplate.menu",
+        "description": "switchtemplate.menu_desc",
         "action": "home",
         "parent": "components"
       }
@@ -18,6 +18,7 @@
         {
           "name": "SwitchTemplate",
           "file": "switchtemplate.plugin.php",
+          "description": "Switch resource templates on the fly",
           "events": [
             "OnLoadWebPageCache",
             "OnLoadWebDocument",
@@ -71,10 +72,26 @@
       "SwitchtemplateSettings"
     ]
   },
+  "dependencies": [
+    {
+      "name": "php",
+      "version": ">=5.4"
+    },
+    {
+      "name": "modx",
+      "version": ">=2.6"
+    }
+  ],
   "build": {
     "readme": "docs/readme.md",
     "license": "docs/license.md",
     "changelog": "docs/changelog.md",
+    "options": {
+      "modx_version": "2.6"
+    },
+    "setupOptions": {
+      "source": "setup.options.php"
+    },
     "resolver": {
       "after": [
         "resolve.synctables.php",

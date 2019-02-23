@@ -1,4 +1,5 @@
 $treehillstudio-color: #a9ba2f;
+$red: #be0000;
 
 .action-buttons {
   text-align: center;
@@ -44,7 +45,7 @@ $treehillstudio-color: #a9ba2f;
 
 .home-panel {
   &.debug {
-    background: linear-gradient(to top right, transparent, transparent, transparent, #fff, transparent);
+    background: linear-gradient(to top right, transparent, transparent, transparent, #ffffff);
   }
 }
 
@@ -53,10 +54,11 @@ $treehillstudio-color: #a9ba2f;
   overflow: hidden;
   position: absolute;
   width: 180px;
-  z-index: 10;
+  z-index: 9;
+  pointer-events: none;
   &:before,
   &:after {
-    border: 5px solid mix(#000, #be0000, 15);
+    border: 5px solid mix(#000000, $red, 15);
     content: '';
     display: block;
     position: absolute;
@@ -85,9 +87,9 @@ $treehillstudio-color: #a9ba2f;
     }
   }
   span {
-    background-color: #be0000;
+    background-color: $red;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
-    color: #fff;
+    color: #ffffff;
     display: block;
     font: 700 18px/1 'Lato', sans-serif;
     padding: 15px 0;

@@ -4,9 +4,13 @@
 
 .action-buttons li {
   display: inline-block;
+  font-size: 1.1em;
   line-height: .7;
   margin-right: 5px;
-  font-size: 1.1em;
+}
+
+.action-buttons li:last-child {
+  margin-right: 0;
 }
 
 .x-form-display-field {
@@ -41,8 +45,8 @@
 }
 
 .home-panel.debug {
-  background: -webkit-gradient(linear, left bottom, right top, from(transparent), color-stop(transparent), color-stop(transparent), color-stop(#fff), to(transparent));
-  background: linear-gradient(to top right, transparent, transparent, transparent, #fff, transparent);
+  background: -webkit-gradient(linear, left bottom, right top, from(transparent), color-stop(transparent), color-stop(transparent), to(#ffffff));
+  background: linear-gradient(to top right, transparent, transparent, transparent, #ffffff);
 }
 
 .ribbon {
@@ -50,7 +54,8 @@
   overflow: hidden;
   position: absolute;
   width: 180px;
-  z-index: 10;
+  z-index: 9;
+  pointer-events: none;
 }
 
 .ribbon:before, .ribbon:after {
@@ -93,7 +98,7 @@
   background-color: #be0000;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
           box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  color: #fff;
+  color: #ffffff;
   display: block;
   font: 700 18px/1 'Lato', sans-serif;
   padding: 15px 0;

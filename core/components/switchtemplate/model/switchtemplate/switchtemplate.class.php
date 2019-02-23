@@ -1,12 +1,15 @@
 <?php
-
 /**
  * SwitchTemplate
  *
- * Copyright 2014-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2014-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package switchtemplate
  * @subpackage classfile
+ */
+
+/**
+ * class SwitchTemplate
  */
 class SwitchTemplate
 {
@@ -49,6 +52,7 @@ class SwitchTemplate
     function __construct(modX &$modx, $options = array())
     {
         $this->modx =& $modx;
+        $this->namespace = $this->getOption('namespace', $options, $this->namespace);
 
         $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/switchtemplate/');
         $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/switchtemplate/');
@@ -62,7 +66,6 @@ class SwitchTemplate
             'version' => $this->version,
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
-            'eventsPath' => $corePath . 'model/' . $this->namespace . '/events/',
             'vendorPath' => $corePath . 'vendor/',
             'chunksPath' => $corePath . 'elements/chunks/',
             'pagesPath' => $corePath . 'elements/pages/',
@@ -80,21 +83,22 @@ class SwitchTemplate
             'connectorUrl' => $assetsUrl . 'connector.php'
         ), $options);
 
-        // Load parameters
+        // Add default options
         $this->options = array_merge($this->options, array(
-            'debug' => (bool) $this->getOption('debug', $options, false),
+            'cache_resource_expires' => intval($this->getOption('cache_resource_expires', $options, $this->modx->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0))),
+            'cache_resource_handler' => $this->getOption('cache_resource_handler', $options, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
+            'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource')),
+            'debug' => (bool)$this->getOption('debug', $options, false),
+            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('SwitchTemplate Administrator') : false,
+            'max_iterations' => intval($this->modx->getOption('parser_max_iterations', null, 10)),
             'mode_key' => $this->getOption('mode_key', $options, 'mode'),
             'mode_tv' => $this->getOption('mode_tv', $options, ''),
-            'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource')),
-            'cache_resource_handler' => $this->getOption('cache_resource_handler', $options, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
-            'cache_resource_expires' => intval($this->getOption('cache_resource_expires', $options, $this->modx->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0))),
-            'max_iterations' => intval($this->modx->getOption('parser_max_iterations', null, 10)),
             'show_debug' => isset($_REQUEST['switchtemplate-debug']) && $_REQUEST['switchtemplate-debug'] == '1' && $this->getOption('allow_debug_info', null, false)
         ));
 
-        $this->modx->lexicon->load($this->namespace . ':default');
-
-        $this->modx->addPackage('switchtemplate', $this->getOption('modelPath'));
+        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
+        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
+        $lexicon->load($this->namespace . ':default');
 
         // Autoload composer classes
         require $this->getOption('vendorPath') . 'autoload.php';

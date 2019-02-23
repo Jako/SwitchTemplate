@@ -3,10 +3,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         modx: grunt.file.readJSON('_build/config.json'),
         banner: '/*!\n' +
-        ' * <%= modx.name %> - <%= modx.description %>\n' +
-        ' * Version: <%= modx.version %>\n' +
-        ' * Build date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        ' */\n',
+            ' * <%= modx.name %> - <%= modx.description %>\n' +
+            ' * Version: <%= modx.version %>\n' +
+            ' * Build date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            ' */\n',
         usebanner: {
             css: {
                 options: {
@@ -35,9 +35,10 @@ module.exports = function (grunt) {
             mgr: {
                 src: [
                     'source/js/mgr/switchtemplate.js',
+                    'source/js/mgr/helper/combo.js',
                     'source/js/mgr/widgets/home.panel.js',
-                    'source/js/mgr/helper/switchtemplate.combo.js',
                     'source/js/mgr/widgets/switchtemplate.grid.js',
+                    'source/js/mgr/widgets/settings.panel.js',
                     'source/js/mgr/sections/home.js'
                 ],
                 dest: 'assets/components/switchtemplate/js/mgr/switchtemplate.min.js'
@@ -76,6 +77,22 @@ module.exports = function (grunt) {
                     'source/css/mgr/switchtemplate.css'
                 ],
                 dest: 'assets/components/switchtemplate/css/mgr/switchtemplate.min.css'
+            }
+        },
+        imagemin: {
+            png: {
+                options: {
+                    optimizationLevel: 7
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'source/img/',
+                        src: ['**/*.png'],
+                        dest: 'assets/components/switchtemplate/img/',
+                        ext: '.png'
+                    }
+                ]
             }
         },
         watch: {
@@ -153,6 +170,7 @@ module.exports = function (grunt) {
     //load the packages
     grunt.loadNpmTasks('grunt-banner');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');

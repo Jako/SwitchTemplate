@@ -6,9 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.2.3] - TBA
+## [1.2.3] - 2019-02-23
 ### Added
 - Show debug mode in custom manager page
+- System settings tab in custom manager page
+
 ### Changed
 - Log errors in debug mode only
 
