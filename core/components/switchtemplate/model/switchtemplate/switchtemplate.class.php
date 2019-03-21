@@ -89,7 +89,7 @@ class SwitchTemplate
             'cache_resource_handler' => $this->getOption('cache_resource_handler', $options, $this->modx->getOption(xPDO::OPT_CACHE_HANDLER, null, 'xPDOFileCache')),
             'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource')),
             'debug' => (bool)$this->getOption('debug', $options, false),
-            'is_admin' => ($this->modx->user) ? $this->modx->user->isMember('Administrator') || $this->modx->user->isMember('SwitchTemplate Administrator') : false,
+            'is_admin' => ($this->modx->user) ? $modx->hasPermission('settings') || $this->modx->hasPermission('switchtemplate_settings') : false,
             'max_iterations' => intval($this->modx->getOption('parser_max_iterations', null, 10)),
             'mode_key' => $this->getOption('mode_key', $options, 'mode'),
             'mode_tv' => $this->getOption('mode_tv', $options, ''),

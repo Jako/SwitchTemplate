@@ -44,8 +44,8 @@ $_lang['switchtemplate.settings_desc'] = 'Edit the system settings of SwitchTemp
 
 $_lang['switchtemplate.debug_mode'] = 'Debug Mode';
 
-$_lang['switchtemplate.systemsetting_key_err_nv'] = 'You could onl edit settings with the prefix crosslinks.';
-$_lang['switchtemplate.systemsetting_usergroup_err_nv'] = 'Only members of the user group Administrator or Crosslinks Administrator are allowed to change settings.';
+$_lang['switchtemplate.systemsetting_key_err_nv'] = 'You could only edit settings with the prefix switchtemplate.';
+$_lang['switchtemplate.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a settings_switchtemplate permission are allowed to change settings.';
 
 $_lang['switchtemplate.err_chunk_nf'] = 'Chunk \'[[+name]]\' is not found.';
 $_lang['switchtemplate.err_template_invalid'] = 'Template is not valid.';

@@ -48,7 +48,7 @@ class SwitchTemplateSystemSettingsUpdateProcessor extends modSystemSettingsUpdat
         if (strpos($key, 'switchtemplate.') !== 0) {
             $this->addFieldError('key', $this->modx->lexicon('switchtemplate.systemsetting_key_err_nv'));
         }
-        if (!($this->modx->user->isMember('Administrator') || $this->modx->user->isMember('SwitchTemplate Administrator'))) {
+        if (!$this->modx->hasPermission('settings') && !$this->modx->hasPermission('switchtemplate_settings')) {
             $this->addFieldError('usergroup', $this->modx->lexicon('switchtemplate.systemsetting_usergroup_err_nv'));
         }
     }
