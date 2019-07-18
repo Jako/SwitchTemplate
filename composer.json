@@ -1,6 +1,5 @@
 {
   "name": "treehillstudio/switchtemplate",
-  "type": "project",
   "require": {
     "lullabot/amp": "^1.1"
   },
