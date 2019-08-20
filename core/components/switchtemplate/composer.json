@@ -9,8 +9,5 @@
       "name": "Thomas Jakobi",
       "email": "thomas.jakobi@partout.info"
     }
-  ],
-  "config": {
-    "vendor-dir": "core/components/switchtemplate/vendor"
-  }
+  ]
 }

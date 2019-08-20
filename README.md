@@ -32,4 +32,4 @@ manager page.
 
 ## Documentation
 
-For more information please read the documentation on http://jako.github.io/SwitchTemplate/
+For more information please read the documentation on https://jako.github.io/SwitchTemplate/

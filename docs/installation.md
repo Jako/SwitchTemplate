@@ -10,7 +10,7 @@ can manually install SwitchTemplate.
 
 * Download the transport package from [MODX Extras](https://modx.com/extras/package/switchtemplate) (or one of the pre built transport packages in [_packages](https://github.com/Jako/SwitchTemplate/tree/master/_packages))
 * Upload the zip file to your MODX installation's `core/packages` folder or upload it manually in the MODX Package Manager.
-* In the Package Manager of your MODX installation select 'Search locally for packages' from the dropdown button.
+* In the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown button.
 * SwitchTemplate should now show up in the list of available packages. Click the corresponding 'Install' button and follow instructions to complete the installation.
 
 ## Build it from source
@@ -21,3 +21,7 @@ repository of SwitchTemplate contains a
 [config.json](https://github.com/Jako/SwitchTemplate/blob/master/_build/config.json)
 to build that package locally. Use this option, if you want to debug
 SwitchTemplate and/or contribute bugfixes and enhancements.
+
+After downloading the github repository, you have to change into the
+`core/components/switchtemplate` folder and install mpdf with composer by invoking
+`composer install`.
