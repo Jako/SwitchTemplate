@@ -8,4 +8,4 @@ _packages/*.*
 !_packages/*.zip
 
 node_modules/
-core/components/switchtemplate/vendor
+core/components/*/vendor
