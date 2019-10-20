@@ -22,7 +22,7 @@
         }, 
         {
             "location": "/installation/", 
-            "text": "Install from MODX Extras\n\n\nSearch for SwitchTemplate in the Package Manager of a MODX installation and\ninstall it in there.\n\n\nManual installation\n\n\nIf you can't access the MODX Extras Repository in your MODX installation, you\ncan manually install SwitchTemplate.\n\n\n\n\nDownload the transport package from \nMODX Extras\n (or one of the pre built transport packages in \n_packages\n)\n\n\nUpload the zip file to your MODX installation's \ncore/packages\n folder or upload it manually in the MODX Package Manager.\n\n\nIn the Package Manager of your MODX installation select 'Search locally for packages' from the dropdown button.\n\n\nSwitchTemplate should now show up in the list of available packages. Click the corresponding 'Install' button and follow instructions to complete the installation.\n\n\n\n\nBuild it from source\n\n\nTo build and install the package from source you could use \nGit Package\nManagement\n. The GitHub\nrepository of SwitchTemplate contains a\n\nconfig.json\n\nto build that package locally. Use this option, if you want to debug\nSwitchTemplate and/or contribute bugfixes and enhancements.", 
+            "text": "Install from MODX Extras\n\n\nSearch for SwitchTemplate in the Package Manager of a MODX installation and\ninstall it in there.\n\n\nManual installation\n\n\nIf you can't access the MODX Extras Repository in your MODX installation, you\ncan manually install SwitchTemplate.\n\n\n\n\nDownload the transport package from \nMODX Extras\n (or one of the pre built transport packages in \n_packages\n)\n\n\nUpload the zip file to your MODX installation's \ncore/packages\n folder or upload it manually in the MODX Package Manager.\n\n\nIn the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown button.\n\n\nSwitchTemplate should now show up in the list of available packages. Click the corresponding 'Install' button and follow instructions to complete the installation.\n\n\n\n\nBuild it from source\n\n\nTo build and install the package from source you could use \nGit Package\nManagement\n. The GitHub\nrepository of SwitchTemplate contains a\n\nconfig.json\n\nto build that package locally. Use this option, if you want to debug\nSwitchTemplate and/or contribute bugfixes and enhancements.\n\n\nAfter downloading the github repository, you have to change into the\n\ncore/components/switchtemplate\n folder and install mpdf with composer by invoking\n\ncomposer install\n.", 
             "title": "Installation"
         }, 
         {
@@ -32,12 +32,12 @@
         }, 
         {
             "location": "/installation/#manual-installation", 
-            "text": "If you can't access the MODX Extras Repository in your MODX installation, you\ncan manually install SwitchTemplate.   Download the transport package from  MODX Extras  (or one of the pre built transport packages in  _packages )  Upload the zip file to your MODX installation's  core/packages  folder or upload it manually in the MODX Package Manager.  In the Package Manager of your MODX installation select 'Search locally for packages' from the dropdown button.  SwitchTemplate should now show up in the list of available packages. Click the corresponding 'Install' button and follow instructions to complete the installation.", 
+            "text": "If you can't access the MODX Extras Repository in your MODX installation, you\ncan manually install SwitchTemplate.   Download the transport package from  MODX Extras  (or one of the pre built transport packages in  _packages )  Upload the zip file to your MODX installation's  core/packages  folder or upload it manually in the MODX Package Manager.  In the MODX Manager, navigate to the Package Manager page, and select 'Search locally for packages' from the dropdown button.  SwitchTemplate should now show up in the list of available packages. Click the corresponding 'Install' button and follow instructions to complete the installation.", 
             "title": "Manual installation"
         }, 
         {
             "location": "/installation/#build-it-from-source", 
-            "text": "To build and install the package from source you could use  Git Package\nManagement . The GitHub\nrepository of SwitchTemplate contains a config.json \nto build that package locally. Use this option, if you want to debug\nSwitchTemplate and/or contribute bugfixes and enhancements.", 
+            "text": "To build and install the package from source you could use  Git Package\nManagement . The GitHub\nrepository of SwitchTemplate contains a config.json \nto build that package locally. Use this option, if you want to debug\nSwitchTemplate and/or contribute bugfixes and enhancements.  After downloading the github repository, you have to change into the core/components/switchtemplate  folder and install mpdf with composer by invoking composer install .", 
             "title": "Build it from source"
         }, 
         {
@@ -67,12 +67,12 @@
         }, 
         {
             "location": "/donate/", 
-            "text": "Support SwitchTemplate\n\n\nSwitchTemplate\n is and always will be free and open-source, but it still requires many man-hours of development, \nbug-fixing, support in MODX forums and on GitHub between the releases.\n\n\nPlease support the ongoing and past development of \nSwitchTemplate\n by making a donation below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSwitchTemplate\n development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
+            "text": "Support SwitchTemplate\n\n\nSwitchTemplate\n is and always will be free and open-source, but it still\nrequires many man-hours of development, bug-fixing, support in MODX forums and\non GitHub between the releases.\n\n\nPlease support the ongoing and past development of \nSwitchTemplate\n by making a\ndonation below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSwitchTemplate\n development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
             "title": "Donate"
         }, 
         {
             "location": "/donate/#support-switchtemplate", 
-            "text": "SwitchTemplate  is and always will be free and open-source, but it still requires many man-hours of development, \nbug-fixing, support in MODX forums and on GitHub between the releases.  Please support the ongoing and past development of  SwitchTemplate  by making a donation below.           SwitchTemplate  development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
+            "text": "SwitchTemplate  is and always will be free and open-source, but it still\nrequires many man-hours of development, bug-fixing, support in MODX forums and\non GitHub between the releases.  Please support the ongoing and past development of  SwitchTemplate  by making a\ndonation below.            SwitchTemplate  development is sponsored by Treehillstudio \u2013 MODX Development in M\u00fcnsterland.", 
             "title": "Support SwitchTemplate"
         }
     ]
