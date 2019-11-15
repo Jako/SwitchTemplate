@@ -52,6 +52,9 @@ class SwitchTemplateOnPageNotFound extends SwitchTemplatePlugin
     {
         $x = 0;
         $len = strlen($haystack);
+        if ($len >= $offset) {
+            return false;
+        }
         for ($i = 0; $i < $num; $i++) {
             $x = strrpos($haystack, $needle, -$offset);
             if ($x === false) {
