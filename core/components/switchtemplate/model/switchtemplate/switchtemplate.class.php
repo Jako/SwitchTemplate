@@ -2,7 +2,7 @@
 /**
  * SwitchTemplate
  *
- * Copyright 2014-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2014-2020 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package switchtemplate
  * @subpackage classfile
@@ -29,7 +29,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.2.3';
+    public $version = '1.2.4';
 
     /**
      * The class options
