@@ -363,7 +363,7 @@ class SwitchTemplate
 
                     if ($template = $this->modx->getObject('modTemplate', array('templatename' => $templatename))) {
                         // get the template content
-                        $resource->_output = $template->get('content');
+                        $resource->_output = $template->process();
                     } else {
                         // fallback to normal resource
                         $message = $this->modx->lexicon('switchtemplate.err_template_nf', array('name' => $templateName));
