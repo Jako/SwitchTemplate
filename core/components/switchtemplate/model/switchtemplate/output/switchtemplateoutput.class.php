@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @package switchtemplate
  * @subpackage output
  */
+
 abstract class SwitchTemplateOutput
 {
     /** @var modX $modx */

@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @package switchtemplate
  * @subpackage plugin
  */
+
 class SwitchTemplateOnLoadWebDocument extends SwitchTemplatePlugin
 {
     public function run()

@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Update processor for SwitchTemplate CMP
+ * Update setting
  *
  * @package switchtemplate
  * @subpackage processor
  */
+
 class SwitchTemplateSettingUpdateProcessor extends modObjectUpdateProcessor
 {
     public $classKey = 'SwitchtemplateSettings';

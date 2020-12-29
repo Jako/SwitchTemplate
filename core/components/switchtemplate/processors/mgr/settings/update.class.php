@@ -1,6 +1,6 @@
 <?php
 /**
- * Update a system setting
+ * Update system setting
  *
  * @param string $key The key of the setting
  * @param string $value The value of the setting

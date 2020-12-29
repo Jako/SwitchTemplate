@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @package switchtemplate
  * @subpackage plugin
  */
+
 abstract class SwitchTemplatePlugin
 {
     /** @var modX $modx */

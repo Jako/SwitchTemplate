@@ -1,9 +1,9 @@
 <?php
-
 /**
  * @package switchtemplate
  * @subpackage plugin
  */
+
 class SwitchTemplateOnPageNotFound extends SwitchTemplatePlugin
 {
     public function run()
@@ -52,7 +52,7 @@ class SwitchTemplateOnPageNotFound extends SwitchTemplatePlugin
     {
         $x = 0;
         $len = strlen($haystack);
-        if ($len >= $offset) {
+        if ($len < $offset) {
             return false;
         }
         for ($i = 0; $i < $num; $i++) {

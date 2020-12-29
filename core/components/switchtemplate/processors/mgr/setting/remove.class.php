@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Remove processor for SwitchTemplate CMP
+ * Remove setting
  *
  * @package switchtemplate
  * @subpackage processor
  */
+
 class SwitchTemplateSettingsRemoveProcessor extends modObjectRemoveProcessor
 {
     public $classKey = 'SwitchtemplateSettings';

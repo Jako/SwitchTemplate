@@ -1,6 +1,6 @@
 <?php
 /**
- * Get list Resources
+ * Get resources
  *
  * @package switchtemplate
  * @subpackage processors

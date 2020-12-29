@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.5] - 2020-12-29
+### Added
+- Bugfix for not found switching extensions
+
 ## [1.2.4] - 2020-11-19
 ### Added
 - Add static file support for templates (Thanks to https://github.com/davidpede) [#10]

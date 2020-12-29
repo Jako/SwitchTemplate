@@ -3,7 +3,7 @@
   "lowCaseName": "switchtemplate",
   "description": "Switch resource templates on the fly",
   "author": "Thomas Jakobi",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "package": {
     "menus": [
       {
@@ -86,6 +86,16 @@
     "readme": "docs/readme.md",
     "license": "docs/license.md",
     "changelog": "docs/changelog.md",
+    "options": {
+      "empty_folders": {
+        "{package_path}core/components/switchtemplate/vendor/lullabot/amp/sample-html": "*",
+        "{package_path}core/components/switchtemplate/vendor/lullabot/amp/tests": "*",
+        "{package_path}core/components/switchtemplate/vendor/masterminds/html5/test": "*",
+        "{package_path}core/components/switchtemplate/vendor/sabberworm/php-css-parser/tests": "*",
+        "{package_path}core/components/switchtemplate/vendor/sebastian/diff/.github": "*",
+        "{package_path}core/components/switchtemplate/vendor/sebastian/diff/tests": "*"
+      }
+    },
     "setupOptions": {
       "source": "setup.options.php"
     },

@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Get list processor for SwitchTemplate CMP
+ * Get settings
  *
  * @package switchtemplate
  * @subpackage processor
  */
+
 class SwitchTemplateSettingsGetListProcessor extends modObjectGetListProcessor
 {
     public $classKey = 'SwitchtemplateSettings';
