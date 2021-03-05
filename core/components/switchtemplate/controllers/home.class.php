@@ -17,7 +17,7 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
     public function initialize()
     {
         $path = $this->modx->getOption('switchtemplate.core_path', null, $this->modx->getOption('core_path') . 'components/switchtemplate/');
-        $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $path . '/model/switchtemplate/', array(
+        $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $path . 'model/switchtemplate/', array(
             'core_path' => $path
         ));
 

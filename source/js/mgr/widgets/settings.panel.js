@@ -26,6 +26,7 @@ SwitchTemplate.grid.SystemSettings = function (config) {
         namespace: 'switchtemplate',
         area: MODx.request['area']
     };
+    config.tbar = [];
     SwitchTemplate.grid.SystemSettings.superclass.constructor.call(this, config);
 };
 Ext.extend(SwitchTemplate.grid.SystemSettings, MODx.grid.SettingsGrid, {
@@ -37,7 +38,6 @@ Ext.extend(SwitchTemplate.grid.SystemSettings, MODx.grid.SettingsGrid, {
             this.getSelectionModel().selectRow(ri);
         }
         this.menu.removeAll();
-
         var m = [];
         if (this.menu.record.menu) {
             m = this.menu.record.menu;
@@ -77,23 +77,18 @@ Ext.extend(SwitchTemplate.grid.SystemSettings, MODx.grid.SettingsGrid, {
     clearFilter: function () {
         var ns = 'switchtemplate';
         var area = MODx.request['area'] ? MODx.request['area'] : '';
-
         this.getStore().baseParams = this.initialConfig.baseParams;
-
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
-
         Ext.getCmp('modx-filter-namespace').setValue(ns);
         Ext.getCmp('modx-filter-key').reset();
-
         this.getStore().baseParams.namespace = ns;
         this.getStore().baseParams.area = area;
         this.getStore().baseParams.key = '';
-
         this.getBottomToolbar().changePage(1);
     },
     filterByKey: function (tf, newValue, oldValue) {
@@ -106,7 +101,6 @@ Ext.extend(SwitchTemplate.grid.SystemSettings, MODx.grid.SettingsGrid, {
         this.getStore().baseParams['namespace'] = 'switchtemplate';
         this.getStore().baseParams['area'] = '';
         this.getBottomToolbar().changePage(1);
-
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             var s = acb.store;
@@ -118,8 +112,7 @@ Ext.extend(SwitchTemplate.grid.SystemSettings, MODx.grid.SettingsGrid, {
     },
     listeners: {
         afterrender: function () {
-            this.topToolbar.items.items[0].hide();
-            this.topToolbar.items.items[2].hide();
+            Ext.getCmp('modx-filter-namespace').hide();
         }
     }
 });
