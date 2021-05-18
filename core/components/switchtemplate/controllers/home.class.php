@@ -48,7 +48,7 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
         }
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
-            SwitchTemplate.config = ' . json_encode($this->switchtemplate->options, JSON_PRETTY_PRINT) . ';
+            SwitchTemplate.config = ' . json_encode($this->switchtemplate->options, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';
             MODx.load({ xtype: "switchtemplate-page-home"});
         });
         </script>');
