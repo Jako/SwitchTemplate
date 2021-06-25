@@ -95,6 +95,7 @@ SwitchTemplate.grid.Setting = function (config) {
                 fn: this.buttonColumnRenderer,
                 scope: this
             },
+            menuDisabled: true,
             width: 40
         }],
         tbar: [{
