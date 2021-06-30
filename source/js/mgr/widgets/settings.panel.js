@@ -1,5 +1,6 @@
 SwitchTemplate.panel.Settings = function (config) {
     config = config || {};
+    MODx.request.ns = 'switchtemplate';
     Ext.applyIf(config, {
         id: 'switchtemplate-panel-settings',
         title: _('switchtemplate.settings'),

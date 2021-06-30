@@ -122,35 +122,3 @@ SwitchTemplate.panel.Overview = function (config) {
 };
 Ext.extend(SwitchTemplate.panel.Overview, MODx.Panel);
 Ext.reg('switchtemplate-panel-overview', SwitchTemplate.panel.Overview);
-
-// SwitchTemplate.panel.Settings = function (config) {
-//     config = config || {};
-//     Ext.applyIf(config, {
-//         id: 'switchtemplate-panel-settings',
-//         title: _('switchtemplate.settings'),
-//         items: [{
-//             html: '<p>' + _('switchtemplate.settings_desc') + '</p>',
-//             border: false,
-//             bodyCssClass: 'panel-desc'
-//         }, {
-//             cls: 'main-wrapper',
-//             items: [{
-//                 layout: 'form',
-//                 id: 'switchtemplate-panel-setting-grid',
-//                 defaults: {
-//                     border: false,
-//                     autoHeight: true
-//                 },
-//                 border: true,
-//                 items: [{
-//                     xtype: 'switchtemplate-grid-setting',
-//                     preventRender: true
-//                 }]
-//             }]
-//         }]
-//     });
-//     SwitchTemplate.panel.Settings.superclass.constructor.call(this, config);
-// }
-// ;
-// Ext.extend(SwitchTemplate.panel.Settings, MODx.Panel);
-// Ext.reg('switchtemplate-panel-settings', SwitchTemplate.panel.Settings);
