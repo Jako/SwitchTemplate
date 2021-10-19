@@ -48,8 +48,6 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
         $url = '<link rel="canonical" href="' . $this->modx->makeUrl($resource->get('id'), '', '', 'full') . '" />';
         $resource->_output = preg_replace('/(\s+)(<title>.*?<\/title>)/i', '$1$2$1' . $url, $resource->_output);
 
-        $_COOKIE['CookieBar'] = 'consent';
-
         $amp = new AMP();
         $amp->loadHtml($resource->_output, array(
             'scope' => Scope::HTML_SCOPE
