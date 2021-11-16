@@ -6,7 +6,7 @@
  * @subpackage lexicon
  */
 $_lang['setting_switchtemplate.debug'] = 'Debug';
-$_lang['setting_switchtemplate.debug_desc'] = 'Log debug informations in MODX error log.';
+$_lang['setting_switchtemplate.debug_desc'] = 'Log debug information in the MODX error log.';
 
 $_lang['setting_switchtemplate.cache_resource_expires'] = 'Cache Expiration Time';
 $_lang['setting_switchtemplate.cache_resource_expires_desc'] = 'The cache expiration time in seconds for custom template. 0 means indefinitely or until the cache items are purposely cleared.';
