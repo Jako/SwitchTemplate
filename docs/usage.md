@@ -22,11 +22,13 @@ SwitchTemplate uses the following system settings in the namespace `switchtempla
 
 Setting | Description | Default
 --------|-------------|--------
-Cache Expiration Time | The cache expiration time in seconds for custom template output. 0 means indefinitely or until the cache items are purposely cleared. | 0
-Cache Handler Class | The class of cache handler for SwitchTemplate to use. | xPDOFileCache
-Cache Handler Key | The key identifying a cache handler for SwitchTemplate to use. | resource
-Request Key | Request key used to switch the custom template chunks. | mode
-Switch Modes TV | Name of a template variable that contains a comma separated list of allowed switch modes. | -
+allow_debug_info | Enable this setting to show switchtemplate debug informations for a page if it is called with the GET parameter &switchtemplate-debug=1. CAUTION: Disable the setting after you have debugged your installation. The debug information exposes a lot information of your site! | No
+cache_resource_expires | The cache expiration time in seconds for custom template output. 0 means indefinitely or until the cache items are purposely cleared. | 0
+cache_resource_handler | The class of cache handler for SwitchTemplate to use. | xPDOFileCache
+cache_resource_key | The key identifying a cache handler for SwitchTemplate to use. | resource
+debug | Log debug information in the MODX error log. | No
+mode_key | Request key used to switch the custom template chunks. | mode
+mode_tv | Name of a template variable that contains a comma separated list of allowed switch modes. | -
 
 ## Custom Manager Page
 
