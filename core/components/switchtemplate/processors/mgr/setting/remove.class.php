@@ -3,7 +3,7 @@
  * Remove setting
  *
  * @package switchtemplate
- * @subpackage processor
+ * @subpackage processors
  */
 
 class SwitchTemplateSettingsRemoveProcessor extends modObjectRemoveProcessor

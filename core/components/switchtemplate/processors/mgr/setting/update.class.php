@@ -3,7 +3,7 @@
  * Update setting
  *
  * @package switchtemplate
- * @subpackage processor
+ * @subpackage processors
  */
 
 class SwitchTemplateSettingUpdateProcessor extends modObjectUpdateProcessor

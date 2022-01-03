@@ -3,7 +3,7 @@
  * Create setting
  *
  * @package switchtemplate
- * @subpackage processor
+ * @subpackage processors
  */
 
 class SwitchTemplateSettingCreateProcessor extends modObjectCreateProcessor

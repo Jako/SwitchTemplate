@@ -3,7 +3,7 @@
  * Get settings
  *
  * @package switchtemplate
- * @subpackage processor
+ * @subpackage processors
  */
 
 class SwitchTemplateSettingsGetListProcessor extends modObjectGetListProcessor
