@@ -1,6 +1,10 @@
 SwitchTemplate.page.Home = function (config) {
     config = config || {};
     Ext.applyIf(config, {
+        buttons: [{
+            text: _('help_ex'),
+            handler: MODx.loadHelpPane
+        }],
         formpanel: 'switchtemplate-panel-home',
         components: [{
             xtype: 'switchtemplate-panel-home'

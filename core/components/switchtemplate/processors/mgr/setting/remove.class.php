@@ -1,15 +1,16 @@
 <?php
 /**
- * Remove setting
+ * Remove a Setting
  *
  * @package switchtemplate
  * @subpackage processors
  */
 
-class SwitchTemplateSettingsRemoveProcessor extends modObjectRemoveProcessor
+use TreehillStudio\Agenda\Processors\ObjectRemoveProcessor;
+
+class SwitchTemplateSettingsRemoveProcessor extends ObjectRemoveProcessor
 {
     public $classKey = 'SwitchtemplateSettings';
-    public $languageTopics = array('switchtemplate:default');
     public $objectType = 'switchtemplate.settings';
 }
 

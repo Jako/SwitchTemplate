@@ -4,33 +4,37 @@
  * @subpackage plugin
  */
 
-class SwitchTemplateOnLoadWebDocument extends SwitchTemplatePlugin
+namespace TreehillStudio\SwitchTemplate\Plugins\Events;
+
+use SwitchtemplateSettings;
+use TreehillStudio\SwitchTemplate\Plugins\Plugin;
+
+class OnLoadWebDocument extends Plugin
 {
-    public function run()
+    public function process()
     {
         $modeKey = $this->switchtemplate->getOption('mode_key');
-        $mode = isset($_REQUEST[$modeKey]) ? $_REQUEST[$modeKey] : '';
+        $mode = $_REQUEST[$modeKey] ?? '';
 
         /** @var SwitchtemplateSettings $setting */
-        $setting = $this->modx->getObject('SwitchtemplateSettings', array('key' => $mode));
+        $setting = $this->modx->getObject('SwitchtemplateSettings', ['key' => $mode]);
 
-        // if SwitchTemplate setting with the given key is found
+        // If SwitchTemplate setting with the given key is found
         if ($mode && $setting) {
-            // change the template on the fly
+            // Change the template on the fly
             $output = $this->switchtemplate->switchTemplate($setting);
 
-            // if the output is not null
+            // If the output is not null
             if ($output !== null) {
-                // break MODX execution and return the output
+                // Break MODX execution and return the output
                 exit($output);
             } elseif ($setting->get('extension')) {
-                // redirect to the default resource without a changed extension
+                // Redirect to the default resource without a changed extension
                 $args = $_GET;
                 unset($args[$this->modx->getOption('request_param_alias', null, 'q')]);
                 unset($args[$this->switchtemplate->getOption('mode_key')]);
                 $this->modx->sendRedirect($this->modx->makeUrl($this->modx->resourceIdentifier, '', $args, 'full'));
             }
         }
-        return;
     }
 }

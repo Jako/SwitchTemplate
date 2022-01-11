@@ -4,6 +4,13 @@
  * @subpackage output
  */
 
+namespace TreehillStudio\SwitchTemplate\Output;
+
+use modResource;
+use modX;
+use SwitchtemplateSettings;
+use TreehillStudio\SwitchTemplate\SwitchTemplate;
+
 abstract class SwitchTemplateOutput
 {
     /** @var modX $modx */
@@ -23,9 +30,9 @@ abstract class SwitchTemplateOutput
         $this->scriptProperties =& $scriptProperties;
         $this->modx = &$modx;
         $corePath = $this->modx->getOption('switchtemplate.core_path', null, $this->modx->getOption('core_path') . 'components/switchtemplate/');
-        $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $corePath . 'model/switchtemplate/', array(
+        $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $corePath . 'model/switchtemplate/', [
             'core_path' => $corePath
-        ));
+        ]);
     }
 
     /**

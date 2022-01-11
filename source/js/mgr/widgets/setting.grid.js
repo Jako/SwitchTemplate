@@ -19,54 +19,37 @@ SwitchTemplate.grid.Setting = function (config) {
             action: 'mgr/setting/getlist',
             pageSize: 10
         },
-        autosave: true,
         fields: ['id', 'name', 'key', 'extension', 'template', 'templatename', 'type', 'output', 'cache', 'include', 'exclude'],
         autoHeight: true,
         paging: true,
         remoteSort: true,
         autoExpandColumn: 'name',
+        showActionsColumn: false,
         columns: [{
-            header: _('id'),
-            dataIndex: 'id',
-            sortable: true,
-            hidden: true
-        }, {
             header: _('switchtemplate.setting_name'),
             dataIndex: 'name',
             sortable: true,
-            editable: false,
-            editor: {
-                xtype: 'textfield'
-            }
+            width: 100
         }, {
             header: _('switchtemplate.setting_key'),
             dataIndex: 'key',
             sortable: true,
-            editable: false,
-            editor: {
-                xtype: 'textfield'
-            },
             width: 50
         }, {
             header: _('switchtemplate.setting_templatename'),
             dataIndex: 'templatename',
+            renderer: SwitchTemplate.util.renderHtml,
             sortable: true,
-            editable: false,
-            editor: {
-                xtype: 'textfield'
-            },
             width: 120
         }, {
             header: _('switchtemplate.setting_extension'),
             dataIndex: 'extension',
             sortable: true,
-            editable: false,
             width: 50
         }, {
             header: _('switchtemplate.setting_type_short'),
             dataIndex: 'type',
             sortable: true,
-            editable: false,
             renderer: function (value) {
                 return _('switchtemplate.type_' + value);
             },
@@ -75,7 +58,6 @@ SwitchTemplate.grid.Setting = function (config) {
             header: _('switchtemplate.setting_output_short'),
             dataIndex: 'output',
             sortable: true,
-            editable: false,
             renderer: function (value) {
                 return _('switchtemplate.output_' + value);
             },
@@ -91,6 +73,11 @@ SwitchTemplate.grid.Setting = function (config) {
                 renderer: 'boolean'
             }
         }, {
+            header: _('id'),
+            dataIndex: 'id',
+            sortable: true,
+            hidden: true
+        }, {
             renderer: {
                 fn: this.buttonColumnRenderer,
                 scope: this
@@ -99,22 +86,43 @@ SwitchTemplate.grid.Setting = function (config) {
             width: 40
         }],
         tbar: [{
-            text: _('switchtemplate.setting_create'), cls: 'primary-button', handler: this.createSetting, scope: this
+            text: _('switchtemplate.setting_create'),
+            cls: 'primary-button',
+            handler: this.createSetting
         }, '->', {
             xtype: 'textfield',
-            id: 'switchtemplate-search-filter',
+            id: this.ident + '-setting-filter-search',
             emptyText: _('search') + '…',
+            submitValue: false,
             listeners: {
-                change: {fn: this.search, scope: this}, 'render': {
+                change: {
+                    fn: this.search,
+                    scope: this
+                },
+                render: {
                     fn: function (cmp) {
                         new Ext.KeyMap(cmp.getEl(), {
-                            key: Ext.EventObject.ENTER, fn: function () {
+                            key: Ext.EventObject.ENTER,
+                            fn: function () {
                                 this.fireEvent('change', this);
                                 this.blur();
                                 return true;
-                            }, scope: cmp
+                            },
+                            scope: cmp
                         });
-                    }, scope: this
+                    },
+                    scope: this
+                }
+            }
+        }, {
+            xtype: 'button',
+            id: this.ident + '-setting-filter-clear',
+            cls: 'x-form-filter-clear',
+            text: _('filter_clear'),
+            listeners: {
+                click: {
+                    fn: this.clearFilter,
+                    scope: this
                 }
             }
         }]
@@ -122,14 +130,17 @@ SwitchTemplate.grid.Setting = function (config) {
     SwitchTemplate.grid.Setting.superclass.constructor.call(this, config)
 };
 Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
-    windows: {}, getMenu: function () {
+    windows: {},
+    getMenu: function () {
         var m = [];
         m.push({
-            text: _('switchtemplate.setting_update'), handler: this.updateSetting
+            text: _('switchtemplate.setting_update'),
+            handler: this.updateSetting
         });
         m.push('-');
         m.push({
-            text: _('switchtemplate.setting_remove'), handler: this.removeSetting
+            text: _('switchtemplate.setting_remove'),
+            handler: this.removeSetting
         });
         this.addContextMenuItem(m);
     },
@@ -156,9 +167,8 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
             record: r,
             listeners: {
                 success: {
-                    fn: function () {
-                        this.refresh();
-                    }, scope: this
+                    fn: this.refresh,
+                    scope: this
                 },
                 beforeSubmit: function () {
                     var f = this.fp.getForm();
@@ -185,16 +195,16 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
             text: _('switchtemplate.setting_remove_confirm'),
             url: this.config.url,
             params: {
-                action: 'mgr/setting/remove', id: this.menu.record.id
+                action: 'mgr/setting/remove',
+                id: this.menu.record.id
             },
             listeners: {
-                'success': {
-                    fn: function () {
-                        this.refresh();
-                    }, scope: this
+                success: {
+                    fn: this.refresh,
+                    scope: this
                 }
             }
-        })
+        });
     },
     search: function (tf) {
         var s = this.getStore();
@@ -202,21 +212,29 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },
+    clearFilter: function () {
+        var s = this.getStore();
+        s.baseParams.query = '';
+        Ext.getCmp(this.ident + '-setting-filter-search').reset();
+        this.getBottomToolbar().changePage(1);
+        this.refresh();
+    },
     buttonColumnRenderer: function () {
-        var b = [];
-        b.push({
-            className: 'update',
-            icon: 'pencil-square-o',
-            text: _('switchtemplate.setting_update')
-        });
-        b.push({
-            className: 'remove',
-            icon: 'trash-o',
-            text: _('switchtemplate.setting_remove')
-        });
-        return this.buttonColumnTpl.apply({
-            action_buttons: b
-        });
+        var values = {
+            action_buttons: [
+                {
+                    className: 'update',
+                    icon: 'pencil-square-o',
+                    text: _('switchtemplate.setting_update')
+                },
+                {
+                    className: 'remove',
+                    icon: 'trash-o',
+                    text: _('switchtemplate.setting_remove')
+                }
+            ]
+        };
+        return this.buttonColumnTpl.apply(values);
     },
     onClick: function (e) {
         var t = e.getTarget();
@@ -226,11 +244,11 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
             var record = this.getSelectionModel().getSelected();
             this.menu.record = record.data;
             switch (act) {
-                case 'update':
-                    this.updateSetting(record, e);
-                    break;
                 case 'remove':
                     this.removeSetting(record, e);
+                    break;
+                case 'update':
+                    this.updateSetting(record, e);
                     break;
                 default:
                     break;
@@ -247,6 +265,9 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
         id: this.ident,
         url: SwitchTemplate.config.connectorUrl,
         action: (config.isUpdate) ? 'mgr/setting/update' : 'mgr/setting/create',
+        autoHeight: true,
+        closeAction: 'close',
+        cls: 'modx-window customrequest-window modx' + SwitchTemplate.config.modxversion,
         width: 700,
         fields: [{
             layout: 'column',
@@ -381,14 +402,12 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                 }]
             }]
         }, {
-            xtype: 'textfield',
+            xtype: 'hidden',
             name: 'id',
             id: this.ident + '-id',
-            hidden: true
         }]
     });
     SwitchTemplate.window.CreateUpdateSetting.superclass.constructor.call(this, config);
 };
 Ext.extend(SwitchTemplate.window.CreateUpdateSetting, MODx.Window);
 Ext.reg('switchtemplate-window-setting-create-update', SwitchTemplate.window.CreateUpdateSetting);
-

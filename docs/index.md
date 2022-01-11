@@ -5,8 +5,8 @@ template of a MODX resource on the fly with a request parameter.
 
 ### Requirements
 
-* MODX Revolution 2.2.4+
-* PHP v5.3+
+* MODX Revolution 2.6+
+* PHP 7.2+
 
 ### Features
 

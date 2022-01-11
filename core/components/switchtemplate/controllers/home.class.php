@@ -14,16 +14,22 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
     /** @var SwitchTemplate $switchtemplate */
     public $switchtemplate;
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize()
     {
         $path = $this->modx->getOption('switchtemplate.core_path', null, $this->modx->getOption('core_path') . 'components/switchtemplate/');
-        $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $path . 'model/switchtemplate/', array(
+        $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $path . 'model/switchtemplate/', [
             'core_path' => $path
-        ));
+        ]);
 
         parent::initialize();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function loadCustomCssJs()
     {
         $assetsUrl = $this->switchtemplate->getOption('assetsUrl');
@@ -36,8 +42,9 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
             $this->addCss($cssSourceUrl . 'switchtemplate.css?v=v' . $this->switchtemplate->version);
             $this->addJavascript($jsSourceUrl . 'switchtemplate.js?v=v' . $this->switchtemplate->version);
             $this->addJavascript($jsSourceUrl . 'helper/combo.js?v=v' . $this->switchtemplate->version);
+            $this->addJavascript($jsSourceUrl . 'helper/util.js?v=v' . $this->switchtemplate->version);
             $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->switchtemplate->version);
-            $this->addJavascript($jsSourceUrl . 'widgets/switchtemplate.grid.js?v=v' . $this->switchtemplate->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/setting.grid.js?v=v' . $this->switchtemplate->version);
             $this->addJavascript(MODX_MANAGER_URL . 'assets/modext/widgets/core/modx.grid.settings.js?v=v' . $this->switchtemplate->version);
             $this->addJavascript($jsSourceUrl . 'widgets/settings.panel.js?v=v' . $this->switchtemplate->version);
             $this->addLastJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->switchtemplate->version);
@@ -49,25 +56,41 @@ class SwitchtemplateHomeManagerController extends modExtraManagerController
         $this->addHtml('<script type="text/javascript">
         Ext.onReady(function() {
             SwitchTemplate.config = ' . json_encode($this->switchtemplate->options, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';
-            MODx.load({ xtype: "switchtemplate-page-home"});
+            MODx.load({xtype: "switchtemplate-page-home"});
         });
         </script>');
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string[]
+     */
     public function getLanguageTopics()
     {
-        return array('core:setting', 'switchtemplate:default');
+        return ['core:setting', 'switchtemplate:default'];
     }
 
-    public function process(array $scriptProperties = array())
+    /**
+     * {@inheritDoc}
+     * @param array $scriptProperties
+     */
+    public function process(array $scriptProperties = [])
     {
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string|null
+     */
     public function getPageTitle()
     {
         return $this->modx->lexicon('switchtemplate');
     }
 
+    /**
+     * {@inheritDoc}
+     * @return string
+     */
     public function getTemplateFile()
     {
         return $this->switchtemplate->getOption('templatesPath') . 'home.tpl';

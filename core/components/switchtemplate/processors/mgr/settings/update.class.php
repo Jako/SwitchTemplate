@@ -1,29 +1,27 @@
 <?php
 /**
- * Update system setting
- *
- * @param string $key The key of the setting
- * @param string $value The value of the setting
- * @param string $xtype The xtype for the setting, for rendering purposes
- * @param string $area The area for the setting
- * @param string $namespace The namespace for the setting
- * @param string $name The lexicon name for the setting
- * @param string $description The lexicon description for the setting
+ * Update a system setting
  *
  * @package switchtemplate
  * @subpackage processors
  */
 
-include_once MODX_CORE_PATH . 'model/modx/processors/system/settings/update.class.php';
+// Compatibility between 2.x/3.x
+if (file_exists(MODX_PROCESSORS_PATH . 'system/settings/update.class.php')) {
+    require_once MODX_PROCESSORS_PATH . 'system/settings/update.class.php';
+} elseif (!class_exists('modSystemSettingsUpdateProcessor')) {
+    class_alias(\MODX\Revolution\Processors\System\Settings\Update::class, \modSystemSettingsUpdateProcessor::class);
+}
 
 class SwitchTemplateSystemSettingsUpdateProcessor extends modSystemSettingsUpdateProcessor
 {
     public $checkSavePermission = false;
-    public $classKey = 'modSystemSetting';
-    public $languageTopics = array('setting', 'namespace', 'switchtemplate:default');
-    public $objectType = 'setting';
-    public $primaryKeyField = 'key';
+    public $languageTopics = ['setting', 'namespace', 'switchtemplate:setting'];
 
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
     public function beforeSave()
     {
         $this->setProperty('namespace', 'switchtemplate');
@@ -32,6 +30,10 @@ class SwitchTemplateSystemSettingsUpdateProcessor extends modSystemSettingsUpdat
         return parent::beforeSave();
     }
 
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
     public function afterSave()
     {
         $this->updateTranslations($this->getProperties());
@@ -40,7 +42,7 @@ class SwitchTemplateSystemSettingsUpdateProcessor extends modSystemSettingsUpdat
     }
 
     /**
-     * Verify the Namespace passed is a valid Namespace
+     * Verify the namespace passed is a valid namespace
      */
     protected function checkCanSave()
     {
@@ -51,51 +53,6 @@ class SwitchTemplateSystemSettingsUpdateProcessor extends modSystemSettingsUpdat
         if (!$this->modx->hasPermission('settings') && !$this->modx->hasPermission('switchtemplate_settings')) {
             $this->addFieldError('usergroup', $this->modx->lexicon('switchtemplate.systemsetting_usergroup_err_nv'));
         }
-    }
-
-    /**
-     * If this is a Boolean setting, ensure the value of the setting is 1/0
-     * @return mixed
-     */
-    public function checkForBooleanValue()
-    {
-        $xtype = $this->getProperty('xtype');
-        $value = $this->getProperty('value');
-        if ($xtype == 'combo-boolean' && !is_numeric($value)) {
-            $value = in_array($value, array('yes', 'Yes', $this->modx->lexicon('yes'), 'true', 'True')) ? 1 : 0;
-            $this->object->set('value', $value);
-        }
-        return $value;
-    }
-
-    /**
-     * Update lexicon name/description
-     *
-     * @param array $fields
-     * @return void
-     */
-    public function updateTranslations(array $fields)
-    {
-        if (isset($fields['name'])) {
-            $this->object->updateTranslation('setting_' . $this->object->get('key'), $fields['name'], array(
-                'namespace' => $this->object->get('namespace'),
-            ));
-        }
-
-        if (isset($fields['description'])) {
-            $this->object->updateTranslation('setting_' . $this->object->get('key') . '_desc', $fields['description'], array(
-                'namespace' => $this->object->get('namespace'),
-            ));
-        }
-    }
-
-    /**
-     * Clear the settings cache and reload the config
-     * @return void
-     */
-    public function clearCache()
-    {
-        $this->modx->reloadConfig();
     }
 }
 

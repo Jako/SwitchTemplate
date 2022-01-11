@@ -1,7 +1,7 @@
 SwitchTemplate.panel.Home = function (config) {
     config = config || {};
     Ext.applyIf(config, {
-        cls: 'container home-panel'+ ((SwitchTemplate.config.debug) ? ' debug' : ''),
+        cls: 'container home-panel'+ ((SwitchTemplate.config.debug) ? ' debug' : '') + ' modx' + SwitchTemplate.config.modxversion,
         defaults: {
             collapsible: false,
             autoHeight: true
@@ -15,17 +15,18 @@ SwitchTemplate.panel.Home = function (config) {
                 autoHeight: true
             },
             border: true,
+            cls: 'switchtemplate-panel',
             items: [{
                 xtype: 'switchtemplate-panel-overview'
             }]
         }, {
-            cls: "treehillstudio_about",
+            cls: 'treehillstudio_about',
             html: '<img width="146" height="40" src="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio-small.png"' + ' srcset="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio-small@2x.png 2x" alt="Treehill Studio">',
             listeners: {
                 afterrender: function () {
                     this.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio"><br>' +
-                            '&copy; 2014-2020 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2014-2022 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('switchtemplate') + ' ' + SwitchTemplate.config.version,
                             msg: msg,
@@ -47,9 +48,9 @@ SwitchTemplate.panel.HomeTab = function (config) {
     config = config || {};
     Ext.applyIf(config, {
         id: 'switchtemplate-panel-' + config.tabtype,
-        title: _('switchtemplate.' + config.tabtype),
+        title: config.title,
         items: [{
-            html: '<p>' + _('switchtemplate.' + config.tabtype + '_desc') + '</p>',
+            html: '<p>' + config.description + '</p>',
             border: false,
             cls: 'panel-desc'
         }, {
@@ -76,18 +77,20 @@ SwitchTemplate.panel.Overview = function (config) {
     this.ident = 'switchtemplate-panel-overview' + Ext.id();
     this.panelOverviewTabs = [{
         xtype: 'switchtemplate-panel-hometab',
+        title: _('switchtemplate.setting'),
+        description: _('switchtemplate.setting_desc'),
         tabtype: 'setting'
     }];
     if (SwitchTemplate.config.is_admin) {
         this.panelOverviewTabs.push({
-            xtype: 'switchtemplate-panel-settings',
-            tabtype: 'settings'
+            xtype: 'switchtemplate-panel-settings'
         })
     }
     Ext.applyIf(config, {
         id: this.ident,
         items: [{
             xtype: 'modx-tabs',
+            border: true,
             stateful: true,
             stateId: 'switchtemplate-panel-overview',
             stateEvents: ['tabchange'],
@@ -107,7 +110,7 @@ SwitchTemplate.panel.Overview = function (config) {
             items: this.panelOverviewTabs,
             listeners: {
                 tabchange: function (o, t) {
-                    if (t.tabtype === 'settings') {
+                    if (t.xtype === 'switchtemplate-panel-settings') {
                         Ext.getCmp('switchtemplate-grid-system-settings').getStore().reload();
                     } else if (t.xtype === 'switchtemplate-panel-hometab') {
                         if (Ext.getCmp('switchtemplate-panel-' + t.tabtype + '-grid')) {

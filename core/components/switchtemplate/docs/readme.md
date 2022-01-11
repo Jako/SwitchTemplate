@@ -2,9 +2,6 @@
 
 Switch resource templates on the fly.
 
-- Author: Thomas Jakobi <office@treehillstudio.com>
-- License: GNU GPLv2
-
 ## Features
 
 SwitchTemplate changes the template of a MODX resource on the fly with a request

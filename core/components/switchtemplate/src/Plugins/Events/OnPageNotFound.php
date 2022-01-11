@@ -4,22 +4,28 @@
  * @subpackage plugin
  */
 
-class SwitchTemplateOnPageNotFound extends SwitchTemplatePlugin
+namespace TreehillStudio\SwitchTemplate\Plugins\Events;
+
+use modContentType;
+use SwitchtemplateSettings;
+use TreehillStudio\SwitchTemplate\Plugins\Plugin;
+
+class OnPageNotFound extends Plugin
 {
-    public function run()
+    public function process()
     {
         if ($this->modx->context->get('key') !== 'mgr') {
             $requestUri = $_REQUEST[$this->modx->getOption('request_param_alias', null, 'q')];
-            $requestName = substr($requestUri, 0, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', array(), 2)));
-            $requestExtension = substr($requestUri, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', array(), 2)));
+            $requestName = substr($requestUri, 0, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', [], 2)));
+            $requestExtension = substr($requestUri, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', [], 2)));
 
             if ($requestExtension &&
-                $this->modx->getCount('SwitchtemplateSettings', array(
+                $this->modx->getCount('SwitchtemplateSettings', [
                     'extension' => $requestExtension
-                ))
+                ])
             ) {
                 /** @var modContentType $htmlContentType */
-                $htmlContentType = $this->modx->getObject('modContentType', array('name' => 'HTML'));
+                $htmlContentType = $this->modx->getObject('modContentType', ['name' => 'HTML']);
                 $htmlExtension = ($htmlContentType) ? $htmlContentType->get('file_extensions') : '.html';
 
                 if (isset($this->modx->aliasMap[$requestName . $htmlExtension])) {
@@ -34,18 +40,17 @@ class SwitchTemplateOnPageNotFound extends SwitchTemplatePlugin
                 if ($id) {
                     $modeKey = $this->switchtemplate->getOption('mode_key');
                     /** @var SwitchtemplateSettings $setting */
-                    $setting = $this->modx->getObject('SwitchtemplateSettings', array(
+                    $setting = $this->modx->getObject('SwitchtemplateSettings', [
                         'extension' => $requestExtension
-                    ));
+                    ]);
                     $_REQUEST[$modeKey] = $setting->get('key');
 
-                    $this->switchtemplate->debugInfo = array('# Extension based template switch triggered with the extension "' . $requestExtension . '"');
+                    $this->switchtemplate->debugInfo = ['# Extension based template switch triggered with the extension "' . $requestExtension . '"'];
 
                     $this->modx->sendForward($id);
                 }
             }
         }
-        return;
     }
 
     private function strrposn($haystack, $needle, $num = 1, $offset = 0)

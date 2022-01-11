@@ -1,15 +1,16 @@
 <?php
 /**
- * Update setting
+ * Update a Setting
  *
  * @package switchtemplate
  * @subpackage processors
  */
 
-class SwitchTemplateSettingUpdateProcessor extends modObjectUpdateProcessor
+use TreehillStudio\SwitchTemplate\Processors\ObjectUpdateProcessor;
+
+class SwitchTemplateSettingUpdateProcessor extends ObjectUpdateProcessor
 {
     public $classKey = 'SwitchtemplateSettings';
-    public $languageTopics = array('switchtemplate:default');
     public $objectType = 'switchtemplate.settings';
 
     public function beforeSave()

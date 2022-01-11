@@ -1,6 +1,5 @@
 SwitchTemplate.panel.Settings = function (config) {
     config = config || {};
-    MODx.request.ns = 'switchtemplate';
     Ext.applyIf(config, {
         id: 'switchtemplate-panel-settings',
         title: _('switchtemplate.settings'),
@@ -22,12 +21,17 @@ Ext.reg('switchtemplate-panel-settings', SwitchTemplate.panel.Settings);
 
 SwitchTemplate.grid.SystemSettings = function (config) {
     config = config || {};
-    config.baseParams = {
-        action: 'system/settings/getList',
-        namespace: 'switchtemplate',
-        area: MODx.request['area']
-    };
-    config.tbar = [];
+    Ext.applyIf(config, {
+        id: 'switchtemplate-grid-systemsettings',
+        url: SwitchTemplate.config.connectorUrl,
+        baseParams: {
+            action: 'mgr/settings/getlist',
+            area: MODx.request.area || ''
+        },
+        save_action: 'mgr/settings/updatefromgrid',
+        tbar: [],
+        queryParam: (SwitchTemplate.config.modxversion >= 3) ? 'query' : 'key'
+    });
     SwitchTemplate.grid.SystemSettings.superclass.constructor.call(this, config);
 };
 Ext.extend(SwitchTemplate.grid.SystemSettings, MODx.grid.SettingsGrid, {
@@ -76,36 +80,29 @@ Ext.extend(SwitchTemplate.grid.SystemSettings, MODx.grid.SettingsGrid, {
         uss.show(e.target);
     },
     clearFilter: function () {
-        var ns = 'switchtemplate';
-        var area = MODx.request['area'] ? MODx.request['area'] : '';
+        var area = MODx.request.area || '';
         this.getStore().baseParams = this.initialConfig.baseParams;
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
-            acb.store.baseParams['namespace'] = ns;
             acb.store.load();
             acb.reset();
         }
-        Ext.getCmp('modx-filter-namespace').setValue(ns);
-        Ext.getCmp('modx-filter-key').reset();
-        this.getStore().baseParams.namespace = ns;
+        Ext.getCmp('modx-filter-' + this.config.queryParam).reset();
         this.getStore().baseParams.area = area;
-        this.getStore().baseParams.key = '';
+        this.getStore().baseParams[this.config.queryParam] = '';
         this.getBottomToolbar().changePage(1);
     },
-    filterByKey: function (tf, newValue, oldValue) {
-        this.getStore().baseParams.key = newValue;
-        this.getStore().baseParams.namespace = 'switchtemplate';
+    filterByKey: function (tf, newValue) {
+        this.getStore().baseParams[this.config.queryParam] = newValue;
         this.getBottomToolbar().changePage(1);
         return true;
     },
-    filterByNamespace: function (cb, rec, ri) {
-        this.getStore().baseParams['namespace'] = 'switchtemplate';
-        this.getStore().baseParams['area'] = '';
+    filterByNamespace: function () {
+        this.getStore().baseParams.area = '';
         this.getBottomToolbar().changePage(1);
         var acb = Ext.getCmp('modx-filter-area');
         if (acb) {
             var s = acb.store;
-            s.baseParams['namespace'] = 'switchtemplate';
             s.removeAll();
             s.load();
             acb.setValue('');

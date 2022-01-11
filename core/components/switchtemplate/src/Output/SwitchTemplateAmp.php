@@ -4,8 +4,15 @@
  * @subpackage plugin
  */
 
+namespace TreehillStudio\SwitchTemplate\Output;
+
+use Exception;
 use Lullabot\AMP\AMP;
 use Lullabot\AMP\Validate\Scope;
+use modContentType;
+use modResource;
+use SwitchtemplateSettings;
+use xPDO;
 
 class SwitchTemplateAmp extends SwitchTemplateOutput
 {
@@ -27,7 +34,7 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
 
         if ($extension = $setting->get('extension')) {
             /** @var modContentType $htmlContentType */
-            $htmlContentType = $this->modx->getObject('modContentType', array('name' => 'HTML'));
+            $htmlContentType = $this->modx->getObject('modContentType', ['name' => 'HTML']);
             $htmlExtension = ($htmlContentType) ? $htmlContentType->get('file_extensions') : '.html';
 
             // Replace extension
@@ -49,10 +56,14 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
         $resource->_output = preg_replace('/(\s+)(<title>.*?<\/title>)/i', '$1$2$1' . $url, $resource->_output);
 
         $amp = new AMP();
-        $amp->loadHtml($resource->_output, array(
-            'scope' => Scope::HTML_SCOPE
-        ));
-        $resource->_output = $amp->convertToAmpHtml();
+        try {
+            $amp->loadHtml($resource->_output, [
+                'scope' => Scope::HTML_SCOPE
+            ]);
+            $resource->_output = $amp->convertToAmpHtml();
+        } catch (Exception $e) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Error converting to AMP: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -60,7 +71,7 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
      */
     private function fixImageTags(&$source)
     {
-        $imagetags = array();
+        $imagetags = [];
         preg_match_all('/<img.*?src=([",\'])(.*?)\1.*?[^>]+>/i', $source, $imagetags);
 
         foreach ($imagetags[2] as $i => $imagename) {
@@ -74,11 +85,7 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
                         $width = $widths[2][0];
                     } else {
                         preg_match_all('/style=".*?width:\s*([0-9%]+?)px/i', $imagetag, $widths);
-                        if (isset($widths[1][0])) {
-                            $width = $widths[1][0];
-                        } else {
-                            $width = false;
-                        }
+                        $width = $widths[1][0] ?? false;
                     }
                     if ($width && substr($width, -1, 1) == '%') {
                         $percentWidth = substr($width, 0, -1);
@@ -91,11 +98,7 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
                         $height = $heights[2][0];
                     } else {
                         preg_match_all('/style=[",\'].*?height:\s*([0-9]+?)px/i', $imagetag, $heights);
-                        if (isset($heights[1][0])) {
-                            $height = $heights[1][0];
-                        } else {
-                            $height = false;
-                        }
+                        $height = $heights[1][0] ?? false;
                     }
 
                     if ($height && substr($height, -1, 1) == '%') {
@@ -106,9 +109,9 @@ class SwitchTemplateAmp extends SwitchTemplateOutput
 
                     if ($percentWidth && !$percentHeight) {
                         $width = round($dimensions[0] * $percentWidth / 100);
-                        $height = ($height) ? $height : round($dimensions[1] * $percentWidth / 100);
+                        $height = ($height) ?: round($dimensions[1] * $percentWidth / 100);
                     } elseif (!$percentWidth && $percentHeight) {
-                        $width = ($width) ? $width : round($dimensions[0] * $percentHeight / 100);
+                        $width = ($width) ?: round($dimensions[0] * $percentHeight / 100);
                         $height = round($dimensions[1] * $percentHeight / 100);
                     } elseif ($percentWidth && $percentHeight) {
                         $width = round($dimensions[0] * $percentWidth / 100);
