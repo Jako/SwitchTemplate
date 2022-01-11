@@ -93,7 +93,10 @@
         "{package_path}core/components/switchtemplate/vendor/masterminds/html5/test": "*",
         "{package_path}core/components/switchtemplate/vendor/sabberworm/php-css-parser/tests": "*",
         "{package_path}core/components/switchtemplate/vendor/sebastian/diff/.github": "*",
-        "{package_path}core/components/switchtemplate/vendor/sebastian/diff/tests": "*"
+        "{package_path}core/components/switchtemplate/vendor/sebastian/diff/tests": "*",
+        "{package_path}core/components/switchtemplate/vendor/querypath/querypath/examples": "*",
+        "{package_path}core/components/switchtemplate/vendor/querypath/querypath/test": "*",
+        "{package_path}core/components/switchtemplate/vendor/querypath/querypath/tutorials": "*"
       }
     },
     "setupOptions": {
