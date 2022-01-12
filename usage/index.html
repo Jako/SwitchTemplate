@@ -455,27 +455,37 @@ language switcher, AMP output ...</p>
 </thead>
 <tbody>
 <tr>
-<td>Cache Expiration Time</td>
+<td>allow_debug_info</td>
+<td>Enable this setting to show switchtemplate debug informations for a page if it is called with the GET parameter &amp;switchtemplate-debug=1. CAUTION: Disable the setting after you have debugged your installation. The debug information exposes a lot information of your site!</td>
+<td>No</td>
+</tr>
+<tr>
+<td>cache_resource_expires</td>
 <td>The cache expiration time in seconds for custom template output. 0 means indefinitely or until the cache items are purposely cleared.</td>
 <td>0</td>
 </tr>
 <tr>
-<td>Cache Handler Class</td>
+<td>cache_resource_handler</td>
 <td>The class of cache handler for SwitchTemplate to use.</td>
 <td>xPDOFileCache</td>
 </tr>
 <tr>
-<td>Cache Handler Key</td>
+<td>cache_resource_key</td>
 <td>The key identifying a cache handler for SwitchTemplate to use.</td>
 <td>resource</td>
 </tr>
 <tr>
-<td>Request Key</td>
+<td>debug</td>
+<td>Log debug information in the MODX error log.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>mode_key</td>
 <td>Request key used to switch the custom template chunks.</td>
 <td>mode</td>
 </tr>
 <tr>
-<td>Switch Modes TV</td>
+<td>mode_tv</td>
 <td>Name of a template variable that contains a comma separated list of allowed switch modes.</td>
 <td>-</td>
 </tr>
@@ -631,7 +641,7 @@ chunk <code>switchTest</code> and is filtered to valid AMP markup.</p>
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            &copy; 2014-2020 <a href="https://treehillstudio.com">Treehill Studio</a>
+            &copy; 2014-2022 <a href="https://treehillstudio.com">Treehill Studio</a>
           </div>
         
         Made with
