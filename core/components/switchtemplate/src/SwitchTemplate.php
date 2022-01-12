@@ -2,7 +2,7 @@
 /**
  * SwitchTemplate
  *
- * Copyright 2014-2022 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2014-2020 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package switchtemplate
  * @subpackage classfile
@@ -42,7 +42,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.3.0';
+    public $version = '1.2.5';
 
     /**
      * The class options

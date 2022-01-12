@@ -1,6 +1,6 @@
 <?php
 /**
- * Default lexicon entries for SwitchTemplate
+ * Default Lexicon Entries for SwitchTemplate
  *
  * @package switchtemplate
  * @subpackage lexicon
