@@ -33,6 +33,7 @@ class OnLoadWebPageCache extends Plugin
             if ($output !== null) {
                 // Break MODX execution and return the output
                 echo $output;
+                @session_write_close();
                 exit;
             }
         }
