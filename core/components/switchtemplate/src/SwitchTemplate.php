@@ -57,6 +57,12 @@ class SwitchTemplate
     public $debugInfo = [];
 
     /**
+     * From cache status
+     * @var bool
+     */
+    public $fromCache;
+
+    /**
      * SwitchTemplate constructor
      *
      * @param modX $modx A reference to the modX instance.

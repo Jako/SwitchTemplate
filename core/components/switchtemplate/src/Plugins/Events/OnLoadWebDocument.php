@@ -11,6 +11,10 @@ use TreehillStudio\SwitchTemplate\Plugins\Plugin;
 
 class OnLoadWebDocument extends Plugin
 {
+    /**
+     * {@inheritDoc}
+     * @return mixed|void
+     */
     public function process()
     {
         $modeKey = $this->switchtemplate->getOption('mode_key');

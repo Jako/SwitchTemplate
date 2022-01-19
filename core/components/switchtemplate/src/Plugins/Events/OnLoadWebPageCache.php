@@ -11,6 +11,10 @@ use TreehillStudio\SwitchTemplate\Plugins\Plugin;
 
 class OnLoadWebPageCache extends Plugin
 {
+    /**
+     * {@inheritDoc}
+     * @return mixed|void
+     */
     public function process()
     {
         if ($this->switchtemplate->fromCache) {

@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fix strrpos warning: Offset is greater than the length of haystack string
+- Fix PHP notice: Undefined property: SwitchTemplate::$fromCache
+
 ## [1.3.0] - 2022-01-11
 
 ### Changed
