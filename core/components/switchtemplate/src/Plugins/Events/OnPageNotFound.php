@@ -12,6 +12,10 @@ use TreehillStudio\SwitchTemplate\Plugins\Plugin;
 
 class OnPageNotFound extends Plugin
 {
+    /**
+     * {@inheritDoc}
+     * @return mixed|void
+     */
     public function process()
     {
         if ($this->modx->context->get('key') !== 'mgr') {
@@ -53,15 +57,21 @@ class OnPageNotFound extends Plugin
         }
     }
 
-    private function strrposn($haystack, $needle, $num = 1, $offset = 0)
+    /**
+     * Get the position of the nth needle in the haystack from right 
+     * 
+     * @param $haystack
+     * @param $needle
+     * @param int $nth
+     * @param int $offset
+     * @return false|int
+     */
+    private function strrposn($haystack, $needle, $nth = 1, $offset = 0)
     {
         $x = 0;
         $len = strlen($haystack);
-        if ($len < $offset) {
-            return false;
-        }
-        for ($i = 0; $i < $num; $i++) {
-            $x = strrpos($haystack, $needle, -$offset);
+        for ($i = 0; $i < $nth; $i++) {
+            $x = ($len >= $offset) ? strrpos($haystack, $needle, -$offset) : false;
             if ($x === false) {
                 return false;
             }
