@@ -22,7 +22,7 @@ SwitchTemplate uses the following system settings in the namespace `switchtempla
 
 Setting | Description | Default
 --------|-------------|--------
-allow_debug_info | Enable this setting to show switchtemplate debug informations for a page if it is called with the GET parameter &switchtemplate-debug=1. CAUTION: Disable the setting after you have debugged your installation. The debug information exposes a lot information of your site! | No
+allow_debug_info | Enable this setting to show switchtemplate debug information for a page if it is called with the GET parameter &switchtemplate-debug=1. CAUTION: Disable the setting after you have debugged your installation. The debug information exposes a lot information of your site! | No
 cache_resource_expires | The cache expiration time in seconds for custom template output. 0 means indefinitely or until the cache items are purposely cleared. | 0
 cache_resource_handler | The class of cache handler for SwitchTemplate to use. | xPDOFileCache
 cache_resource_key | The key identifying a cache handler for SwitchTemplate to use. | resource
