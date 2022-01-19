@@ -333,16 +333,16 @@
         },
         {
             "name": "marc1706/fast-image-size",
-            "version": "v1.1.6",
+            "version": "v1.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marc1706/fast-image-size.git",
-                "reference": "3a3a2b036be20f43fa06ce00dfa754df503e6684"
+                "reference": "aea6934a273182208bced600953f19a3d2eaeca0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marc1706/fast-image-size/zipball/3a3a2b036be20f43fa06ce00dfa754df503e6684",
-                "reference": "3a3a2b036be20f43fa06ce00dfa754df503e6684",
+                "url": "https://api.github.com/repos/marc1706/fast-image-size/zipball/aea6934a273182208bced600953f19a3d2eaeca0",
+                "reference": "aea6934a273182208bced600953f19a3d2eaeca0",
                 "shasum": ""
             },
             "require": {
@@ -360,8 +360,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "FastImageSize\\": "lib",
-                    "FastImageSize\\tests\\": "tests"
+                    "FastImageSize\\": "lib"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -388,9 +387,9 @@
             ],
             "support": {
                 "issues": "https://github.com/marc1706/fast-image-size/issues",
-                "source": "https://github.com/marc1706/fast-image-size/tree/v1.1.6"
+                "source": "https://github.com/marc1706/fast-image-size/tree/v1.1.7"
             },
-            "time": "2019-12-07T08:02:07+00:00"
+            "time": "2022-01-12T16:29:39+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -984,5 +983,5 @@
     "platform-overrides": {
         "php": "7.2"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
