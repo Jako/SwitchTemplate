@@ -3,7 +3,7 @@
  * SwitchTemplate Plugin
  *
  * @package switchtemplate
- * @subpackage pluginfile
+ * @subpackage plugin
  *
  * @var modX $modx
  * @var array $scriptProperties
