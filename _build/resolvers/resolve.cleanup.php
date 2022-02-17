@@ -47,7 +47,7 @@ if ($object->xpdo) {
                 }
             }
             if ($countFolders || $countFiles) {
-                $modx->log(xPDO::LOG_LEVEL_INFO, 'Removed ' . $countFiles . ' legacy files and ' . $countFolders . ' legacy folders before ' . $package . ' .' . $version);
+                $modx->log(xPDO::LOG_LEVEL_INFO, 'Removed ' . $countFiles . ' legacy files and ' . $countFolders . ' legacy folders before ' . $package . ' ' . $version . '.');
             }
         }
     }
@@ -126,14 +126,14 @@ if ($object->xpdo) {
             $corePath = $modx->getOption('core_path', null, MODX_CORE_PATH);
             $assetsPath = $modx->getOption('assets_path', null, MODX_ASSETS_PATH);
 
-            if ($oldPackage && $oldPackage->compareVersion('1.6.0', '>')) {
+            if ($oldPackage && $oldPackage->compareVersion('1.3.1', '>')) {
                 $cleanup = [
                     'core' => [
                         'components/switchtemplate/model/switchtemplate/events',
                         'components/switchtemplate/model/switchtemplate/output',
                     ]
                 ];
-                cleanupFolders($modx, $corePath, $assetsPath, $cleanup, 'SwitchTemplate', '1.3.0');
+                cleanupFolders($modx, $corePath, $assetsPath, $cleanup, 'SwitchTemplate', '1.3.1');
             }
             $success = true;
             break;
