@@ -87,23 +87,14 @@
     "license": "docs/license.md",
     "changelog": "docs/changelog.md",
     "options": {
-      "empty_folders": {
-        "{package_path}core/components/switchtemplate/vendor/lullabot/amp/sample-html": "*",
-        "{package_path}core/components/switchtemplate/vendor/lullabot/amp/tests": "*",
-        "{package_path}core/components/switchtemplate/vendor/masterminds/html5/test": "*",
-        "{package_path}core/components/switchtemplate/vendor/sabberworm/php-css-parser/tests": "*",
-        "{package_path}core/components/switchtemplate/vendor/sebastian/diff/.github": "*",
-        "{package_path}core/components/switchtemplate/vendor/sebastian/diff/tests": "*",
-        "{package_path}core/components/switchtemplate/vendor/querypath/querypath/examples": "*",
-        "{package_path}core/components/switchtemplate/vendor/querypath/querypath/test": "*",
-        "{package_path}core/components/switchtemplate/vendor/querypath/querypath/tutorials": "*"
-      }
+      "composer": true
     },
     "setupOptions": {
       "source": "setup.options.php"
     },
     "resolver": {
       "after": [
+        "resolve.composer.php",
         "resolve.synctables.php",
         "resolve.cleanup.php",
         "resolve.treehillstudio.php"
