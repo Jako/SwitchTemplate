@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - TBA
+
+### Changed
+
+- Update Composer dependencies
+
 ## [1.3.1] - 2022-02-17
 
 ### Fixed
@@ -53,7 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Make the extension based template switch work with xRouting, LangRouter and other routing extras
-- Enable debug information in the frontend with a system setting an an URL parameter
+- Enable debug information in the frontend with a system setting and an URL parameter
 
 ## [1.2.0] - 2017-09-12
 
@@ -71,7 +77,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Switch back to default template if the chunk/template is not found
-- Template name could be set by set by placeholder too
+- Template name could be set by placeholder too
 
 ## [1.1.0] - 2015-03-10
 
