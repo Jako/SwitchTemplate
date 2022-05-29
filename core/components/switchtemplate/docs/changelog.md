@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update Composer dependencies
+- Decrease the timeout in the statistics resolver
+- Fix wrong classname
 
 ## [1.3.1] - 2022-02-17
 
