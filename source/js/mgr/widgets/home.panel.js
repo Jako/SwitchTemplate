@@ -74,7 +74,7 @@ Ext.reg('switchtemplate-panel-hometab', SwitchTemplate.panel.HomeTab);
 
 SwitchTemplate.panel.Overview = function (config) {
     config = config || {};
-    this.ident = 'switchtemplate-panel-overview' + Ext.id();
+    this.ident = 'switchtemplate-panel-overview-' + Ext.id();
     this.panelOverviewTabs = [{
         xtype: 'switchtemplate-panel-hometab',
         title: _('switchtemplate.setting'),

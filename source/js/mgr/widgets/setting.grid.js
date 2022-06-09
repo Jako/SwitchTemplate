@@ -260,7 +260,7 @@ Ext.reg('switchtemplate-grid-setting', SwitchTemplate.grid.Setting);
 
 SwitchTemplate.window.CreateUpdateSetting = function (config) {
     config = config || {};
-    this.ident = config.ident || 'switchtemplate-mecitem' + Ext.id();
+    this.ident = 'switchtemplate-setting-create-update-' + Ext.id();
     Ext.applyIf(config, {
         id: this.ident,
         url: SwitchTemplate.config.connectorUrl,
