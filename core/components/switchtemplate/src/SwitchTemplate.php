@@ -42,7 +42,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.3.1';
+    public $version = '1.3.2';
 
     /**
      * The class options
