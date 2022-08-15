@@ -38,7 +38,7 @@ SwitchTemplate.grid.Setting = function (config) {
         }, {
             header: _('switchtemplate.setting_templatename'),
             dataIndex: 'templatename',
-            renderer: SwitchTemplate.util.renderHtml,
+            renderer: SwitchTemplate.util.htmlRenderer,
             sortable: true,
             width: 120
         }, {
