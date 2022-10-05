@@ -36,11 +36,6 @@
     
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sora:300,400,400i,700%7CJetBrains+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Sora";--md-code-font-family:"JetBrains Mono"}</style>
-      
     
     
     
@@ -442,10 +437,9 @@ is chunk the resource variables and template variables are prepared as
 placeholder before the chunk is parsed. The caching of the output of
 SwitchTemplate could be enabled for each separate setting. The output is cached
 separate for each resource and each setting. Each setting could be enabled or
-disabled for selected resources. The output could be filtered to valid AMP
-markup.</p>
+disabled for selected resources.</p>
 <p>SwitchTemplate could be used for different purposes: As Ajax connector, as
-language switcher, AMP output ...</p>
+language switcher ...</p>
 <h2 id="system-settings">System Settings</h2>
 <p>SwitchTemplate uses the following system settings in the namespace <code>switchtemplate</code>:</p>
 <table>
@@ -530,10 +524,6 @@ Each setting could use the following properties:</p>
 <td>Cache the output of the switched template.</td>
 </tr>
 <tr>
-<td>Output Type</td>
-<td>The output for filtering the template output (<code>HTML</code> or <code>AMP</code>)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</td>
-</tr>
-<tr>
 <td>Enabled Resources (Default 'All')</td>
 <td>A list of MODX resources that could have a switched template.</td>
 </tr>
@@ -545,10 +535,10 @@ Each setting could use the following properties:</p>
 </table>
 <h3 id="example">Example</h3>
 <p>If you create the following setting in the custom manager page, you could call
-every page in your installation with the url parameter mode=amp (i.e.
-<code>https://your.own.domain/?mode=amp</code>) or with the file extension .amp.html (i.e.
-<code>https://your.own.domain/index.amp.html</code>) and the page is shown with the template
-chunk <code>switchTest</code> and is filtered to valid AMP markup.</p>
+every page in your installation with the url parameter mode=ajax (i.e.
+<code>https://your.own.domain/?mode=ajax</code>) or with the file extension .ajax.html
+(i.e. <code>https://your.own.domain/index.ajax.html</code>) and the page is shown with the
+template chunk <code>ajaxTest</code>.</p>
 <table>
 <thead>
 <tr>
@@ -563,15 +553,15 @@ chunk <code>switchTest</code> and is filtered to valid AMP markup.</p>
 </tr>
 <tr>
 <td>Key</td>
-<td>amp</td>
+<td>ajax</td>
 </tr>
 <tr>
 <td>Extension</td>
-<td>.amp.html</td>
+<td>.ajax.html</td>
 </tr>
 <tr>
 <td>Chunk/Template Name</td>
-<td>switchTest</td>
+<td>ajaxTest</td>
 </tr>
 <tr>
 <td>Template Type</td>
@@ -580,10 +570,6 @@ chunk <code>switchTest</code> and is filtered to valid AMP markup.</p>
 <tr>
 <td>Cache the Output</td>
 <td>Yes</td>
-</tr>
-<tr>
-<td>Output Type</td>
-<td>AMP</td>
 </tr>
 <tr>
 <td>Enabled Resources (Default 'All')</td>
@@ -595,14 +581,6 @@ chunk <code>switchTest</code> and is filtered to valid AMP markup.</p>
 </tr>
 </tbody>
 </table>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>The <code>AMP</code> output type will filter the resource output to valid <a href="https://www.ampproject.org">AMP</a> markup using the <a href="https://github.com/Lullabot/amp-library">AMP PHP Library</a>. &lt;img&gt; tags with locally referenced images receive image width and height attributes before to avoid <a href="https://github.com/Lullabot/amp-library#caveats-and-known-issues">openssl issues</a> with PHP 5.6+.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
                 
               
               
