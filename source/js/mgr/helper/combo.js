@@ -18,26 +18,6 @@ SwitchTemplate.combo.Type = function (config) {
 Ext.extend(SwitchTemplate.combo.Type, MODx.combo.ComboBox);
 Ext.reg('switchtemplate-combo-type', SwitchTemplate.combo.Type);
 
-SwitchTemplate.combo.Output = function (config) {
-    config = config || {};
-    Ext.applyIf(config, {
-        store: new Ext.data.ArrayStore({
-            fields: ['output', 'display'],
-            data: [
-                ['html', _('switchtemplate.output_html')],
-                ['amp', _('switchtemplate.output_amp')]
-            ]
-        }),
-        mode: 'local',
-        displayField: 'display',
-        valueField: 'output',
-        editable: false
-    });
-    SwitchTemplate.combo.Output.superclass.constructor.call(this, config);
-};
-Ext.extend(SwitchTemplate.combo.Output, MODx.combo.ComboBox);
-Ext.reg('switchtemplate-combo-output', SwitchTemplate.combo.Output);
-
 SwitchTemplate.combo.Resources = function (config) {
     var resources = new Ext.data.JsonStore({
         id: 'id',

@@ -1,6 +1,6 @@
 SwitchTemplate.grid.Setting = function (config) {
     config = config || {};
-    this.ident = 'switchtemplate-grid-setting-' + Ext.id();
+    this.ident = 'switchtemplate-setting-' + Ext.id();
     this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
         + '<tpl if="action_buttons !== null">'
         + '<ul class="action-buttons">'
@@ -13,13 +13,13 @@ SwitchTemplate.grid.Setting = function (config) {
         compiled: true
     });
     Ext.applyIf(config, {
-        id: 'switchtemplate-grid-setting',
+        id: this.ident,
         url: SwitchTemplate.config.connectorUrl,
         baseParams: {
             action: 'mgr/setting/getlist',
             pageSize: 10
         },
-        fields: ['id', 'name', 'key', 'extension', 'template', 'templatename', 'type', 'output', 'cache', 'include', 'exclude'],
+        fields: ['id', 'name', 'key', 'extension', 'template', 'templatename', 'type', 'cache', 'include', 'exclude'],
         autoHeight: true,
         paging: true,
         remoteSort: true,
@@ -52,14 +52,6 @@ SwitchTemplate.grid.Setting = function (config) {
             sortable: true,
             renderer: function (value) {
                 return _('switchtemplate.type_' + value);
-            },
-            width: 40
-        }, {
-            header: _('switchtemplate.setting_output_short'),
-            dataIndex: 'output',
-            sortable: true,
-            renderer: function (value) {
-                return _('switchtemplate.output_' + value);
             },
             width: 40
         }, {
@@ -127,7 +119,7 @@ SwitchTemplate.grid.Setting = function (config) {
             }
         }]
     });
-    SwitchTemplate.grid.Setting.superclass.constructor.call(this, config)
+    SwitchTemplate.grid.Setting.superclass.constructor.call(this, config);
 };
 Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
     windows: {},
@@ -307,7 +299,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
         }, {
             layout: 'column',
             items: [{
-                columnWidth: .4,
+                columnWidth: .5,
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
@@ -317,7 +309,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     anchor: '100%'
                 }]
             }, {
-                columnWidth: .2,
+                columnWidth: .25,
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-type',
@@ -330,7 +322,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     allowBlank: false
                 }]
             }, {
-                columnWidth: .2,
+                columnWidth: .25,
                 layout: 'form',
                 items: [{
                     xtype: 'modx-combo-boolean',
@@ -339,18 +331,6 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     name: 'cache',
                     hiddenName: 'cache',
                     id: this.ident + '-cache',
-                    anchor: '100%'
-                }]
-            }, {
-                columnWidth: .2,
-                layout: 'form',
-                items: [{
-                    xtype: 'switchtemplate-combo-output',
-                    fieldLabel: _('switchtemplate.setting_output'),
-                    value: 'html',
-                    name: 'output',
-                    hiddenName: 'output',
-                    id: this.ident + '-output',
                     anchor: '100%'
                 }]
             }]

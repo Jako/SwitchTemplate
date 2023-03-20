@@ -12,6 +12,7 @@ $output = '<style type="text/css">
     #modx-setupoptions-panel { display: none; }
     #modx-setupoptions-form p { margin-bottom: 10px; }
     #modx-setupoptions-form h2 { margin-bottom: 15px; }
+    #modx-setupoptions-form .warning { background-color: #be0000; padding: 10px; color: #fff; }
 </style>';
 
 $values = [];
@@ -34,6 +35,11 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         break;
     case xPDOTransport::ACTION_UPGRADE:
         $output .= '<h2>Upgrade SwitchTemplate</h2>
+
+        <p class="warning">Since version 2.0.0 of SwitchTemplate the AMP support
+        is removed. Please remove your AMP rules in SwitchTemplate and remove
+        the rel="amphtml" link in your main template, if you update from version
+        1 to 2.</p>
 
         <p>SwitchTemplate will be upgraded. This open source extra was developed by
         Treehill Studio - MODX development in Münsterland.</p>

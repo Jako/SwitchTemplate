@@ -26,7 +26,7 @@ SwitchTemplate.panel.Home = function (config) {
                 afterrender: function () {
                     this.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center"><img src="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + SwitchTemplate.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio"><br>' +
-                            '&copy; 2014-2022 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2014-2023 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('switchtemplate') + ' ' + SwitchTemplate.config.version,
                             msg: msg,
@@ -100,8 +100,8 @@ SwitchTemplate.panel.Overview = function (config) {
                 };
             },
             autoScroll: true,
-            deferredRender: false,
-            forceLayout: true,
+            deferredRender: true,
+            forceLayout: false,
             defaults: {
                 layout: 'form',
                 autoHeight: true,

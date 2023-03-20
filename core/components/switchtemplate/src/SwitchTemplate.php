@@ -2,7 +2,7 @@
 /**
  * SwitchTemplate
  *
- * Copyright 2014-2022 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2014-2023 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package switchtemplate
  * @subpackage classfile
@@ -12,7 +12,6 @@ namespace TreehillStudio\SwitchTemplate;
 
 use modX;
 use SwitchtemplateSettings;
-use TreehillStudio\SwitchTemplate\Output\SwitchTemplateOutput;
 use xPDO;
 
 /**
@@ -42,7 +41,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '1.3.3';
+    public $version = '2.0.0';
 
     /**
      * The class options
@@ -101,6 +100,13 @@ class SwitchTemplate
             'connectorUrl' => $assetsUrl . 'connector.php'
         ], $options);
 
+        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
+        $lexicon->load($this->namespace . ':default');
+
+        $this->packageName = $this->modx->lexicon('switchtemplate');
+
+        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
+
         // Add default options
         $this->options = array_merge($this->options, [
             'cache_resource_expires' => intval($this->getOption('cache_resource_expires', $options, $this->modx->getOption(xPDO::OPT_CACHE_EXPIRES, null, 0))),
@@ -114,13 +120,6 @@ class SwitchTemplate
             'mode_tv' => $this->getOption('mode_tv', $options, ''),
             'show_debug' => isset($_REQUEST['switchtemplate-debug']) && $_REQUEST['switchtemplate-debug'] == '1' && $this->getOption('allow_debug_info', null, false)
         ]);
-
-        $this->modx->addPackage($this->namespace, $this->getOption('modelPath'));
-        $lexicon = $this->modx->getService('lexicon', 'modLexicon');
-        $lexicon->load($this->namespace . ':default');
-
-        // Autoload composer classes
-        require $this->getOption('vendorPath') . 'autoload.php';
     }
 
     /**
@@ -421,17 +420,7 @@ class SwitchTemplate
         // Parse uncacheable elements
         $this->modx->getParser()->processElementTags('', $resource->_output, true, true, '[[', ']]', [], $this->getOption('max_iterations'));
 
-        $outputType = ($setting->get('output')) ? $setting->get('output') : 'html';
-        $className = 'TreehillStudio\SwitchTemplate\Output\SwitchTemplate' . ucfirst($outputType);
-        if (class_exists($className)) {
-            /** @var SwitchTemplateOutput $handler */
-            $handler = new $className($this->modx, $this->options);
-            $handler->run($resource, $setting);
-        } else {
-            if ($this->getOption('debug')) {
-                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Output type not set.', '', 'SwitchtTemplate');
-            }
-        }
+        $this->registerScripts();
 
         return $resource;
     }

@@ -6,7 +6,7 @@ edit_uri: tree/master/docs
 repo_name: 'Jako/SwitchTemplate'
 repo_url: https://github.com/Jako/SwitchTemplate
 
-copyright: '&copy; 2014-2022 <a href="https://treehillstudio.com">Treehill Studio</a>'
+copyright: '&copy; 2014-2023 <a href="https://treehillstudio.com">Treehill Studio</a>'
 
 nav:
 - Description: 'index.md'
@@ -18,6 +18,9 @@ extra:
     provider: matomo
     url: matomo.treehillstudio.com
     site: 40
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Jako
 
 theme:
   name: material
@@ -35,9 +38,7 @@ theme:
   language: en
   feature:
     tabs: false
-  font:
-    text: Sora
-    code: JetBrains Mono
+  font: false
 
 markdown_extensions:
   - footnotes
@@ -45,4 +46,12 @@ markdown_extensions:
   - admonition
   - meta
   - toc
+  - pymdownx.details
   - pymdownx.superfences
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - glightbox

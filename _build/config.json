@@ -3,7 +3,7 @@
   "lowCaseName": "switchtemplate",
   "description": "Switch resource templates on the fly",
   "author": "Thomas Jakobi",
-  "version": "1.3.3",
+  "version": "2.0.0",
   "package": {
     "menus": [
       {
@@ -86,15 +86,11 @@
     "readme": "docs/readme.md",
     "license": "docs/license.md",
     "changelog": "docs/changelog.md",
-    "options": {
-      "composer": true
-    },
     "setupOptions": {
       "source": "setup.options.php"
     },
     "resolver": {
       "after": [
-        "resolve.composer.php",
         "resolve.synctables.php",
         "resolve.cleanup.php",
         "resolve.treehillstudio.php"

@@ -15,11 +15,10 @@ is chunk the resource variables and template variables are prepared as
 placeholder before the chunk is parsed. The caching of the output of
 SwitchTemplate could be enabled for each separate setting. The output is cached
 separate for each resource and each setting. Each setting could be enabled or
-disabled for selected resources. The output could be filtered to valid AMP
-markup.
+disabled for selected resources.
 
 SwitchTemplate could be used for different purposes: As Ajax connector, as
-language switcher, AMP output ...
+language switcher ...
 
 ## Installation
 
