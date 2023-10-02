@@ -114,7 +114,7 @@ class SwitchTemplate
             'cache_resource_key' => $this->getOption('cache_resource_key', $options, $this->modx->getOption(xPDO::OPT_CACHE_KEY, null, 'resource')),
             'debug' => (bool)$this->getOption('debug', $options, false),
             'modxversion' => $modxversion['version'],
-            'is_admin' => $this->modx->user && ($modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings')),
+            'is_admin' => $this->modx->user && $this->modx->context && ($modx->hasPermission('settings') || $modx->hasPermission($this->namespace . '_settings')),
             'max_iterations' => intval($this->modx->getOption('parser_max_iterations', null, 10)),
             'mode_key' => $this->getOption('mode_key', $options, 'mode'),
             'mode_tv' => $this->getOption('mode_tv', $options, ''),
