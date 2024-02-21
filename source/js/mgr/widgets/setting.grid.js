@@ -75,7 +75,8 @@ SwitchTemplate.grid.Setting = function (config) {
                 scope: this
             },
             menuDisabled: true,
-            width: 40
+            width: 40,
+            fixed: true
         }],
         tbar: [{
             text: _('switchtemplate.setting_create'),
@@ -211,7 +212,8 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
         this.getBottomToolbar().changePage(1);
         this.refresh();
     },
-    buttonColumnRenderer: function () {
+    buttonColumnRenderer: function (value, metaData) {
+    metaData.css = 'x-grid-cell-icons';
         var values = {
             action_buttons: [
                 {
