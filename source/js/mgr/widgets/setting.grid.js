@@ -75,7 +75,7 @@ SwitchTemplate.grid.Setting = function (config) {
                 scope: this
             },
             menuDisabled: true,
-            width: 40,
+            width: 49,
             fixed: true
         }],
         tbar: [{
