@@ -19,7 +19,7 @@ abstract class Processor extends modProcessor
 {
     public $languageTopics = ['switchtemplate:default'];
 
-    /** @var SwitchTemplate */
+    /** @var SwitchTemplate $switchtemplate */
     public $switchtemplate;
 
     /**
@@ -27,12 +27,21 @@ abstract class Processor extends modProcessor
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    function __construct(modX &$modx, array $properties = [])
+    public function __construct(modX &$modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
 
         $corePath = $this->modx->getOption('switchtemplate.core_path', null, $this->modx->getOption('core_path') . 'components/switchtemplate/');
         $this->switchtemplate = $this->modx->getService('switchtemplate', 'SwitchTemplate', $corePath . 'model/switchtemplate/');
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return bool
+     */
+    public function checkPermissions()
+    {
+        return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
     }
 
     abstract public function process();
