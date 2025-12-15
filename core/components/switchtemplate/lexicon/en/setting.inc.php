@@ -18,4 +18,4 @@ $_lang['setting_switchtemplate.debug_desc'] = 'Log debug information in the MODX
 $_lang['setting_switchtemplate.mode_key'] = 'Request Key';
 $_lang['setting_switchtemplate.mode_key_desc'] = 'Request key used to switch the custom templates.';
 $_lang['setting_switchtemplate.mode_tv'] = 'Switch Modes TV';
-$_lang['setting_switchtemplate.mode_tv_desc'] = 'Name of a template variable that contains a comma separated list of allowed switch modes.';
+$_lang['setting_switchtemplate.mode_tv_desc'] = 'Name of a template variable that contains a comma-separated list of allowed switch modes.';

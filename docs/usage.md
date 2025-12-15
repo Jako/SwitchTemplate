@@ -27,7 +27,7 @@ SwitchTemplate uses the following system settings in the namespace `switchtempla
 | cache_resource_key     | The key identifying a cache handler for SwitchTemplate to use.                                                                                                                                                                                                                | resource      |
 | debug                  | Log debug information in the MODX error log.                                                                                                                                                                                                                                  | No            |
 | mode_key               | Request key used to switch the custom template chunks.                                                                                                                                                                                                                        | mode          |
-| mode_tv                | Name of a template variable that contains a comma separated list of allowed switch modes.                                                                                                                                                                                     | -             |
+| mode_tv                | Name of a template variable that contains a comma-separated list of allowed switch modes.                                                                                                                                                                                     | -             |
 
 ## Custom Manager Page
 
