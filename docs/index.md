@@ -1,6 +1,6 @@
 # SwitchTemplate
 
-SwitchTemplate template switching plugin for MODx Revolution. It changes the
+Template switching plugin for MODx Revolution. It changes the
 template of a MODX resource on the fly with a request parameter.
 
 ### Requirements
