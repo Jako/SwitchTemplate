@@ -266,7 +266,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
         fields: [{
             layout: 'column',
             items: [{
-                columnWidth: .33,
+                columnWidth: 0.33,
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
@@ -277,7 +277,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     allowBlank: false
                 }]
             }, {
-                columnWidth: .33,
+                columnWidth: 0.33,
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
@@ -288,7 +288,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     allowBlank: false
                 }]
             }, {
-                columnWidth: .34,
+                columnWidth: 0.34,
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
@@ -301,7 +301,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
         }, {
             layout: 'column',
             items: [{
-                columnWidth: .5,
+                columnWidth: 0.5,
                 layout: 'form',
                 items: [{
                     xtype: 'textfield',
@@ -311,7 +311,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     anchor: '100%'
                 }]
             }, {
-                columnWidth: .25,
+                columnWidth: 0.25,
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-type',
@@ -324,7 +324,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     allowBlank: false
                 }]
             }, {
-                columnWidth: .25,
+                columnWidth: 0.25,
                 layout: 'form',
                 items: [{
                     xtype: 'modx-combo-boolean',
@@ -339,7 +339,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
         }, {
             layout: 'column',
             items: [{
-                columnWidth: .5,
+                columnWidth: 0.5,
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-resources',
@@ -361,7 +361,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     hidden: true
                 }]
             }, {
-                columnWidth: .5,
+                columnWidth: 0.5,
                 layout: 'form',
                 items: [{
                     xtype: 'switchtemplate-combo-resources',
