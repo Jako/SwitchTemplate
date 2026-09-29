@@ -4,7 +4,7 @@
   "description": "Switch resource templates on the fly",
   "author": "Thomas Jakobi <office@treehillstudio.com>",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.1.0",
   "phpversion": "7.2",
   "modxversion": "2.6",
   "startYear": "2014",
