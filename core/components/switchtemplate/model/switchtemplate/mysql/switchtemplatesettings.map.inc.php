@@ -18,10 +18,11 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
     'template' => '',
     'type' => 'chunk',
     'extension' => '',
-    'output' => 'html',
     'cache' => 1,
     'include' => NULL,
     'exclude' => NULL,
+    'templates' => NULL,
+    'contexts' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -65,14 +66,6 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
       'null' => false,
       'default' => '',
     ),
-    'output' => 
-    array (
-      'dbtype' => 'varchar',
-      'precision' => '10',
-      'phptype' => 'string',
-      'null' => false,
-      'default' => 'html',
-    ),
     'cache' => 
     array (
       'dbtype' => 'tinyint',
@@ -89,6 +82,18 @@ $xpdo_meta_map['SwitchtemplateSettings']= array (
       'null' => true,
     ),
     'exclude' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => true,
+    ),
+    'templates' => 
+    array (
+      'dbtype' => 'text',
+      'phptype' => 'string',
+      'null' => true,
+    ),
+    'contexts' => 
     array (
       'dbtype' => 'text',
       'phptype' => 'string',

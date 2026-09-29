@@ -9,6 +9,8 @@
         <field key="cache" dbtype="tinyint" precision="1" attributes="unsigned" phptype="integer" null="false" default="1"/>
         <field key="include" dbtype="text" phptype="string" null="true"/>
         <field key="exclude" dbtype="text" phptype="string" null="true"/>
+        <field key="templates" dbtype="text" phptype="string" null="true"/>
+        <field key="contexts" dbtype="text" phptype="string" null="true"/>
 
         <index alias="key" name="key" primary="false" unique="true" type="BTREE">
             <column key="key" length="" collation="A" null="false"/>

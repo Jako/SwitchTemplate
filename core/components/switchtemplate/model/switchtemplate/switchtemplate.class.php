@@ -2,7 +2,7 @@
 /**
  * SwitchTemplate
  *
- * Copyright 2014-2023 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2014-2026 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package switchtemplate
  * @subpackage classfile

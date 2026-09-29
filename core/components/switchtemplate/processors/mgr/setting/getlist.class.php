@@ -25,7 +25,7 @@ class SwitchTemplateSettingsGetListProcessor extends ObjectGetListProcessor
     public function prepareRow(xPDOObject $object)
     {
         $ta = $object->toArray('', false, true);
-        $ta['templatename'] = ($ta['template'] != '') ? $ta['template'] : '<span class="green">{original_template_name} '.$ta['name'].'</span>';
+        $ta['templatename'] = ($ta['template'] != '') ? $ta['template'] : '<span class="green">{original_template_name} ' . $ta['name'] . '</span>';
         return $ta;
     }
 }

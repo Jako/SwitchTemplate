@@ -5,6 +5,7 @@
  * @package switchtemplate
  * @subpackage lexicon
  */
+
 $_lang['switchtemplate'] = 'SwitchTemplate';
 $_lang['switchtemplate.debug_mode'] = 'Debug Mode';
 $_lang['switchtemplate.err_chunk_nf'] = 'Chunk "[[+name]]" is not found.';
@@ -16,6 +17,8 @@ $_lang['switchtemplate.setting'] = 'Settings';
 $_lang['switchtemplate.setting_cache'] = 'Cache the Output';
 $_lang['switchtemplate.setting_cache_short'] = 'Cache';
 $_lang['switchtemplate.setting_ceate'] = 'Create';
+$_lang['switchtemplate.setting_contexts'] = 'Enabled Contexts';
+$_lang['switchtemplate.setting_contexts_desc'] = 'Empty: "All Enabled"';
 $_lang['switchtemplate.setting_create'] = 'New Setting';
 $_lang['switchtemplate.setting_desc'] = 'Create and modify your SwitchTemplate settings, that are used to change the the template of a MODX resource on the fly.';
 $_lang['switchtemplate.setting_exclude'] = 'Disabled Resources';
@@ -28,6 +31,8 @@ $_lang['switchtemplate.setting_name'] = 'Name';
 $_lang['switchtemplate.setting_remove'] = 'Delete';
 $_lang['switchtemplate.setting_remove_confirm'] = 'Are you sure you want to delete this SwitchTemplate setting?';
 $_lang['switchtemplate.setting_templatename'] = 'Chunk/Template Name';
+$_lang['switchtemplate.setting_templates'] =  'Enabled Templates';
+$_lang['switchtemplate.setting_templates_desc'] = 'Empty: "All Enabled"';
 $_lang['switchtemplate.setting_type'] = 'Template Type';
 $_lang['switchtemplate.setting_type_short'] = 'Type';
 $_lang['switchtemplate.setting_update'] = 'Update';

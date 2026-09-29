@@ -2,7 +2,7 @@
 /**
  * SwitchTemplate
  *
- * Copyright 2014-2023 by Thomas Jakobi <office@treehillstudio.com>
+ * Copyright 2014-2026 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package switchtemplate
  * @subpackage classfile
@@ -41,7 +41,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '2.0.0';
+    public $version = '2.1.0';
 
     /**
      * The class options
@@ -155,6 +155,8 @@ class SwitchTemplate
     {
         $include = ($setting->get('include') != '') ? explode(',', $setting->get('include')) : [];
         $exclude = ($setting->get('exclude') != '') ? explode(',', $setting->get('exclude')) : [];
+        $templates = ($setting->get('templates') != '') ? explode(',', $setting->get('templates')) : [];
+        $contexts = ($setting->get('contexts') != '') ? explode(',', $setting->get('contexts')) : [];
 
         // Get the current resource
         if (!$this->modx->resource) {
@@ -165,6 +167,8 @@ class SwitchTemplate
         }
         $resource = &$this->modx->resource;
         $resourceId = $resource->get('id');
+        $templateId = $resource->get('template');
+        $contextKey = $resource->get('context_key');
         $resource->_output = '';
 
         if ($this->getOption('show_debug')) {
@@ -176,6 +180,20 @@ class SwitchTemplate
         if ((count($include) && (!in_array($resourceId, $include))) ||
             (count($exclude) && (in_array($resourceId, $exclude)))
         ) {
+            if ($this->getOption('show_debug')) {
+                exit('<pre>' . implode("\n\n", $this->debugInfo));
+            }
+            return null;
+        }
+        // Stop, if resource template is not in template list
+        if (count($templates) && (!in_array($templateId, $templates))) {
+            if ($this->getOption('show_debug')) {
+                exit('<pre>' . implode("\n\n", $this->debugInfo));
+            }
+            return null;
+        }
+        // Stop, if resource context is not in context list
+        if (count($contexts) && (!in_array($contextKey, $contexts))) {
             if ($this->getOption('show_debug')) {
                 exit('<pre>' . implode("\n\n", $this->debugInfo));
             }

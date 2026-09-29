@@ -1,6 +1,7 @@
 {
   "name": "treehillstudio/switchtemplate",
   "description": "Switch resource templates on the fly",
+  "version": "2.1.0",
   "authors": [
     {
       "name": "Thomas Jakobi",
@@ -11,11 +12,11 @@
   "license": "GPL-2.0-or-later",
   "config": {
     "platform": {
-      "php": "7.2.5"
+      "php": "7.2"
     }
   },
   "require": {
-    "php": ">=7.2.5"
+    "php": ">=7.2"
   },
   "autoload": {
     "psr-4": {

@@ -19,7 +19,7 @@ SwitchTemplate.grid.Setting = function (config) {
             action: 'mgr/setting/getlist',
             pageSize: 10
         },
-        fields: ['id', 'name', 'key', 'extension', 'template', 'templatename', 'type', 'cache', 'include', 'exclude'],
+        fields: ['id', 'name', 'key', 'extension', 'template', 'templatename', 'type', 'cache', 'include', 'exclude', 'templates', 'contexts', 'includeData', 'excludeData', 'templatesData', 'contextsData'],
         autoHeight: true,
         paging: true,
         remoteSort: true,
@@ -166,7 +166,10 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
                 beforeSubmit: function () {
                     var f = this.fp.getForm();
                     f.items.each(function (item) {
-                        if (item.xtype === 'switchtemplate-combo-resources') {
+                        if (item.xtype === 'switchtemplate-combo-resources' ||
+                            item.xtype === 'switchtemplate-combo-templates' ||
+                            item.xtype === 'switchtemplate-combo-contexts'
+                        ) {
                             var dataField = f.findField(item.name + 'Data');
                             if (dataField) {
                                 dataField.setValue(item.getValue());
@@ -213,7 +216,7 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
         this.refresh();
     },
     buttonColumnRenderer: function (value, metaData) {
-    metaData.css = 'x-grid-cell-icons';
+        metaData.css = 'x-grid-cell-icons';
         var values = {
             action_buttons: [
                 {
@@ -351,7 +354,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     anchor: '100%'
                 }, {
                     xtype: MODx.expandHelp ? 'label' : 'hidden',
-                    forId: this.ident + '-template',
+                    forId: this.ident + '-include',
                     html: _('switchtemplate.setting_include_desc'),
                     cls: 'desc-under'
                 }, {
@@ -373,13 +376,61 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
                     anchor: '100%'
                 }, {
                     xtype: MODx.expandHelp ? 'label' : 'hidden',
-                    forId: this.ident + '-template',
+                    forId: this.ident + '-exclude',
                     html: _('switchtemplate.setting_exclude_desc'),
                     cls: 'desc-under'
                 }, {
                     xtype: 'textfield',
                     name: 'excludeData',
                     id: this.ident + '-excludeData',
+                    hidden: true
+                }]
+            }]
+        }, {
+            layout: 'column',
+            items: [{
+                columnWidth: 0.5,
+                layout: 'form',
+                items: [{
+                    xtype: 'switchtemplate-combo-templates',
+                    fieldLabel: _('switchtemplate.setting_templates'),
+                    description: MODx.expandHelp ? '' : _('switchtemplate.setting_templates_desc'),
+                    name: 'templates',
+                    hiddenName: 'templates',
+                    id: this.ident + '-templates',
+                    anchor: '100%',
+                    allowBlank: true,
+                }, {
+                    xtype: MODx.expandHelp ? 'label' : 'hidden',
+                    forId: this.ident + '-templates',
+                    html: _('switchtemplate.setting_templates_desc'),
+                    cls: 'desc-under'
+                }, {
+                    xtype: 'textfield',
+                    name: 'templatesData',
+                    id: this.ident + '-templatesData',
+                    hidden: true
+                }]
+            }, {
+                columnWidth: 0.5,
+                layout: 'form',
+                items: [{
+                    xtype: 'switchtemplate-combo-contexts',
+                    fieldLabel: _('switchtemplate.setting_contexts'),
+                    description: MODx.expandHelp ? '' : _('switchtemplate.setting_contexts_desc'),
+                    name: 'contexts',
+                    hiddenName: 'contexts',
+                    id: this.ident + '-contexts',
+                    anchor: '100%'
+                }, {
+                    xtype: MODx.expandHelp ? 'label' : 'hidden',
+                    forId: this.ident + '-contexts',
+                    html: _('switchtemplate.setting_contexts_desc'),
+                    cls: 'desc-under'
+                }, {
+                    xtype: 'textfield',
+                    name: 'contextsData',
+                    id: this.ident + '-contextsData',
                     hidden: true
                 }]
             }]
