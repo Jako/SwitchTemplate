@@ -39,6 +39,6 @@ $_lang['switchtemplate.setting_update'] = 'Update';
 $_lang['switchtemplate.settings'] = '<i class="icon icon-cog"></i>';
 $_lang['switchtemplate.settings_desc'] = 'Edit the system settings of SwitchTemplate. You can edit the value of a system setting by double-clicking on the ’Value‘ table cell or by right-clicking in the table cell.';
 $_lang['switchtemplate.systemsetting_key_err_nv'] = 'You could only edit settings with the prefix switchtemplate.';
-$_lang['switchtemplate.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a settings_switchtemplate permission are allowed to change settings.';
+$_lang['switchtemplate.systemsetting_usergroup_err_nv'] = 'Only users with a settings permission or a switchtemplate_settings permission are allowed to change settings.';
 $_lang['switchtemplate.type_chunk'] = 'Chunk';
 $_lang['switchtemplate.type_template'] = 'Template';
