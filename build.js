@@ -133,42 +133,42 @@ async function taskBump() {
         'core/components/switchtemplate/model/switchtemplate/switchtemplate.class.php',
         'core/components/switchtemplate/src/SwitchTemplate.php',
     ];
-    copyrightFiles.forEach(file => {
-        replaceInFile(file, [{
+    for (const file of copyrightFiles) {
+        await replaceInFile(file, [{
             search: copyrightRegex,
             replace: copyrightReplace
         }], 'copyright in');
-    });
-    replaceInFile('core/components/switchtemplate/src/SwitchTemplate.php', [{
+    }
+    await replaceInFile('core/components/switchtemplate/src/SwitchTemplate.php', [{
         search: /version = '\d+\.\d+\.\d+-?[0-9a-z]*'/ig,
         replace: `version = '${version}'`
     }], 'version in');
     const homepanelFiles = [
         'source/js/mgr/widgets/home.panel.js'
     ];
-    homepanelFiles.forEach(file => {
-        replaceInFile(file, [{
+    for (const file of homepanelFiles) {
+        await replaceInFile(file, [{
             search: apiRegex,
             replace: apiReplace
         }], 'daterange in');
-    });
+    }
     const docFiles = [
         'zensical.toml',
     ];
-    docFiles.forEach(file => {
-        replaceInFile(file, [{
+    for (const file of docFiles) {
+        await replaceInFile(file, [{
             search: apiRegex,
             replace: apiReplace
         }], 'daterange in');
-    });
-    replaceInFile('docs/index.md', [{
+    }
+    await replaceInFile('docs/index.md', [{
         search: /[*-] MODX Revolution \d.\d.*/g,
         replace: '* MODX Revolution ' + modxversion + '+'
     }, {
         search: /[*-] PHP (v)?\d.\d.*/g,
         replace: '* PHP ' + phpversion + '+'
     }], 'requirements in');
-    replaceInFile('core/components/switchtemplate/composer.json', [{
+    await replaceInFile('core/components/switchtemplate/composer.json', [{
         search: /"php": "\d.\d.*?"/g,
         replace: '"php": "' + phpversion + '"'
     }, {
@@ -186,12 +186,12 @@ async function taskBump() {
         '_build/config.json',
         'core/components/switchtemplate/composer.json',
     ];
-    buildFiles.forEach(file => {
-        replaceInFile(file, [{
+    for (const file of buildFiles) {
+        await replaceInFile(file, [{
             search: /"version": "\d+\.\d+\.\d+-?[0-9a-z]*"/ig,
             replace: `"version": "${version}"`
         }], 'version in');
-    });
+    }
 }
 
 async function taskScripts() {
