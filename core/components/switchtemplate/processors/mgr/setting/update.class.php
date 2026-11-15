@@ -29,6 +29,12 @@ class SwitchTemplateSettingUpdateProcessor extends ObjectUpdateProcessor
         $this->object->set('templates', $templates);
         $contexts = $this->getProperty('contextsData');
         $this->object->set('contexts', $contexts);
+        if ($this->modx->getCount($this->classKey, [
+            'key' => $this->object->get('key'),
+            'id:!=' => $this->object->get('id')
+        ])) {
+            $this->addFieldError('key', $this->modx->lexicon('switchtemplate.err_setting_key_ae'));
+        }
         return parent::beforeSave();
     }
 }

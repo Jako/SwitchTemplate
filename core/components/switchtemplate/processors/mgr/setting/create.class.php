@@ -29,6 +29,9 @@ class SwitchTemplateSettingCreateProcessor extends ObjectCreateProcessor
         $this->object->set('templates', $templates);
         $contexts = $this->getProperty('contextsData');
         $this->object->set('contexts', $contexts);
+        if ($this->modx->getCount($this->classKey, ['key' => $this->object->get('key')])) {
+            $this->addFieldError('key', $this->modx->lexicon('switchtemplate.err_setting_key_ae'));
+        }
         return parent::beforeSave();
     }
 }

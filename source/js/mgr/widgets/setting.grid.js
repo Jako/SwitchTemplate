@@ -28,11 +28,13 @@ SwitchTemplate.grid.Setting = function (config) {
         columns: [{
             header: _('switchtemplate.setting_name'),
             dataIndex: 'name',
+            renderer: SwitchTemplate.util.htmlRenderer,
             sortable: true,
             width: 100
         }, {
             header: _('switchtemplate.setting_key'),
             dataIndex: 'key',
+            renderer: SwitchTemplate.util.htmlRenderer,
             sortable: true,
             width: 50
         }, {
@@ -44,6 +46,7 @@ SwitchTemplate.grid.Setting = function (config) {
         }, {
             header: _('switchtemplate.setting_extension'),
             dataIndex: 'extension',
+            renderer: SwitchTemplate.util.htmlRenderer,
             sortable: true,
             width: 50
         }, {
@@ -156,7 +159,7 @@ Ext.extend(SwitchTemplate.grid.Setting, MODx.grid.Grid, {
         var createUpdateSetting = MODx.load({
             xtype: 'switchtemplate-window-setting-create-update',
             isUpdate: isUpdate,
-            title: (isUpdate) ? _('switchtemplate.setting_update') : _('switchtemplate.setting_ceate'),
+            title: (isUpdate) ? _('switchtemplate.setting_update') : _('switchtemplate.setting_create'),
             record: r,
             listeners: {
                 success: {
@@ -264,7 +267,7 @@ SwitchTemplate.window.CreateUpdateSetting = function (config) {
         action: (config.isUpdate) ? 'mgr/setting/update' : 'mgr/setting/create',
         autoHeight: true,
         closeAction: 'close',
-        cls: 'modx-window customrequest-window modx' + SwitchTemplate.config.modxversion,
+        cls: 'modx-window switchtemplate-window modx' + SwitchTemplate.config.modxversion,
         width: 700,
         fields: [{
             layout: 'column',

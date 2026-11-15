@@ -19,34 +19,30 @@ class OnPageNotFound extends Plugin
     public function process()
     {
         if ($this->modx->context->get('key') !== 'mgr') {
-            $requestUri = $_REQUEST[$this->modx->getOption('request_param_alias', null, 'q')];
-            $requestName = substr($requestUri, 0, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', [], 2)));
-            $requestExtension = substr($requestUri, $this->strrposn($requestUri, '.', $this->switchtemplate->getOption('extension_dots', [], 2)));
+            $requestUri = (string)($_REQUEST[$this->modx->getOption('request_param_alias', null, 'q')] ?? '');
+            if ($requestUri === '') {
+                return;
+            }
 
-            if ($requestExtension &&
-                $this->modx->getCount('SwitchtemplateSettings', [
-                    'extension' => $requestExtension
-                ])
-            ) {
+            $setting = $this->getSettingByExtension($requestUri);
+            if ($setting) {
+                $requestExtension = $setting->get('extension');
+                $requestName = substr($requestUri, 0, -strlen($requestExtension));
+
                 /** @var modContentType $htmlContentType */
                 $htmlContentType = $this->modx->getObject('modContentType', ['name' => 'HTML']);
                 $htmlExtension = ($htmlContentType) ? $htmlContentType->get('file_extensions') : '.html';
 
-                if (isset($this->modx->aliasMap[$requestName . $htmlExtension])) {
-                    $id = $this->modx->aliasMap[$requestName . $htmlExtension];
-                } elseif (isset($this->modx->aliasMap[$requestName . '/'])) {
-                    $id = $this->modx->aliasMap[$requestName . '/'];
-                } elseif ($requestName == 'index') {
+                if ($requestName === 'index') {
                     $id = $this->modx->getOption('site_start');
                 } else {
-                    $id = 0;
+                    $id = $this->modx->findResource($requestName . $htmlExtension);
+                    if (!$id) {
+                        $id = $this->modx->findResource($requestName . '/');
+                    }
                 }
                 if ($id) {
                     $modeKey = $this->switchtemplate->getOption('mode_key');
-                    /** @var SwitchtemplateSettings $setting */
-                    $setting = $this->modx->getObject('SwitchtemplateSettings', [
-                        'extension' => $requestExtension
-                    ]);
                     $_REQUEST[$modeKey] = $setting->get('key');
 
                     $this->switchtemplate->debugInfo = ['# Extension based template switch triggered with the extension "' . $requestExtension . '"'];
@@ -58,25 +54,30 @@ class OnPageNotFound extends Plugin
     }
 
     /**
-     * Get the position of the nth needle in the haystack from right 
-     * 
-     * @param $haystack
-     * @param $needle
-     * @param int $nth
-     * @param int $offset
-     * @return false|int
+     * Get the SwitchTemplate setting with the longest extension the request URI ends with
+     *
+     * @param string $requestUri
+     * @return SwitchtemplateSettings|null
      */
-    private function strrposn($haystack, $needle, $nth = 1, $offset = 0)
+    private function getSettingByExtension($requestUri)
     {
-        $x = 0;
-        $len = strlen($haystack);
-        for ($i = 0; $i < $nth; $i++) {
-            $x = ($len >= $offset) ? strrpos($haystack, $needle, -$offset) : false;
-            if ($x === false) {
-                return false;
+        $c = $this->modx->newQuery('SwitchtemplateSettings');
+        $c->where(['extension:!=' => '']);
+        /** @var SwitchtemplateSettings[] $settings */
+        $settings = $this->modx->getIterator('SwitchtemplateSettings', $c);
+
+        $match = null;
+        $matchLength = 0;
+        foreach ($settings as $setting) {
+            $extension = $setting->get('extension');
+            $length = strlen($extension);
+            if ($length > $matchLength && $length < strlen($requestUri) &&
+                substr_compare($requestUri, $extension, -$length) === 0
+            ) {
+                $match = $setting;
+                $matchLength = $length;
             }
-            $offset = $len - $x + strlen($needle);
         }
-        return $x;
+        return $match;
     }
 }

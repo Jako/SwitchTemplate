@@ -41,7 +41,7 @@ class SwitchTemplate
      * The version
      * @var string $version
      */
-    public $version = '2.1.0';
+    public $version = '2.1.1';
 
     /**
      * The class options
@@ -462,14 +462,14 @@ class SwitchTemplate
                 if (isset($cachedResource['sourceCache'])) {
                     $this->modx->sourceCache = $cachedResource['sourceCache'];
                 }
-                if (isset($cachedResource['_jscripts'])) {
-                    $this->modx->jscripts = $cachedResource['resource']['_sjscripts'];
+                if (!empty($cachedResource['resource']['_jscripts'])) {
+                    $this->modx->jscripts = $this->modx->jscripts + $cachedResource['resource']['_jscripts'];
                 }
-                if (isset($cachedResource['_sjscripts'])) {
-                    $this->modx->sjscripts = $cachedResource['resource']['_sjscripts'];
+                if (!empty($cachedResource['resource']['_sjscripts'])) {
+                    $this->modx->sjscripts = $this->modx->sjscripts + $cachedResource['resource']['_sjscripts'];
                 }
-                if (isset($cachedResource['_loadedjscripts'])) {
-                    $this->modx->loadedjscripts = $cachedResource['resource']['_loadedjscripts'];
+                if (!empty($cachedResource['resource']['_loadedjscripts'])) {
+                    $this->modx->loadedjscripts = array_merge($this->modx->loadedjscripts, $cachedResource['resource']['_loadedjscripts']);
                 }
                 $this->modx->resourceGenerated = false;
             }

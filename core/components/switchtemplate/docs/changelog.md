@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 2026-09-29
+## [2.1.1] - 2026-11-15
+
+### Fixed
+
+- Restore the registered scripts and styles of cached switched templates
+- Fix the extension based template switch with disabled `cache_alias_map` and extensions with any number of dots
+- Remove unsafe HTML from the settings grid and prevent duplicate setting keys
+
+## [2.1.0] - 2026-09-29
 
 ### Added
 

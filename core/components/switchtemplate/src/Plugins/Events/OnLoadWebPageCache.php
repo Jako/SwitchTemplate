@@ -23,13 +23,16 @@ class OnLoadWebPageCache extends Plugin
         }
 
         $modeKey = $this->switchtemplate->getOption('mode_key');
-        $mode = isset($_REQUEST[$modeKey]) ? $_REQUEST[$modeKey] : '';
+        $mode = $_REQUEST[$modeKey] ?? '';
+        if (!is_string($mode) || $mode === '') {
+            return;
+        }
 
         /** @var SwitchtemplateSettings $setting */
         $setting = $this->modx->getObject('SwitchtemplateSettings', ['key' => $mode]);
 
         // If SwitchTemplate setting with the given key is found
-        if ($mode && $setting) {
+        if ($setting) {
             // Change the template on the fly
             $output = $this->switchtemplate->switchTemplate($setting);
 
