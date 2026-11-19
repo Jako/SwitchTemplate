@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.2] - TBA
 
+### Changed
+
+- Don't expose server paths in the manager page options
+
 ### Fixed
 
 - Add missing error messages and fix a text in the lexicon
