@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Add missing error messages and fix a text in the lexicon
+- Don't log the suppressed open_basedir warnings of Composer during the installation
 
 ## [2.1.1] - 2026-11-15
 
